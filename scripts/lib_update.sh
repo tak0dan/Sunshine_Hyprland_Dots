@@ -10,13 +10,12 @@
 # Arguments:
 #   $1 - expected repository root (typically SCRIPT_DIR from copy.sh)
 # Behavior:
-#   * Verifies the script is executed from Hyprland-Dots root.
+#   * Verifies the repo root is a dotfiles git checkout (copy.sh and .git).
 #   * Stashes local changes (including untracked), pulls latest changes.
 #   * Shows progress, reports errors, and summarizes results.
 #   * Waits for user input before returning control to caller.
 run_repo_update() {
   local repo_dir="${1:-$(pwd)}"
-  local expected_name="Hyprland-Dots"
   local log_dir="$repo_dir/Copy-Logs"
   local log_file="$log_dir/update-$(date +%d-%H%M%S)_git.log"
 
@@ -24,8 +23,10 @@ run_repo_update() {
 
   echo "${INFO} Starting repository update..." | tee -a "$log_file"
 
-  if [ ! -d "$repo_dir" ] || [ "$(basename "$repo_dir")" != "$expected_name" ]; then
-    echo "${ERROR} This helper must be run from the $expected_name directory. Current: $(pwd)" | tee -a "$log_file"
+  # Accept any checkout of these dotfiles (the fork is named Sunshine_Hyprland_Dots),
+  # identified by copy.sh and a git directory rather than by folder name.
+  if [ ! -d "$repo_dir" ] || [ ! -f "$repo_dir/copy.sh" ] || [ ! -d "$repo_dir/.git" ]; then
+    echo "${ERROR} This helper must be run from a dotfiles git checkout (copy.sh and .git). Current: $repo_dir" | tee -a "$log_file"
     read -n1 -s -r -p "Press any key to return to the menu..."
     echo
     return 1
