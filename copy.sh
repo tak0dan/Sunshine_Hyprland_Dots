@@ -1238,7 +1238,7 @@ printf "\n%.0s" {1..1}
 # The additional wallpapers come from Wallpaper-Bank. The revision that was
 # installed is stored next to the wallpapers, so an existing install is
 # detected and only asked about again when a newer revision is available.
-WALLPAPER_BANK_REPO="${WALLPAPER_BANK_REPO:-https://github.com/LinuxBeginnings/Wallpaper-Bank.git}"
+WALLPAPER_BANK_REPO="${WALLPAPER_BANK_REPO:-https://github.com/tak0dan/Sunshine_Hyprland_Wallpapers.git}"
 WALLPAPER_BANK_MARKER="$PICTURES_DIR/wallpapers/.wallpaper-bank-revision"
 # Dynamically calculate threshold: only a few default wallpapers ship with the dots
 default_wallpapers_count=$(find "$SCRIPT_DIR/wallpapers" -type f 2>/dev/null | wc -l || echo 0)
@@ -1415,6 +1415,11 @@ else
 fi
 
 printf "\n%.0s" {1..1}
+
+# Fork defaults: sun image for SDDM, flower bloom for the desktop (fresh install only)
+if [ "$RUN_MODE" = "install" ]; then
+  apply_fork_wallpapers "$LOG" "$PICTURES_DIR/wallpapers" || true
+fi
 
 # initialize wallust to avoid config error on hyprland
 wallust_args=()

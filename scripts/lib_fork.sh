@@ -161,3 +161,81 @@ EOF
     echo "${OK:-[OK]} fastfetch will run on shell start (${rc})." 2>&1 | tee -a "$log"
   done
 }
+
+# Theme directory of the active SDDM theme. Reads Current= from sddm.conf and
+# falls back to simple_sddm_2, the theme the fork's SDDM setup uses.
+fork_sddm_theme_dir() {
+  local conf theme="" value
+  for conf in /etc/sddm.conf /etc/sddm.conf.d/*.conf; do
+    [ -f "$conf" ] || continue
+    value=$(sed -nE 's/^[[:space:]]*Current[[:space:]]*=[[:space:]]*//p' "$conf" | tail -n1 | tr -d '[:space:]')
+    [ -n "$value" ] && theme="$value"
+  done
+  printf '/usr/share/sddm/themes/%s\n' "${theme:-simple_sddm_2}"
+}
+
+# Set the SDDM login background from an image file.
+# The path comes from the theme's Background= key (Backgrounds/default for
+# simple_sddm_2). Needs sudo, since the theme lives under /usr/share.
+set_fork_sddm_background() {
+  local log="${1:-/dev/null}" src="$2"
+  local dir bg_rel ext
+  dir=$(fork_sddm_theme_dir)
+
+  if [ ! -d "$dir" ]; then
+    echo "${WARN:-[WARN]} SDDM theme not found at $dir; SDDM background not changed." 2>&1 | tee -a "$log"
+    return 1
+  fi
+  bg_rel=$(sed -nE 's/^[[:space:]]*Background[[:space:]]*=[[:space:]]*"?([^"]*)"?.*/\1/p' "$dir/theme.conf" 2>/dev/null | head -n1)
+  if [ -z "$bg_rel" ]; then
+    echo "${WARN:-[WARN]} ${dir}/theme.conf has no Background key; SDDM background not changed." 2>&1 | tee -a "$log"
+    return 1
+  fi
+
+  sudo mkdir -p "$(dirname "$dir/$bg_rel")" || return 1
+  if ! sudo cp -f "$src" "$dir/$bg_rel"; then
+    echo "${WARN:-[WARN]} Could not write the SDDM background (sudo failed?)." 2>&1 | tee -a "$log"
+    return 1
+  fi
+  # Keep existing .jpg/.png variants of the same name in sync, as sddm_wallpaper.sh does.
+  for ext in jpg png; do
+    if [ -e "$dir/$bg_rel.$ext" ]; then
+      sudo cp -f "$src" "$dir/$bg_rel.$ext"
+    fi
+  done
+  echo "${OK:-[OK]} SDDM background set to $(basename "$src")." 2>&1 | tee -a "$log"
+}
+
+# Set the desktop wallpaper from an image file. The current-wallpaper state
+# file is what the rest of the setup reads, so it is written the same way
+# WallustSwww.sh writes it.
+set_fork_desktop_wallpaper() {
+  local log="${1:-/dev/null}" src="$2"
+  local cfg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+  local current="$cfg_home/hypr/wallpaper_effects/.wallpaper_current"
+  local rofi_link="$cfg_home/hypr/rofi/.current_wallpaper"
+
+  mkdir -p "$(dirname "$current")" "$(dirname "$rofi_link")" || return 1
+  if ! cp -f "$src" "$current"; then
+    echo "${WARN:-[WARN]} Could not set the desktop wallpaper." 2>&1 | tee -a "$log"
+    return 1
+  fi
+  ln -snf "$current" "$rofi_link" 2>/dev/null || true
+  echo "${OK:-[OK]} Desktop wallpaper set to $(basename "$src")." 2>&1 | tee -a "$log"
+}
+
+# Fork defaults on a fresh install: the sun image is the SDDM background and
+# the flower bloom is the desktop wallpaper. Images come from the wallpapers
+# folder (bank or the fork's own copy).
+apply_fork_wallpapers() {
+  local log="${1:-/dev/null}" dir="$2"
+  local sun="$dir/SunshineOS_Wallpaper.png"
+  local flower="$dir/SunshineOS_Flower_Bloom.png"
+
+  if [ ! -f "$sun" ] || [ ! -f "$flower" ]; then
+    echo "${WARN:-[WARN]} Default wallpapers not found in $dir; skipping wallpaper defaults." 2>&1 | tee -a "$log"
+    return 1
+  fi
+  set_fork_desktop_wallpaper "$log" "$flower"
+  set_fork_sddm_background "$log" "$sun" || true
+}
