@@ -346,17 +346,18 @@ prompt_lua_migration() {
   echo "${NOTE:-[NOTE]} This upgrade will migrate your Hyprlang (.conf) configuration to LUA."
   echo "${NOTE:-[NOTE]} A backup is created first; hyprland.conf remains as fallback."
   while true; do
-    if ! read -r -p "${CAT:-[ACTION]} Configuration will be migrated to LUA. Continue? (Y/n): " lua_migrate_choice </dev/tty; then
-      echo "${WARN:-[WARN]} Unable to read input; defaulting to migrate to LUA." 2>&1 | tee -a "$log"
+    if ! read -r -p "${CAT:-[ACTION]} Configuration will be migrated to LUA. Continue? (y/N): " lua_migrate_choice </dev/tty; then
+      echo "${WARN:-[WARN]} Unable to read input; keeping the current .conf config." 2>&1 | tee -a "$log"
+      MIGRATE_HYPR_TO_LUA=0
       break
     fi
     case "$lua_migrate_choice" in
-    [Yy] | [Yy][Ee][Ss] | "")
+    [Yy] | [Yy][Ee][Ss])
       MIGRATE_HYPR_TO_LUA=1
       echo "${INFO:-[INFO]} LUA migration approved for this upgrade." 2>&1 | tee -a "$log"
       break
       ;;
-    [Nn] | [Nn][Oo])
+    [Nn] | [Nn][Oo] | "")
       MIGRATE_HYPR_TO_LUA=0
       echo "${WARN:-[WARN]} Skipping LUA migration; remaining on Hyprlang (.conf) for now." 2>&1 | tee -a "$log"
       echo "${NOTE:-[NOTE]} You can migrate later with: scripts/migrate-hypr-to-lua.sh" 2>&1 | tee -a "$log"
