@@ -1,6 +1,6 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -12,7 +12,7 @@
 
 local dsp = hl.dsp or hl
 local function resolve_cmd(cmd)
-  local defaults = rawget(_G, "KOOLDOTS_DEFAULTS") or {}
+  local defaults = rawget(_G, "SUNSHINEDOTS_DEFAULTS") or {}
   local resolved_term = defaults.term or os.getenv("TERMINAL") or "kitty"
   local resolved_files = defaults.files or "dolphin"
   local resolved_edit = defaults.edit or os.getenv("EDITOR") or "nano"
@@ -196,7 +196,7 @@ local function dispatch(name, args)
     -- In-process replacement for scripts/LuaCycleWindow.sh.
     local previous = args == "prev" or args == "b"
     return function()
-      local actions = rawget(_G, "KOOLDOTS_WINDOW_ACTIONS")
+      local actions = rawget(_G, "SUNSHINEDOTS_WINDOW_ACTIONS")
       if actions and actions.cycle_window then
         actions.cycle_window(previous and "previous" or "next")
       end
@@ -377,17 +377,17 @@ local function dispatch(name, args)
 end
 
 -- In-process replacements for scripts/LayoutKeybindDispatch.sh and
--- scripts/LuaCycleWindow.sh. They resolve KOOLDOTS_WINDOW_ACTIONS at keypress
+-- scripts/LuaCycleWindow.sh. They resolve SUNSHINEDOTS_WINDOW_ACTIONS at keypress
 -- time so load order does not matter. See lua/window_actions.lua.
 local function layout_cycle(direction)
-  local actions = rawget(_G, "KOOLDOTS_WINDOW_ACTIONS")
+  local actions = rawget(_G, "SUNSHINEDOTS_WINDOW_ACTIONS")
   if actions and actions.layout_cycle then
     actions.layout_cycle(direction)
   end
 end
 
 local function layout_focus(direction)
-  local actions = rawget(_G, "KOOLDOTS_WINDOW_ACTIONS")
+  local actions = rawget(_G, "SUNSHINEDOTS_WINDOW_ACTIONS")
   if actions and actions.layout_focus then
     actions.layout_focus(direction)
   end
@@ -478,7 +478,7 @@ bind("SUPER SHIFT", "C", exec_cmd([[$HOME/.config/hypr/scripts/KillActiveProcess
 bind("CTRL ALT", "L", exec_cmd([[$HOME/.config/hypr/scripts/LockScreen.sh]]), { description = [[lock screen]] })
 bind("CTRL ALT", "P", exec_cmd([[$HOME/.config/hypr/scripts/Wlogout.sh]]), { description = [[powermenu]] })
 bind("SUPER SHIFT", "N", exec_cmd([[swaync-client -t -sw]]), { description = [[notification panel]] })
-bind("SUPER SHIFT", "E", exec_cmd([[$HOME/.config/hypr/scripts/Kool_Quick_Settings.sh]]), { description = [[Quick settings menu]] })
+bind("SUPER SHIFT", "E", exec_cmd([[$HOME/.config/hypr/scripts/Sunshine_Quick_Settings.sh]]), { description = [[Quick settings menu]] })
 bind("SUPER CTRL", "D", dispatch([[layoutmsg]], [[removemaster]]), { description = [[remove master]] })
 bind("SUPER", "I", dispatch([[layoutmsg]], [[addmaster]]), { description = [[add master]] })
 bind("SUPER CTRL", "Return", dispatch([[layoutmsg]], [[swapwithmaster]]), { description = [[swap with master]] })

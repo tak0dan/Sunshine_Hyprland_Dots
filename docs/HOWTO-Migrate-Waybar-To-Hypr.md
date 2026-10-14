@@ -86,7 +86,7 @@ waybar-msg cmd reload || pkill -SIGUSR2 -x waybar
 Run the normal upgrade and reboot:
 
 ```sh
-cd ~/Hyprland-Dots
+cd ~/Sunshine_Hyprland_Dots
 git stash && git pull
 ./copy.sh --express-upgrade
 reboot

@@ -1,5 +1,5 @@
 # Catppuccin Mocha
-# Bundled with KoolDots so the default `theme = "Catppuccin Mocha"` resolves on
+# Bundled with Sunshine Hyprland Dots so the default `theme = "Catppuccin Mocha"` resolves on
 # distros whose Ghostty package does not ship the built-in theme collection
 # (for example Gentoo, where share/ghostty/themes is absent).
 # Upstream palette: https://github.com/catppuccin/catppuccin (MIT)

@@ -1,6 +1,6 @@
-# Cómo agregar aplicaciones de inicio automático en KoolDots (`user_startup.lua`)
+# Cómo agregar aplicaciones de inicio automático en Sunshine Hyprland Dots (`user_startup.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las aplicaciones personales de inicio automático, applets de la bandeja del sistema, servicios en segundo plano y scripts de inicio personalizados se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las aplicaciones personales de inicio automático, applets de la bandeja del sistema, servicios en segundo plano y scripts de inicio personalizados se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_startup.lua

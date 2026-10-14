@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -89,7 +89,7 @@ LUA
 }
 
 run_patch() {  # [config-home]
-  env KOOLDOTS_CONFIG_HOME="${1:-$HOME_DIR}" KOOLDOTS_LOG="$WORK/patch.log" bash "$PATCH"
+  env SUNSHINEDOTS_CONFIG_HOME="${1:-$HOME_DIR}" SUNSHINEDOTS_LOG="$WORK/patch.log" bash "$PATCH"
 }
 
 UC="$HOME_DIR/hypr/UserConfigs"
@@ -181,7 +181,7 @@ seed_readme() {  # <content>
 }
 
 run_patch81() {
-  env KOOLDOTS_CONFIG_HOME="$MP" KOOLDOTS_LOG="$WORK/patch81.log" bash "$PATCH81"
+  env SUNSHINEDOTS_CONFIG_HOME="$MP" SUNSHINEDOTS_LOG="$WORK/patch81.log" bash "$PATCH81"
 }
 
 it "the README patch appends the current notes without dropping the old text"
@@ -238,7 +238,7 @@ seed_ml() {  # <content>
 }
 
 run_patch82() {
-  env KOOLDOTS_CONFIG_HOME="$ML" KOOLDOTS_LOG="$WORK/patch82.log" bash "$PATCH82"
+  env SUNSHINEDOTS_CONFIG_HOME="$ML" SUNSHINEDOTS_LOG="$WORK/patch82.log" bash "$PATCH82"
 }
 
 it "the reset patch removes a generated monitors.lua"
@@ -276,7 +276,7 @@ else fail "a layout applied after the reset was deleted"; fi
 
 mkdir -p "$WORK/ml-empty"
 it "the reset patch skips when UserConfigs is not installed"
-env KOOLDOTS_CONFIG_HOME="$WORK/ml-empty" KOOLDOTS_LOG="$WORK/patch82.log" \
+env SUNSHINEDOTS_CONFIG_HOME="$WORK/ml-empty" SUNSHINEDOTS_LOG="$WORK/patch82.log" \
   bash "$PATCH82" >/dev/null 2>&1 && pass_msg || fail "must exit 0"
 it "the reset patch invents no config tree"
 if [[ -e "$WORK/ml-empty/hypr" ]]; then fail "it created a config tree"; else pass_msg; fi
@@ -347,7 +347,7 @@ LUA
 }
 
 run_patch83() {
-  env KOOLDOTS_CONFIG_HOME="$LU" KOOLDOTS_LOG="$WORK/patch83.log" bash "$PATCH83"
+  env SUNSHINEDOTS_CONFIG_HOME="$LU" SUNSHINEDOTS_LOG="$WORK/patch83.log" bash "$PATCH83"
 }
 
 seed_lid_install
@@ -404,7 +404,7 @@ assert_eq "the file is untouched" "$before" "$(cat "$UC83")"
 
 mkdir -p "$WORK/lu-empty"
 it "a missing user_laptops.lua is skipped cleanly"
-env KOOLDOTS_CONFIG_HOME="$WORK/lu-empty" KOOLDOTS_LOG="$WORK/patch83.log" \
+env SUNSHINEDOTS_CONFIG_HOME="$WORK/lu-empty" SUNSHINEDOTS_LOG="$WORK/patch83.log" \
   bash "$PATCH83" >/dev/null 2>&1 && pass_msg || fail "must exit 0 with nothing to patch"
 it "the lid-open patch invents no config tree"
 if [[ -e "$WORK/lu-empty/hypr" ]]; then fail "it created a config tree"; else pass_msg; fi
@@ -462,7 +462,7 @@ LUA
 }
 
 run_patch84() {
-  env KOOLDOTS_CONFIG_HOME="$LU84" KOOLDOTS_LOG="$WORK/patch84.log" bash "$PATCH84"
+  env SUNSHINEDOTS_CONFIG_HOME="$LU84" SUNSHINEDOTS_LOG="$WORK/patch84.log" bash "$PATCH84"
 }
 
 seed_no_ext_install
@@ -512,7 +512,7 @@ assert_eq "the file is untouched" "$before" "$(cat "$UC84")"
 
 mkdir -p "$WORK/lu84-empty"
 it "a missing user_laptops.lua is skipped cleanly"
-env KOOLDOTS_CONFIG_HOME="$WORK/lu84-empty" KOOLDOTS_LOG="$WORK/patch84.log" \
+env SUNSHINEDOTS_CONFIG_HOME="$WORK/lu84-empty" SUNSHINEDOTS_LOG="$WORK/patch84.log" \
   bash "$PATCH84" >/dev/null 2>&1 && pass_msg || fail "must exit 0 with nothing to patch"
 it "the single-monitor patch invents no config tree"
 if [[ -e "$WORK/lu84-empty/hypr" ]]; then fail "it created a config tree"; else pass_msg; fi

@@ -1,6 +1,6 @@
-# How to Configure Layer Rules in KoolDots (`user_layer_rules.lua`)
+# How to Configure Layer Rules in Sunshine Hyprland Dots (`user_layer_rules.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal rules applied to layer surfaces (status bars like Waybar, application launchers like Rofi/Wofi, notification daemons, OSD popups) are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal rules applied to layer surfaces (status bars like Waybar, application launchers like Rofi/Wofi, notification daemons, OSD popups) are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_layer_rules.lua

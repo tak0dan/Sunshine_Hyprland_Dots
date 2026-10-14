@@ -66,10 +66,10 @@ Shape:
   - `<cause>`
   - `<what changed>`
   - `<effect>`
-  - Issue: [#158](https://github.com/LinuxBeginnings/Hyprland-Dots/issues/158)
+  - Issue: [#158](https://github.com/tak0dan/Sunshine_Hyprland_Dots/issues/158)
 - `<second fix>` `<one line summary>`
   - `<detail>`
-  - PR: [#159](https://github.com/LinuxBeginnings/Hyprland-Dots/pull/159)
+  - PR: [#159](https://github.com/tak0dan/Sunshine_Hyprland_Dots/pull/159)
 ```
 
 ## Commit messages
@@ -85,7 +85,7 @@ Shape:
 - A release does all of this together:
   - Finalise the `## vX.Y.Z` heading at the top of `CHANGELOG.md`.
   - Set `DOTS_VERSION` in `config/hypr/lua/env.lua`.
-  - Rename the `config/hypr/vX.Y.Z` marker file. `copy.sh` and `KooLsDotsUpdate.sh` read it to detect the installed version.
+  - Rename the `config/hypr/vX.Y.Z` marker file. `copy.sh` and `SunshineDotsUpdate.sh` read it to detect the installed version.
   - Merge `development` into `main` and tag `Hyprland-Dots-vX.Y.Z`.
 - The updater compares against `main`, so an unreleased version on `development` must not be advertised there.
 

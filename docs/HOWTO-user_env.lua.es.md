@@ -1,6 +1,6 @@
-# Cómo configurar variables de entorno en KoolDots (`user_env.lua`)
+# Cómo configurar variables de entorno en Sunshine Hyprland Dots (`user_env.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las variables de entorno personales de la sesión (temas para kits de herramientas, escalado de interfaz, controladores gráficos y unidades de widgets) se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las variables de entorno personales de la sesión (temas para kits de herramientas, escalado de interfaz, controladores gráficos y unidades de widgets) se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_env.lua
@@ -17,7 +17,7 @@ Esta guía explica cómo funcionan las variables de entorno en Hyprland Lua, có
 - **Entorno del sistema (`~/.config/hypr/configs/system_env.lua` y `lua/environment.lua`)**:
   Configura las variables base de Wayland (como `XDG_CURRENT_DESKTOP`, `XDG_SESSION_TYPE`, `MOZ_ENABLE_WAYLAND`, `ELECTRON_OZONE_PLATFORM_HINT`, etc.).
 - **Entorno del usuario (`~/.config/hypr/UserConfigs/user_env.lua`)**:
-  Se carga para aplicar variables de entorno adicionales o modificaciones personales. Los datos aquí definidos se conservan tras las actualizaciones de KoolDots.
+  Se carga para aplicar variables de entorno adicionales o modificaciones personales. Los datos aquí definidos se conservan tras las actualizaciones de Sunshine Hyprland Dots.
 
 ### Sintaxis de la función `hl.env()`
 
@@ -109,7 +109,7 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 -- hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 ```
 
-### Ejemplo E: Widgets y unidades de KoolDots
+### Ejemplo E: Widgets y unidades de Sunshine Hyprland Dots
 
 ```lua
 -- Unidades para el pronóstico del clima ("metric" para °C/km/h o "imperial" para °F/mph)

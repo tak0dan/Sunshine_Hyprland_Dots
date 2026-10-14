@@ -1,6 +1,6 @@
-# How to Configure Monitors in KoolDots (`monitors.lua`)
+# How to Configure Monitors in Sunshine Hyprland Dots (`monitors.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal and multi-monitor setups are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal and multi-monitor setups are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/monitors.lua
@@ -8,7 +8,7 @@ In **KoolDots (2026)** with the Lua configuration workflow, all personal and mul
 
 This guide explains how monitor configuration works in Hyprland Lua, how monitor profiles interact with user overrides, and provides practical examples for single, multi-monitor, high-refresh, and scaled displays.
 
-> **Easier first:** KoolDots ships a display-layout system that writes this file
+> **Easier first:** Sunshine Hyprland Dots ships a display-layout system that writes this file
 > for you. Press `SUPER + ALT + D`, arrange the monitors (drag and drop, or the
 > parameter table) and save the result under a name; it then restores itself
 > whenever that set of monitors is connected. See

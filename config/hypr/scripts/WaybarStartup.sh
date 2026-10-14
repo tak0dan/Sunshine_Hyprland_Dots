@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -23,7 +23,7 @@ WAYBAR_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar"
 # The fallback directory is passed in rather than read from a variable: a bare
 # ${waybar_dir} expands to nothing - and then to "/config" - unless the caller
 # happens to have set it.
-kooldots_waybar_config() {
+sunshinedots_waybar_config() {
   local fallback_dir=$1
   local dp="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/DisplayProfile.sh" p=""
   if [ -x "$dp" ]; then
@@ -33,7 +33,7 @@ kooldots_waybar_config() {
   else printf '%s\n' "$fallback_dir/config"; fi
 }
 
-WAYBAR_CONFIG_ARG="$(kooldots_waybar_config "$WAYBAR_DIR")"
+WAYBAR_CONFIG_ARG="$(sunshinedots_waybar_config "$WAYBAR_DIR")"
 WAYBAR_STYLE_ARG="$WAYBAR_DIR/style.css"
 # How long a start holds the lock after process detection to allow GTK/socket
 # initialization before external reloads are permitted.

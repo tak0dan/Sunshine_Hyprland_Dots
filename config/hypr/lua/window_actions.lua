@@ -1,6 +1,6 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -583,6 +583,6 @@ function M.layout_focus(direction)
 end
 
 -- Exposed so system_keybinds.lua can reach it regardless of load order.
-KOOLDOTS_WINDOW_ACTIONS = M
+SUNSHINEDOTS_WINDOW_ACTIONS = M
 
 return M

@@ -1,5 +1,5 @@
-/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
-/* KooL Hyprland Edit Rofi Config */
+/* ---- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 ---- */
+/* Sunshine Hyprland Edit Rofi Config */
 
 @import "~/.config/hypr/rofi/config.rasi"  
 
@@ -35,7 +35,7 @@ listview {
 /* ---- Entry input ---- */
 entry {
   expand: true;
-  placeholder: " 💫  Customize KooL Hyprland  💫";
+  placeholder: " 💫  Customize Sunshine Hyprland  💫";
   horizontal-align: 0.5;
 }
 

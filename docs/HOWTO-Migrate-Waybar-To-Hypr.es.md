@@ -90,7 +90,7 @@ waybar-msg cmd reload || pkill -SIGUSR2 -x waybar
 Ejecute la actualización habitual y reinicie:
 
 ```sh
-cd ~/Hyprland-Dots
+cd ~/Sunshine_Hyprland_Dots
 git stash && git pull
 ./copy.sh --express-upgrade
 reboot

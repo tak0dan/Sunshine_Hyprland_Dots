@@ -1,6 +1,6 @@
-# How to Change and Customize Keybindings in KoolDots (`user_keybinds.lua`)
+# How to Change and Customize Keybindings in Sunshine Hyprland Dots (`user_keybinds.lua`)
 
-In **KoolDots (2026)** with the Lua configuration architecture, all personal keybinding additions, overrides, and rebindings are configured in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration architecture, all personal keybinding additions, overrides, and rebindings are configured in:
 
 ```
 ~/.config/hypr/UserConfigs/user_keybinds.lua
@@ -15,7 +15,7 @@ This guide explains how keybindings work in the Lua architecture, how system def
 ### System Defaults vs. User Keybindings
 
 - **System Defaults (`~/.config/hypr/configs/system_keybinds.lua`)**  
-  Defines the out-of-the-box keybinds for window management, core KoolDots scripts (Waybar menus, Rofi selectors, wallpaper effects, audio control, layouts), and standard workspace navigation. This file is managed by the dotfiles installer and should **not** be edited directly, as future updates may overwrite changes.
+  Defines the out-of-the-box keybinds for window management, core Sunshine Hyprland Dots scripts (Waybar menus, Rofi selectors, wallpaper effects, audio control, layouts), and standard workspace navigation. This file is managed by the dotfiles installer and should **not** be edited directly, as future updates may overwrite changes.
 
 - **User Overrides (`~/.config/hypr/UserConfigs/user_keybinds.lua`)**  
   Reserved exclusively for your personal keybinds and overrides. Keybinds declared here take precedence and are **preserved across dotfiles updates**.
@@ -152,7 +152,7 @@ bind("SUPER CTRL", "T", exec_cmd("missioncenter"), { description = "Mission Cent
 ---
 
 ### Category B: Overriding Default Launchers & Apps
-Replace standard KoolDots applications with your preferred alternatives:
+Replace standard Sunshine Hyprland Dots applications with your preferred alternatives:
 
 ```lua
 -- 1. Replace default Terminal (Kitty) with Ghostty or WezTerm

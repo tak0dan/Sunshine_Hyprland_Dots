@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -332,7 +332,7 @@ copy_phase2() {
   local hypr_waybar_dir="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar"
   local hypr_waybar_stash=""
   if [ -d "$hypr_waybar_dir" ]; then
-    hypr_waybar_stash="$(mktemp -d "${TMPDIR:-/tmp}/kooldots-waybar-stash.XXXXXX")"
+    hypr_waybar_stash="$(mktemp -d "${TMPDIR:-/tmp}/sunshinedots-waybar-stash.XXXXXX")"
     mv "$hypr_waybar_dir" "$hypr_waybar_stash/waybar" 2>&1 | tee -a "$log"
   fi
 

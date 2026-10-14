@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -10,7 +10,7 @@
 #   any suite failed, so it is usable as a single gate.
 set -uo pipefail
 HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-OUT_DIR="${TMPDIR:-/tmp}/kooldots-display-tests.$$"
+OUT_DIR="${TMPDIR:-/tmp}/sunshinedots-display-tests.$$"
 mkdir -p -- "$OUT_DIR"
 trap 'rm -rf -- "$OUT_DIR"' EXIT
 

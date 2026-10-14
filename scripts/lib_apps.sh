@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -128,20 +128,20 @@ install_terminal_configs() {
   fi
 }
 
-# Write KOOLDOTS_DEFAULTS.<key> = "<value>" into a user defaults Lua file.
+# Write SUNSHINEDOTS_DEFAULTS.<key> = "<value>" into a user defaults Lua file.
 # Replaces an existing uncommented line, or appends one.
-set_kooldots_default() {
+set_sunshinedots_default() {
   local file=$1 key=$2 value=$3
-  sed -i -E "/^[[:space:]]*KOOLDOTS_DEFAULTS\.${key}[[:space:]]*=/d" "$file"
-  printf 'KOOLDOTS_DEFAULTS.%s = "%s"\n' "$key" "$value" >> "$file"
+  sed -i -E "/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.${key}[[:space:]]*=/d" "$file"
+  printf 'SUNSHINEDOTS_DEFAULTS.%s = "%s"\n' "$key" "$value" >> "$file"
 }
 
 apply_editor_selection_to_userconfigs() {
   local log="${1:-/dev/null}"
   local base="${DOTFILES_DIR:-.}"
   local cfg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
-  local editor="${KOOLDOTS_SELECTED_EDITOR:-}"
-  local visual="${KOOLDOTS_SELECTED_VISUAL:-}"
+  local editor="${SUNSHINEDOTS_SELECTED_EDITOR:-}"
+  local visual="${SUNSHINEDOTS_SELECTED_VISUAL:-}"
 
   [ -z "$editor" ] && [ -z "$visual" ] && return 0
 
@@ -154,10 +154,10 @@ apply_editor_selection_to_userconfigs() {
   local lf
   for lf in "${lua_defaults_files[@]}"; do
     if [ -n "$editor" ]; then
-      set_kooldots_default "$lf" edit "$editor"
+      set_sunshinedots_default "$lf" edit "$editor"
     fi
     if [ -n "$visual" ]; then
-      set_kooldots_default "$lf" visual "$visual"
+      set_sunshinedots_default "$lf" visual "$visual"
     fi
   done
 }
@@ -177,7 +177,7 @@ choose_default_editor() {
 
   if [ "${RUN_MODE:-}" = "upgrade" ] && [ -f "$user_def_lua" ]; then
     local current_edit
-    current_edit=$(sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*["'"'"']([^"'"'"']*)["'"'"'].*/\1/p' "$user_def_lua" | tail -n1)
+    current_edit=$(sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*["'"'"']([^"'"'"']*)["'"'"'].*/\1/p' "$user_def_lua" | tail -n1)
     if [ -n "$current_edit" ]; then
       echo "${NOTE:-[NOTE]} Existing editor '$current_edit' preserved from user_defaults.lua (manage anytime via Rofi Quick Settings: SUPER+SHIFT+E)." 2>&1 | tee -a "$log"
       return 0
@@ -216,22 +216,22 @@ choose_default_editor() {
 
   if [ "$editor" = kate ]; then
     if command -v kate >/dev/null 2>&1; then
-      export KOOLDOTS_SELECTED_VISUAL="kate"
+      export SUNSHINEDOTS_SELECTED_VISUAL="kate"
     else
       echo "${WARN:-[WARN]} kate is not installed; VISUAL left unset." 2>&1 | tee -a "$log"
-      export KOOLDOTS_SELECTED_VISUAL=""
+      export SUNSHINEDOTS_SELECTED_VISUAL=""
     fi
-    export KOOLDOTS_SELECTED_EDITOR="nano"
+    export SUNSHINEDOTS_SELECTED_EDITOR="nano"
     echo "${OK:-[OK]} Default editor set to ${MAGENTA:-}nano${RESET:-} (terminal) with ${MAGENTA:-}kate${RESET:-} as VISUAL." 2>&1 | tee -a "$log"
   else
     if command -v "$cmd" >/dev/null 2>&1; then
-      export KOOLDOTS_SELECTED_EDITOR="$cmd"
+      export SUNSHINEDOTS_SELECTED_EDITOR="$cmd"
     else
       echo "${WARN:-[WARN]} ${editor} is not installed; falling back to nano." 2>&1 | tee -a "$log"
-      export KOOLDOTS_SELECTED_EDITOR="nano"
+      export SUNSHINEDOTS_SELECTED_EDITOR="nano"
     fi
-    export KOOLDOTS_SELECTED_VISUAL=""
-    echo "${OK:-[OK]} Default editor set to ${MAGENTA:-}${KOOLDOTS_SELECTED_EDITOR}${RESET:-}." 2>&1 | tee -a "$log"
+    export SUNSHINEDOTS_SELECTED_VISUAL=""
+    echo "${OK:-[OK]} Default editor set to ${MAGENTA:-}${SUNSHINEDOTS_SELECTED_EDITOR}${RESET:-}." 2>&1 | tee -a "$log"
   fi
 
   apply_editor_selection_to_userconfigs "$log"

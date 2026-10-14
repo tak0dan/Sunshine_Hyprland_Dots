@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -26,7 +26,7 @@ mkdir -p "$WORK/waybar" "$WORK/run"
 printf '* { }\n' >"$WORK/waybar/style.css"
 cp "$F/waybar-config-2bars" "$WORK/waybar/config"
 
-STATE="$WORK/run/kooldots-display-profiles"
+STATE="$WORK/run/sunshinedots-display-profiles"
 
 # The dual fixture already sits at the coordinates store-v1's Home asks for, so
 # it doubles as the post-apply "active" answer. A mismatching variant drives the

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -28,7 +28,7 @@ target="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/UserConfigs/monitors.lua"
 rofi_theme="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/config-Monitors.rasi"
 dp="$SCRIPTSDIR/DisplayProfile.sh"
 MP_HYPRCTL="${MP_HYPRCTL:-hyprctl}"
-MP_STATE_DIR="${MP_STATE_DIR:-${XDG_RUNTIME_DIR:-/tmp}/kooldots-display-profiles}"
+MP_STATE_DIR="${MP_STATE_DIR:-${XDG_RUNTIME_DIR:-/tmp}/sunshinedots-display-profiles}"
 msg="❗NOTE:❗ A profile chosen here is saved as a layout for the monitors connected now"
 
 # Check if rofi is already running

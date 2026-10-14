@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -22,7 +22,7 @@ PROFILE_LOG="$SANDBOX/profile-calls.log"
 # The nwg-displays integration. Every run points at the sandbox, so a real
 # ~/.config/hypr/monitors.conf on the machine is never consulted.
 NWG_CONF="$SANDBOX/nwg-monitors.conf"
-NWG_STAMP="$SANDBOX/kooldots-display-profiles/nwg-import.stamp"
+NWG_STAMP="$SANDBOX/sunshinedots-display-profiles/nwg-import.stamp"
 
 # Fake controller: records each invocation instead of touching the session.
 cat > "$BIN/DisplayProfile.sh" <<'EOS'
@@ -138,7 +138,7 @@ assert_contains "$SANDBOX/out.txt" "reconnect" && pass_msg
 
 it "singleton: a second watcher exits cleanly without applying a profile"
 # hold the lock, then start a watcher that must refuse to run
-lockfile="$SANDBOX/kooldots-monitor-watcher.lock"
+lockfile="$SANDBOX/sunshinedots-monitor-watcher.lock"
 : > "$lockfile"
 ( flock -x 9; sleep 3 ) 9>"$lockfile" &
 holder=$!
@@ -176,7 +176,7 @@ printf '%s\n' "$*" >> "$PROFILE_LOG"
 exit 0
 EOS
 chmod +x "$BIN/DisplayProfile.sh"
-rm -f "$SANDBOX/kooldots-monitor-watcher.lock"
+rm -f "$SANDBOX/sunshinedots-monitor-watcher.lock"
 st=$(run_watcher events-unrelated.txt)
 assert_status 0 "$st" "first watcher"
 st=$(run_watcher events-unrelated.txt)
@@ -195,7 +195,7 @@ printf '%s\n' "$*" >> "$PROFILE_LOG"
 exit 0
 EOS
 chmod +x "$BIN/DisplayProfile.sh"
-lock="$SANDBOX/kooldots-monitor-watcher.lock"
+lock="$SANDBOX/sunshinedots-monitor-watcher.lock"
 rm -f "$lock"
 : > "$PROFILE_LOG"
 env "MW_PROFILE_SCRIPT=$BIN/DisplayProfile.sh" "MW_DEBOUNCE=0.3" \
@@ -252,7 +252,7 @@ if [[ $(wc -l < "$PROFILE_LOG") -eq 2 ]]; then exit 1; fi
 exit 0
 EOS
 chmod +x "$BIN/DisplayProfile.sh"
-rm -f "$SANDBOX/kooldots-monitor-watcher.lock"
+rm -f "$SANDBOX/sunshinedots-monitor-watcher.lock"
 st=$(run_watcher events-removed.txt)
 assert_status 0 "$st" "watcher exit"
 # startup + failed apply + retried apply
@@ -284,9 +284,9 @@ if grep -qE 'EXTERNAL_OUTPUT|LAPTOP_OUTPUT' "$SCRIPT"; then fail "still present"
 
 # --- the pause protocol ----------------------------------------------------
 it "monitor events are ignored while a live PID holds the pause file"
-mkdir -p "$SANDBOX/kooldots-display-profiles"
+mkdir -p "$SANDBOX/sunshinedots-display-profiles"
 sleep 30 & live=$!
-printf '%s\n' "$live" >"$SANDBOX/kooldots-display-profiles/pause"
+printf '%s\n' "$live" >"$SANDBOX/sunshinedots-display-profiles/pause"
 st=$(run_watcher events-burst.txt)
 kill "$live" 2>/dev/null || true
 assert_status 0 "$st" "watcher exit"
@@ -294,53 +294,53 @@ assert_status 0 "$st" "watcher exit"
 assert_contains "$SANDBOX/watcher.log" "paused" && pass_msg
 
 it "a stale pause file whose PID is gone is ignored and removed"
-printf '999999\n' >"$SANDBOX/kooldots-display-profiles/pause"
+printf '999999\n' >"$SANDBOX/sunshinedots-display-profiles/pause"
 st=$(run_watcher events-burst.txt)
 assert_status 0 "$st" "watcher exit"
 [[ $(profile_calls) -ge 1 ]] || fail "a dead PID must not block the apply"
-if [[ -e "$SANDBOX/kooldots-display-profiles/pause" ]]; then fail "the stale file was not removed"; else pass_msg; fi
+if [[ -e "$SANDBOX/sunshinedots-display-profiles/pause" ]]; then fail "the stale file was not removed"; else pass_msg; fi
 
 it "a pause file holding nonsense is ignored"
-printf 'not-a-pid\n' >"$SANDBOX/kooldots-display-profiles/pause"
+printf 'not-a-pid\n' >"$SANDBOX/sunshinedots-display-profiles/pause"
 st=$(run_watcher events-burst.txt)
 [[ $(profile_calls) -ge 1 ]] || fail "garbage must not block the apply"
-rm -f "$SANDBOX/kooldots-display-profiles/pause"
+rm -f "$SANDBOX/sunshinedots-display-profiles/pause"
 pass_msg
 
 # --- configreloaded --------------------------------------------------------
 it "configreloaded re-applies the layout that is running, not the set default"
-printf 'FP\nWork\n' >"$SANDBOX/kooldots-display-profiles/current"
+printf 'FP\nWork\n' >"$SANDBOX/sunshinedots-display-profiles/current"
 st=$(run_watcher events-configreloaded.txt)
 assert_status 0 "$st" "watcher exit"
 assert_contains "$PROFILE_LOG" "-- Work" && pass_msg
 
 it "configreloaded with no recorded layout falls back to auto"
-rm -f "$SANDBOX/kooldots-display-profiles/current"
+rm -f "$SANDBOX/sunshinedots-display-profiles/current"
 st=$(run_watcher events-configreloaded.txt)
 [[ $(grep -c '^auto$' "$PROFILE_LOG") -ge 1 ]] || fail "expected an auto call: $(cat "$PROFILE_LOG")"
 pass_msg
 
 it "configreloaded with a generated layout recorded falls back to auto"
-printf 'FP\n(auto)\n' >"$SANDBOX/kooldots-display-profiles/current"
+printf 'FP\n(auto)\n' >"$SANDBOX/sunshinedots-display-profiles/current"
 st=$(run_watcher events-configreloaded.txt)
 assert_not_contains "$PROFILE_LOG" "-- (auto)" "a generated layout has no name to re-apply"
 [[ $(grep -c '^auto$' "$PROFILE_LOG") -ge 1 ]] || fail "expected an auto call"
-rm -f "$SANDBOX/kooldots-display-profiles/current"
+rm -f "$SANDBOX/sunshinedots-display-profiles/current"
 pass_msg
 
 it "a monitor change still uses auto, not the recorded layout"
-printf 'FP\nWork\n' >"$SANDBOX/kooldots-display-profiles/current"
+printf 'FP\nWork\n' >"$SANDBOX/sunshinedots-display-profiles/current"
 st=$(run_watcher events-burst.txt)
 assert_not_contains "$PROFILE_LOG" "-- Work" "a new monitor set must be resolved afresh"
-rm -f "$SANDBOX/kooldots-display-profiles/current"
+rm -f "$SANDBOX/sunshinedots-display-profiles/current"
 pass_msg
 
 it "configreloaded is also ignored while paused"
 sleep 30 & live2=$!
-printf '%s\n' "$live2" >"$SANDBOX/kooldots-display-profiles/pause"
+printf '%s\n' "$live2" >"$SANDBOX/sunshinedots-display-profiles/pause"
 st=$(run_watcher events-configreloaded.txt)
 kill "$live2" 2>/dev/null || true
-rm -f "$SANDBOX/kooldots-display-profiles/pause"
+rm -f "$SANDBOX/sunshinedots-display-profiles/pause"
 [[ $(profile_calls) == 0 ]] || fail "expected no calls while paused, got $(profile_calls)"
 pass_msg
 
@@ -354,26 +354,26 @@ it "configreloaded with a recorded (auto) layout replays it instead of re-resolv
 # and not yet saved. Both are on screen and recorded in active-layout.json, so
 # a reload must replay that file - re-resolving would replace the arrangement
 # the user just made.
-printf 'FP\n(auto)\n' >"$SANDBOX/kooldots-display-profiles/current"
-printf 'FP\n' >"$SANDBOX/kooldots-display-profiles/active-layout.fingerprint"
-printf '{"monitors":[]}\n' >"$SANDBOX/kooldots-display-profiles/active-layout.json"
+printf 'FP\n(auto)\n' >"$SANDBOX/sunshinedots-display-profiles/current"
+printf 'FP\n' >"$SANDBOX/sunshinedots-display-profiles/active-layout.fingerprint"
+printf '{"monitors":[]}\n' >"$SANDBOX/sunshinedots-display-profiles/active-layout.json"
 st=$(run_watcher events-configreloaded.txt)
 assert_status 0 "$st" "watcher exit"
 assert_contains "$PROFILE_LOG" 'reapply' "the recorded layout was replayed"
-rm -f "$SANDBOX/kooldots-display-profiles/active-layout.json" \
-      "$SANDBOX/kooldots-display-profiles/active-layout.fingerprint" \
-      "$SANDBOX/kooldots-display-profiles/current"
+rm -f "$SANDBOX/sunshinedots-display-profiles/active-layout.json" \
+      "$SANDBOX/sunshinedots-display-profiles/active-layout.fingerprint" \
+      "$SANDBOX/sunshinedots-display-profiles/current"
 
 it "configreloaded with a (auto) record from another set falls back to auto"
-printf 'FP\n(auto)\n' >"$SANDBOX/kooldots-display-profiles/current"
-printf 'OTHER\n' >"$SANDBOX/kooldots-display-profiles/active-layout.fingerprint"
-printf '{"monitors":[]}\n' >"$SANDBOX/kooldots-display-profiles/active-layout.json"
+printf 'FP\n(auto)\n' >"$SANDBOX/sunshinedots-display-profiles/current"
+printf 'OTHER\n' >"$SANDBOX/sunshinedots-display-profiles/active-layout.fingerprint"
+printf '{"monitors":[]}\n' >"$SANDBOX/sunshinedots-display-profiles/active-layout.json"
 st=$(run_watcher events-configreloaded.txt)
 assert_status 0 "$st" "watcher exit"
 [[ $(grep -c '^auto$' "$PROFILE_LOG") -ge 1 ]] || fail "expected an auto call: $(cat "$PROFILE_LOG")"
-rm -f "$SANDBOX/kooldots-display-profiles/active-layout.json" \
-      "$SANDBOX/kooldots-display-profiles/active-layout.fingerprint" \
-      "$SANDBOX/kooldots-display-profiles/current"
+rm -f "$SANDBOX/sunshinedots-display-profiles/active-layout.json" \
+      "$SANDBOX/sunshinedots-display-profiles/active-layout.fingerprint" \
+      "$SANDBOX/sunshinedots-display-profiles/current"
 pass_msg
 
 # --- a directly launched nwg-displays ---------------------------------------

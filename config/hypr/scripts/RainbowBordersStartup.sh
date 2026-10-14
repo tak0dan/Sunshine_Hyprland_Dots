@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -21,7 +21,7 @@
 #   the startup list calls it once for a login where no wallpaper resolves.
 #   One implementation, so the callers cannot drift apart.
 #
-# Modes written by scripts/Kool_Quick_Settings.sh:
+# Modes written by scripts/Sunshine_Quick_Settings.sh:
 #   wallust_random | rainbow | gradient_flow  -> one-shot RainbowBorders.sh
 #   low_cpu                                   -> animated RainbowBorders-low-cpu.sh
 #   disabled                                  -> leave the Wallust border alone

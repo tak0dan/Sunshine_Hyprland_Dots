@@ -30,7 +30,7 @@
             "type": "command",
             "key": " ",
             "keyColor": "blue",
-            "text": "echo LinuxBeginnings Version: ${DOTS_VERSION}"
+            "text": "echo Sunshine Hyprland Dots Version: ${DOTS_VERSION}"
         },
         {
             "type": "wm",

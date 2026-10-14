@@ -49,7 +49,7 @@ Source: `config/hypr/configs/system_keybinds.lua`
 ## Panels / Menus / Bar
 - `SUPER + A` — Desktop overview (`OverviewToggle.sh`)
 - `SUPER + CTRL + A` — Ags overview (`ags -t 'overview'`)
-- `SUPER + SHIFT + E` — Quick settings menu (`Kool_Quick_Settings.sh`)
+- `SUPER + SHIFT + E` — Quick settings menu (`Sunshine_Quick_Settings.sh`)
 - `SUPER + SHIFT + N` — Notification panel (`swaync-client -t -sw`)
 - `CTRL + ALT + D` — Toggle dock (`Dock.sh`)
 - `SUPER + CTRL + ALT + B` — Toggle Waybar on/off (`pkill -SIGUSR1 waybar`)

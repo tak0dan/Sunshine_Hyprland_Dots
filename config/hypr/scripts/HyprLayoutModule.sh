@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -173,7 +173,7 @@ next_layout() {
 # It is a looping script, so Waybar will not re-exec it on an RT signal - it
 # listens on socket2 instead.
 refresh_waybar() {
-	hypr_emit_event "kool:layout"
+	hypr_emit_event "sunshine:layout"
 }
 
 set_layout() {

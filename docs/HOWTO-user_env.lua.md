@@ -1,6 +1,6 @@
-# How to Configure Environment Variables in KoolDots (`user_env.lua`)
+# How to Configure Environment Variables in Sunshine Hyprland Dots (`user_env.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal session environment variables (toolkit theming, scaling, driver flags, weather units) are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal session environment variables (toolkit theming, scaling, driver flags, weather units) are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_env.lua
@@ -17,7 +17,7 @@ This guide explains how environment variables work in Hyprland Lua, how system d
 - **System Environment (`~/.config/hypr/configs/system_env.lua` & `lua/environment.lua`)**:
   Configures baseline Wayland environment variables (such as `XDG_CURRENT_DESKTOP`, `XDG_SESSION_TYPE`, `MOZ_ENABLE_WAYLAND`, `ELECTRON_OZONE_PLATFORM_HINT`, etc.).
 - **User Environment (`~/.config/hypr/UserConfigs/user_env.lua`)**:
-  Loaded to apply your personal environment variable additions and overrides. Entries defined here survive updates to KoolDots.
+  Loaded to apply your personal environment variable additions and overrides. Entries defined here survive updates to Sunshine Hyprland Dots.
 
 ### The `hl.env()` Helper Syntax
 
@@ -109,7 +109,7 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 -- hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 ```
 
-### Example E: KoolDots Widgets & Tool Units
+### Example E: Sunshine Hyprland Dots Widgets & Tool Units
 
 ```lua
 -- Weather temperature and speed units ("metric" for °C/km/h or "imperial" for °F/mph)

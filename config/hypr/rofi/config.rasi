@@ -1,5 +1,5 @@
-/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
-/* dKoolDots - Default
+/* ---- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 ---- */
+/* Sunshine Hyprland Dots - Default
 
 * All main themes or configs are located in ~/.config/hypr/rofi/themes/
 * If you want to edit the config, that is where you should edit NOT here
@@ -23,4 +23,4 @@
 /* You can manually change here or you can use rofi theme selector SUPER SHIFT E */
 
 
-@theme "~/.config/hypr/rofi/themes/KooL_style-4.rasi"
+@theme "~/.config/hypr/rofi/themes/Sunshine_style-4.rasi"

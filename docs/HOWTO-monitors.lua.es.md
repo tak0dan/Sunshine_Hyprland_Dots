@@ -1,6 +1,6 @@
-# Cómo configurar monitores en KoolDots (`monitors.lua`)
+# Cómo configurar monitores en Sunshine Hyprland Dots (`monitors.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las configuraciones de pantalla y multimonitor se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las configuraciones de pantalla y multimonitor se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/monitors.lua
@@ -8,7 +8,7 @@ En **KoolDots (2026)** con el flujo de configuración en Lua, todas las configur
 
 Esta guía explica cómo funciona la configuración de pantallas en Hyprland Lua, cómo interactúan los perfiles de monitor con las modificaciones de usuario y ofrece ejemplos prácticos para configuraciones individuales, multimonitor, alta tasa de refresco y escalado.
 
-> **Más fácil primero:** KoolDots incluye un sistema de disposiciones de pantalla
+> **Más fácil primero:** Sunshine Hyprland Dots incluye un sistema de disposiciones de pantalla
 > que escribe este archivo por usted. Presione `SUPER + ALT + D`, ordene las
 > pantallas (arrastrando, o con la tabla de parámetros) y guarde el resultado con
 > un nombre; a partir de ahí se restaura solo cada vez que se conecta ese conjunto

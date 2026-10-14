@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -65,14 +65,14 @@ seed_rofi() {  # <new-content> <old-content>
 # The repo's own config: one import and one default @theme line.
 REPO_CFG='@import "~/.config/hypr/rofi/0-shared-fonts.rasi"
 
-@theme "~/.config/hypr/rofi/themes/KooL_style-4.rasi"
+@theme "~/.config/hypr/rofi/themes/Sunshine_style-4.rasi"
 '
 # What RofiThemeSelector.sh leaves behind: the previous theme commented out and
 # the chosen one appended.
 USER_CFG='@import "~/.config/hypr/rofi/0-shared-fonts.rasi"
 
-//@theme "~/.config/hypr/rofi/themes/KooL_style-4.rasi"
-@theme "~/.config/hypr/rofi/themes/KooL_style-6.rasi"
+//@theme "~/.config/hypr/rofi/themes/Sunshine_style-4.rasi"
+@theme "~/.config/hypr/rofi/themes/Sunshine_style-6.rasi"
 '
 
 it "the rofi theme selection is carried into the freshly copied config"
@@ -82,10 +82,10 @@ assert_eq "exactly one active @theme line" '1' \
   "$(grep -cE '^[[:space:]]*@theme[[:space:]]' "$NEW_CFG")"
 
 it "the carried line is the one the user chose"
-assert_contains "$NEW_CFG" 'KooL_style-6.rasi' "the chosen theme won" && pass_msg
+assert_contains "$NEW_CFG" 'Sunshine_style-6.rasi' "the chosen theme won" && pass_msg
 
 it "the repo's own default theme line is not left behind"
-if grep -qE '^[[:space:]]*@theme[[:space:]].*KooL_style-4' "$NEW_CFG"; then
+if grep -qE '^[[:space:]]*@theme[[:space:]].*Sunshine_style-4' "$NEW_CFG"; then
   fail "the repo default is still an active @theme line"
 else pass_msg; fi
 
@@ -94,8 +94,8 @@ assert_contains "$NEW_CFG" '@import "~/.config/hypr/rofi/0-shared-fonts.rasi"' \
   "the import was kept" && pass_msg
 
 it "an unchanged selection leaves the new config alone"
-seed_rofi '@theme "~/.config/hypr/rofi/themes/KooL_style-6.rasi"
-' '@theme "~/.config/hypr/rofi/themes/KooL_style-6.rasi"
+seed_rofi '@theme "~/.config/hypr/rofi/themes/Sunshine_style-6.rasi"
+' '@theme "~/.config/hypr/rofi/themes/Sunshine_style-6.rasi"
 '
 before="$(cat "$NEW_CFG")"
 _carry_rofi_theme_selection "$NEW_CFG" "$OLD_CFG" "$LOG"

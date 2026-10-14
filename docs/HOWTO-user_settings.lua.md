@@ -1,6 +1,6 @@
-# How to Configure User Settings in KoolDots (`user_settings.lua`)
+# How to Configure User Settings in Sunshine Hyprland Dots (`user_settings.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal input device settings, keyboard layouts, touchpad behaviors, sensitivity, and core compositor options are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal input device settings, keyboard layouts, touchpad behaviors, sensitivity, and core compositor options are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_settings.lua
@@ -17,7 +17,7 @@ This guide explains how `user_settings.lua` interacts with system configurations
 - **System Settings (`~/.config/hypr/configs/system_settings.lua` & `lua/settings.lua`)**:
   Defines core environment behavior, dnd (drag and drop) rules, layout settings (dwindle / master), and system default input rules.
 - **User Settings (`~/.config/hypr/UserConfigs/user_settings.lua`)**:
-  Loaded to apply your personal input customizations (such as your keyboard languages, touchpad scrolling options, mouse acceleration, and cursor behavior). Your configurations in this file are preserved across KoolDots updates.
+  Loaded to apply your personal input customizations (such as your keyboard languages, touchpad scrolling options, mouse acceleration, and cursor behavior). Your configurations in this file are preserved across Sunshine Hyprland Dots updates.
 
 ### The `hl.config()` Structure
 

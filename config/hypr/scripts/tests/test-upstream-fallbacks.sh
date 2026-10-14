@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -23,19 +23,19 @@ WORK="$(mktemp -d)"; trap 'rm -rf -- "$WORK"' EXIT
 mkdir -p "$WORK/waybar" "$WORK/hypr/scripts"
 printf '{}\n' >"$WORK/waybar/config"
 
-# resolve_in <script> -> what kooldots_waybar_config prints, with
+# resolve_in <script> -> what sunshinedots_waybar_config prints, with
 # XDG_CONFIG_HOME pointed at the sandbox so the controller it looks for is the
 # fake one (or absent). The fallback directory is passed as an argument, the way
 # every caller does it - the function no longer reads a variable that happens to
 # be in scope.
 resolve_in() {
   local script=$1 fn
-  fn="$(sed -n '/^kooldots_waybar_config()/,/^}/p' -- "$S/$script")"
+  fn="$(sed -n '/^sunshinedots_waybar_config()/,/^}/p' -- "$S/$script")"
   [[ -n $fn ]] || { printf 'NO_FUNCTION\n'; return 0; }
   env XDG_CONFIG_HOME="$WORK" bash -c "
     set -uo pipefail
     $fn
-    kooldots_waybar_config '$WORK/waybar'"
+    sunshinedots_waybar_config '$WORK/waybar'"
 }
 
 install_controller() {  # body
@@ -47,8 +47,8 @@ EOS
 }
 
 for f in WaybarStartup.sh Refresh.sh; do
-  it "$f has a kooldots_waybar_config function that uses the directory it is given"
-  if sed -n '/^kooldots_waybar_config()/,/^}/p' -- "$S/$f" | grep -qE '\$fallback_dir'; then
+  it "$f has a sunshinedots_waybar_config function that uses the directory it is given"
+  if sed -n '/^sunshinedots_waybar_config()/,/^}/p' -- "$S/$f" | grep -qE '\$fallback_dir'; then
     pass_msg
   else fail "the function is missing or does not use \$fallback_dir"; fi
 done
@@ -59,7 +59,7 @@ it "every caller passes the fallback directory explicitly"
 # being in scope.
 bad=""
 for f in WaybarStartup.sh Refresh.sh; do
-  grep -qE 'kooldots_waybar_config "\$(WAYBAR_DIR|waybar_dir)"' "$S/$f" || bad="$bad $f"
+  grep -qE 'sunshinedots_waybar_config "\$(WAYBAR_DIR|waybar_dir)"' "$S/$f" || bad="$bad $f"
 done
 if [[ -z $bad ]]; then pass_msg; else fail "a caller does not pass the directory:$bad"; fi
 
@@ -108,7 +108,7 @@ if grep -n 'restart_cmd' -A4 "$S/Refresh.sh" | grep -q -- '-c \\"\$waybar_dir/co
 else pass_msg; fi
 
 it "Refresh.sh's direct-launch branch uses the resolved path"
-if grep -n 'restart_cmd' -A4 "$S/Refresh.sh" | grep -q 'kooldots_waybar_config\|waybar_cfg'; then
+if grep -n 'restart_cmd' -A4 "$S/Refresh.sh" | grep -q 'sunshinedots_waybar_config\|waybar_cfg'; then
   pass_msg
 else fail "the direct-launch branch does not use the resolved path"; fi
 
@@ -129,25 +129,25 @@ else fail "apply_config no longer delegates, so it needs the resolver itself"; f
 
 # --- Quick Settings --------------------------------------------------------
 it "Quick Settings routes nwg-displays through the pause file"
-if grep -q 'kooldots-display-profiles' "$S/Kool_Quick_Settings.sh" \
-   && grep -q 'pause' "$S/Kool_Quick_Settings.sh"; then pass_msg
+if grep -q 'sunshinedots-display-profiles' "$S/Sunshine_Quick_Settings.sh" \
+   && grep -q 'pause' "$S/Sunshine_Quick_Settings.sh"; then pass_msg
 else fail "no pause protocol around the GUI"; fi
 
 it "Quick Settings points nwg-displays at the discard path"
-assert_contains "$S/Kool_Quick_Settings.sh" 'nwg-monitors.discard.conf' \
+assert_contains "$S/Sunshine_Quick_Settings.sh" 'nwg-monitors.discard.conf' \
   "the real monitors.conf is not written" && pass_msg
 
 it "Quick Settings still tells the user to install nwg-displays when it is missing"
-assert_contains "$S/Kool_Quick_Settings.sh" 'Install nwg-displays' \
+assert_contains "$S/Sunshine_Quick_Settings.sh" 'Install nwg-displays' \
   "the existing guard is preserved" && pass_msg
 
 it "Quick Settings closes the lock descriptor on the GUI"
-if grep -nE '^\s*nwg-displays ' "$S/Kool_Quick_Settings.sh" | grep -qv '9>&-'; then
+if grep -nE '^\s*nwg-displays ' "$S/Sunshine_Quick_Settings.sh" | grep -qv '9>&-'; then
   fail "the GUI launch does not close fd 9"
 else pass_msg; fi
 
 it "Quick Settings invites the user to save the arrangement"
-assert_contains "$S/Kool_Quick_Settings.sh" 'Save current state' \
+assert_contains "$S/Sunshine_Quick_Settings.sh" 'Save current state' \
   "the user is told how to keep the drag" && pass_msg
 
 it "every background spawn in WaybarStartup.sh closes the lock descriptor"
@@ -192,7 +192,7 @@ fi
 # --- nothing else changed in those files -----------------------------------
 it "the upstream scripts are still valid bash"
 bad=""
-for f in WaybarStartup.sh Refresh.sh WaybarLayout.sh Kool_Quick_Settings.sh LidSwitch.sh; do
+for f in WaybarStartup.sh Refresh.sh WaybarLayout.sh Sunshine_Quick_Settings.sh LidSwitch.sh; do
   bash -n "$S/$f" 2>/dev/null || bad="$bad $f"
 done
 if [[ -z $bad ]]; then pass_msg; else fail "syntax errors in:$bad"; fi

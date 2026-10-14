@@ -5,7 +5,7 @@ Status: **queue complete** — every item in the [work queue](#6-work-queue) is 
 [open questions](#9-open-questions-and-known-risks) for the runtime checks still outstanding on the
 Gentoo host.
 
-Owner: any agent picking up the Lua migration for KoolDots / Hyprland-Dots.
+Owner: any agent picking up the Lua migration for Sunshine Hyprland Dots / Hyprland-Dots.
 Scope: `config/hypr/scripts/*`, the Lua config tree under `config/hypr/`, and the Waybar status
 modules under `config/hypr/waybar/`. D6/LUA-012 is IPC work rather than Lua, but it is the same
 "in-process instead of out-of-process" rule, so it is tracked here.
@@ -127,7 +127,7 @@ Load order, verified from `config/hypr/hyprland.lua` and `config/hypr/lua/user_o
 
 ```
 hyprland.lua
-  -> lua/user_defaults.lua        (sets KOOLDOTS_DEFAULTS)
+  -> lua/user_defaults.lua        (sets SUNSHINEDOTS_DEFAULTS)
   -> lua/animations.lua
   -> lua/user_overrides.lua
        -> configs/system_env.lua
@@ -155,7 +155,7 @@ Key consequences:
   orphan are text inside commented-out example blocks). They are dead weight and they carry the
   `raw_dispatch_cmd` bug described below.
 - **Two live scripts used to point at that orphan**, which is why it survived so long.
-  `config/hypr/scripts/Kool_Quick_Settings.sh` (`resolve_system_keybinds_file`, the "Edit System
+  `config/hypr/scripts/Sunshine_Quick_Settings.sh` (`resolve_system_keybinds_file`, the "Edit System
   Default Keybinds" entry) preferred `lua/keybinds.lua` whenever it existed, so the Quick Settings
   menu let users edit a file Hyprland never loads. `config/hypr/scripts/KeyBinds.sh` passed it to
   `keybinds_parser.py` as the first input. Both now resolve `configs/system_keybinds.lua` first and
@@ -323,7 +323,7 @@ keybind search and leaves the Quick Settings menu opening a missing path:
 
 - `config/hypr/scripts/KeyBinds.sh` — build the input list from the canonical file and only fall back
   to `lua/keybinds.lua` if nothing else exists.
-- `config/hypr/scripts/Kool_Quick_Settings.sh` — `resolve_system_keybinds_file()` must resolve
+- `config/hypr/scripts/Sunshine_Quick_Settings.sh` — `resolve_system_keybinds_file()` must resolve
   `configs/system_keybinds.lua`, then `UserConfigs/system_keybinds.lua`, before the old template.
 
 Acceptance: every chord reported by the diff is verifiable as text inside a comment or string, not a
@@ -641,7 +641,7 @@ Deleting or porting a script invalidates prose elsewhere. Check and update:
 - `docs/Keybinds.md` — updated by LUA-002/LUA-005/LUA-006 to name the canonical source file and the
   ported binds, and by LUA-009/LUA-010 to name the in-process `layout_cycle` / `layout_focus` /
   `cycle_window` actions instead of the deleted scripts.
-- `config/hypr/scripts/KeyBinds.sh` and `config/hypr/scripts/Kool_Quick_Settings.sh` — both decide
+- `config/hypr/scripts/KeyBinds.sh` and `config/hypr/scripts/Sunshine_Quick_Settings.sh` — both decide
   which keybind file to read. Update them whenever the canonical keybind file moves.
 - `CHANGELOG.md` — add a user-visible entry for each removal.
 - `docs/Patching-UserConfigs.md` — if a user-facing config surface changes.
@@ -763,13 +763,13 @@ files changed, verification evidence, follow-ups.
 
 - 2026-10-03 — agent `Oz`
   - Deleted: `config/hypr/lua/keybinds.lua`, `config/hypr/lua/keybind_helpers.lua`.
-  - Changed: `config/hypr/scripts/KeyBinds.sh`, `config/hypr/scripts/Kool_Quick_Settings.sh`,
+  - Changed: `config/hypr/scripts/KeyBinds.sh`, `config/hypr/scripts/Sunshine_Quick_Settings.sh`,
     `docs/Keybinds.md`.
   - Evidence: `hyprland.lua` does not load them; `user_overrides.lua:80-88` loads
     `configs/system_*.lua`; nothing `dofile`s or `require`s them. Chord diff: 149 chords in the
     orphan vs 190 in the canonical file, 143 shared, and all 6 orphan-only entries are text inside
     commented example blocks (`--TITLE=`, `ALT + SPACE`, `UWSM-APP -- KITTY`, ...).
-  - **Blocker found by the pre-delete grep, fixed before deleting:** `Kool_Quick_Settings.sh`
+  - **Blocker found by the pre-delete grep, fixed before deleting:** `Sunshine_Quick_Settings.sh`
     `resolve_system_keybinds_file()` preferred `lua/keybinds.lua`, so the Quick Settings
     "Edit System Default Keybinds" entry opened a file Hyprland never loads, and `KeyBinds.sh`
     passed it as the first input to `keybinds_parser.py`. Both now resolve
@@ -960,7 +960,7 @@ files changed, verification evidence, follow-ups.
     re-runs a one-shot `exec` on RTMIN+9 (1 run at startup, then one per signal), and that it does
     **not** re-run a running script.
   - Verification: `bash -n` clean; the deployed listener re-rendered on the emitted event (1 -> 2
-    lines) while socket2 showed `custom>>kool:layout`; Waybar reloaded with both listeners and their
+    lines) while socket2 showed `custom>>sunshine:layout`; Waybar reloaded with both listeners and their
     `socat` children alive.
   - Verified by hand on the local VM (2026-10-03): `SUPER + ALT + 1..4` updates the layout label with
     no workspace switch in between, so the socket refresh reaches the module. `SUPER + ALT + mouse

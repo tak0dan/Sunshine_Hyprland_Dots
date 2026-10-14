@@ -1,6 +1,6 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -8,7 +8,7 @@
 local dsp = hl.dsp or hl
 
 local function resolve_cmd(cmd)
-  local defaults = rawget(_G, "KOOLDOTS_DEFAULTS") or {}
+  local defaults = rawget(_G, "SUNSHINEDOTS_DEFAULTS") or {}
   local resolved_term = defaults.term or os.getenv("TERMINAL") or "kitty"
   local resolved_files = defaults.files or "dolphin"
   local resolved_edit = defaults.edit or os.getenv("EDITOR") or "nano"
@@ -213,7 +213,7 @@ local function dispatch(name, args)
     -- dispatcher name that no longer resolves, so the bind did nothing.
     local previous = args == "prev" or args == "b"
     return function()
-      local actions = rawget(_G, "KOOLDOTS_WINDOW_ACTIONS")
+      local actions = rawget(_G, "SUNSHINEDOTS_WINDOW_ACTIONS")
       if actions and actions.cycle_window then
         actions.cycle_window(previous and "previous" or "next")
       end

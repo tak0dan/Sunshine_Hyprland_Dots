@@ -1,19 +1,19 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
 -- User defaults overrides template.
 -- This file is sourced by lua/user_defaults.lua.
 
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 
 -- Examples:
--- KOOLDOTS_DEFAULTS.edit = "nvim"
--- KOOLDOTS_DEFAULTS.visual = "nvim"
--- KOOLDOTS_DEFAULTS.term = "kitty"
--- KOOLDOTS_DEFAULTS.files = "dolphin"
--- KOOLDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
-KOOLDOTS_DEFAULTS.edit = "nano"
-KOOLDOTS_DEFAULTS.visual = "kate"
+-- SUNSHINEDOTS_DEFAULTS.edit = "nvim"
+-- SUNSHINEDOTS_DEFAULTS.visual = "nvim"
+-- SUNSHINEDOTS_DEFAULTS.term = "kitty"
+-- SUNSHINEDOTS_DEFAULTS.files = "dolphin"
+-- SUNSHINEDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
+SUNSHINEDOTS_DEFAULTS.edit = "nano"
+SUNSHINEDOTS_DEFAULTS.visual = "kate"

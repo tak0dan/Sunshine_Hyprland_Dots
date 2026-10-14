@@ -1,5 +1,5 @@
 # ==================================================
-#  KoolDots fork additions (2026)
+#  Sunshine Hyprland Dots fork additions (2026)
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -142,11 +142,12 @@ PY
 # Only existing rc files are touched, and the block is added once.
 enable_fastfetch_on_shell() {
   local log="${1:-/dev/null}"
-  local marker="# >>> KoolDots fastfetch >>>"
+  local marker="# >>> Sunshine Hyprland Dots fastfetch >>>"
   local rc
   for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
     [ -f "$rc" ] || continue
-    if grep -qF "$marker" "$rc"; then
+    # Also match the block written by earlier releases, so upgrades do not add a second one.
+    if grep -qF "$marker" "$rc" || grep -qF "# >>> KoolDots fastfetch >>>" "$rc"; then
       continue
     fi
     # Do not add a second fastfetch call when the user already runs one.
@@ -156,12 +157,12 @@ enable_fastfetch_on_shell() {
     fi
     cat >> "$rc" <<'EOF'
 
-# >>> KoolDots fastfetch >>>
-# Show fastfetch when an interactive shell starts (added by KoolDots).
+# >>> Sunshine Hyprland Dots fastfetch >>>
+# Show fastfetch when an interactive shell starts (added by Sunshine Hyprland Dots).
 case $- in
   *i*) command -v fastfetch >/dev/null 2>&1 && fastfetch ;;
 esac
-# <<< KoolDots fastfetch <<<
+# <<< Sunshine Hyprland Dots fastfetch <<<
 EOF
     echo "${OK:-[OK]} fastfetch will run on shell start (${rc})." 2>&1 | tee -a "$log"
   done
@@ -292,7 +293,7 @@ enable_fork_per_window_layout() {
 snapshot_user_config() {
   local log="${1:-/dev/null}"
   local cfg="${XDG_CONFIG_HOME:-$HOME/.config}"
-  local dest="$HOME/.kooldots-snapshots"
+  local dest="$HOME/.sunshinedots-snapshots"
   local stamp; stamp=$(date +%Y%m%d-%H%M%S)
   local dirs=() d
   for d in hypr waybar rofi swaync wlogout quickshell fastfetch kitty ghostty wallust btop cava Kvantum qt5ct qt6ct swappy yazi starship nwg-dock-hyprland systemd; do

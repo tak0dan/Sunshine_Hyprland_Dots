@@ -1,6 +1,6 @@
-# How to Configure Window Decorations in KoolDots (`user_decorations.lua`)
+# How to Configure Window Decorations in Sunshine Hyprland Dots (`user_decorations.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all aesthetic window styling (borders, gaps, corner rounding, transparency, blur effects, drop shadows, and grouped tab styling) are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all aesthetic window styling (borders, gaps, corner rounding, transparency, blur effects, drop shadows, and grouped tab styling) are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_decorations.lua

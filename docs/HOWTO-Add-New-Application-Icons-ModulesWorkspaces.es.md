@@ -2,7 +2,7 @@
 
 [Read in English](./HOWTO-Add-New-Application-Icons-ModulesWorkspaces.md)
 
-En **KoolDots (2026)**, los diseños de Waybar que utilizan el módulo dinámico de espacios de trabajo pueden mostrar iconos específicos por aplicación para cada ventana abierta en cada espacio de trabajo.
+En **Sunshine Hyprland Dots (2026)**, los diseños de Waybar que utilizan el módulo dinámico de espacios de trabajo pueden mostrar iconos específicos por aplicación para cada ventana abierta en cada espacio de trabajo.
 
 Estas reglas de espacios de trabajo y mapeos de iconos se definen en:
 
@@ -34,11 +34,11 @@ El módulo `hyprland/workspaces` de Waybar admite la reescritura dinámica de ve
 ```
 
 - **`format`**: `{icon} {windows}` muestra el número o icono del espacio de trabajo seguido de los iconos de cada ventana abierta en dicho espacio.
-- **`window-rewrite-default`**: El icono de respaldo cuando una aplicación no coincide con ninguna regla (en KoolDots se muestra un glifo de terminal con una cruz roja ` ✘`).
+- **`window-rewrite-default`**: El icono de respaldo cuando una aplicación no coincide con ninguna regla (en Sunshine Hyprland Dots se muestra un glifo de terminal con una cruz roja ` ✘`).
 - **`window-rewrite`**: Un mapa JSON de selectores regex que apuntan a cadenas con iconos.
 
 ### ¿Qué diseños de Waybar admiten esta función?
-La mayoría de los diseños estándar y modernos de Waybar en KoolDots incluyen `"hyprland/workspaces#rw"`:
+La mayoría de los diseños estándar y modernos de Waybar en Sunshine Hyprland Dots incluyen `"hyprland/workspaces#rw"`:
 - `TOP-Default`, `BOT-Default`
 - `TOP-Default-Laptop`, `TOP-Default-Laptop-glass`
 - `TOP-Simple`, `BOT-Simple`
@@ -189,7 +189,7 @@ Algunas aplicaciones contenedorizadas o envueltas tienen prefijos de clase espec
 
 3. **El icono aparece como un rectángulo o cuadro vacío:**
    - La fuente tipográfica instalada no contiene ese glifo específico.
-   - Elija un glifo alternativo del conjunto estándar de Nerd Fonts admitido en KoolDots.
+   - Elija un glifo alternativo del conjunto estándar de Nerd Fonts admitido en Sunshine Hyprland Dots.
 
 4. **Los iconos no se muestran en su barra activa:**
    - Su diseño activo de Waybar podría estar usando otro módulo de espacios de trabajo (como `#roman`, `#pacman`, `#kanji` o `#numbers`).

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -25,7 +25,7 @@
 # shellcheck source=./lib.sh
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
-CONFIG_HOME="${KOOLDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+CONFIG_HOME="${SUNSHINEDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
 WAYBAR_DIR="$CONFIG_HOME/hypr/waybar"
 STYLE_DIR="$WAYBAR_DIR/style"
 
@@ -65,7 +65,7 @@ for css in "${files[@]}"; do
   [ -f "$css" ] || continue
   grep -qE "$STALE_RE" "$css" 2>/dev/null || continue
 
-  tmp="$(mktemp "${TMPDIR:-/tmp}/kooldots-patch.XXXXXX")" || continue
+  tmp="$(mktemp "${TMPDIR:-/tmp}/sunshinedots-patch.XXXXXX")" || continue
   if awk -v canonical="$CANONICAL_IMPORT" '
       $0 ~ /^[[:space:]]*@import[[:space:]].*colors-waybar\.css/ {
         if ($0 ~ /\.config\/(waybar|\.config\/hypr)\//) { print canonical; next }

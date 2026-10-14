@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */  #
+# /* ---- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 ---- */  #
 # A bash script designed to run only once dotfiles installed
 
 # THIS SCRIPT CAN BE DELETED ONCE SUCCESSFULLY BOOTED!! And also, edit ${XDG_CONFIG_HOME:-$HOME/.config}/hypr/configs/Settings.conf

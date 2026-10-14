@@ -1,4 +1,4 @@
-# Changelog — KoolDots
+# Changelog — Sunshine Hyprland Dots
 
 ## v2.3.28
 

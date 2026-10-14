@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -36,7 +36,7 @@ KEYBINDS="$USERCONFIGS/user_keybinds.lua"
 LAPTOPS="$USERCONFIGS/user_laptops.lua"
 STORE="$USERCONFIGS/display-layouts.json"
 
-workdir="$(mktemp -d "${TMPDIR:-/tmp}/kooldots-patch-80.XXXXXX")" || exit 1
+workdir="$(mktemp -d "${TMPDIR:-/tmp}/sunshinedots-patch-80.XXXXXX")" || exit 1
 trap 'rm -rf -- "$workdir"' EXIT
 
 # --- 1. start the watcher on login ------------------------------------------

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -20,13 +20,13 @@ Search_Engine=""
 
 # 1. Check Lua user defaults
 if [[ -f "$lua_user_defaults" ]]; then
-    lua_engine=$(sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']+)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$lua_user_defaults" | tail -n1)
+    lua_engine=$(sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']+)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$lua_user_defaults" | tail -n1)
     [[ -n "$lua_engine" ]] && Search_Engine="$lua_engine"
 fi
 
 # 2. Check Lua system defaults if still unset
 if [[ -z "$Search_Engine" && -f "$lua_sys_defaults" ]]; then
-    sys_engine=$(sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']+)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$lua_sys_defaults" | tail -n1)
+    sys_engine=$(sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']+)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$lua_sys_defaults" | tail -n1)
     [[ -n "$sys_engine" ]] && Search_Engine="$sys_engine"
 fi
 

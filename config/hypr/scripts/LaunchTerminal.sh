@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -22,7 +22,7 @@ notify_msg() {
   local urgency="${1:-normal}"
   local body="${2:-}"
   if command -v notify-send >/dev/null 2>&1; then
-    notify-send -u "$urgency" "KooL Launchers" "$body"
+    notify-send -u "$urgency" "Sunshine Launchers" "$body"
   fi
 }
 

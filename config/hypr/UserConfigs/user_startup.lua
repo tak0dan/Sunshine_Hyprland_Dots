@@ -1,6 +1,6 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -10,7 +10,7 @@
 -- =============================================================================
 -- USER STARTUP RULES & SYNTAX
 -- =============================================================================
--- In KoolDots Lua configuration, user autostart commands are defined in this file.
+-- In Sunshine Hyprland Dots Lua configuration, user autostart commands are defined in this file.
 --
 -- How it works:
 -- 1. Add command strings to the `startup_commands` table below (or call `exec_once("command")`).

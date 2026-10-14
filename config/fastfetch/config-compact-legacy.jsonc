@@ -1,4 +1,4 @@
-/* ----------- 💫 https://github.com/LinuxBeginnings 💫 -------- */
+/* ----------- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 -------- */
 
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
@@ -30,7 +30,7 @@
         {
             "keyColor": "blue",
             "key": " ",
-            "text": "echo Jakoolit: v${DOTS_VERSION}",
+            "text": "echo Sunshine Hyprland Dots: v${DOTS_VERSION}",
 	    "type": "command"
         },
         {

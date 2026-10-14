@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -59,7 +59,7 @@ echo -e "\e[35m
 printf "\n%.0s" {1..1}  
 
 echo "${WARNING}A T T E N T I O N !${RESET}"
-echo "${SKY_BLUE}This script is meant to download from the "RELEASES" on the KooL Hyprland-Dots${RESET}"
+echo "${SKY_BLUE}This script is meant to download from the "RELEASES" on the Sunshine Hyprland-Dots${RESET}"
 echo "${YELLOW}Kindly note that the RELEASES is one version older that from main${RESET}"
 printf "\n%.0s" {1..1}
 echo "${MAGENTA}If you want to get the latest, kindly ran the ${SKY_BLUE}copy.sh${RESET} ${MAGENTA}instead${RESET}"
@@ -83,7 +83,7 @@ if [ -f Hyprland-Dots.tar.gz ]; then
   existing_version=$(echo Hyprland-Dots.tar.gz | grep -oP 'v\d+\.\d+\.\d+' | sed 's/v//')
 
   # Fetch the tag_name for the latest release using the GitHub API
-  latest_version=$(curl -s https://api.github.com/repos/LinuxBeginnings/Hyprland-Dots/releases/latest | grep "tag_name" | cut -d '"' -f 4 | sed 's/v//')
+  latest_version=$(curl -s https://api.github.com/repos/tak0dan/Sunshine_Hyprland_Dots/releases/latest | grep "tag_name" | cut -d '"' -f 4 | sed 's/v//')
 
   # Check if versions match
   if [ "$existing_version" = "$latest_version" ]; then
@@ -99,8 +99,8 @@ if [ -f Hyprland-Dots.tar.gz ]; then
     if [ "$upgrade_choice" = "y" ]; then
 		echo -e "${NOTE} Proceeding to download the latest release."
 		
-		# Delete existing directories starting with LinuxBeginnings-Hyprland-Dots
-      find . -type d -name 'LinuxBeginnings-Hyprland-Dots*' -exec rm -rf {} +
+		# Delete existing directories starting with Sunshine-Hyprland-Dots
+      find . -type d -name 'Sunshine-Hyprland-Dots*' -exec rm -rf {} +
       rm -f Hyprland-Dots.tar.gz
       printf "${WARN} Removed existing Hyprland-Dots.tar.gz.\n"
     else
@@ -113,7 +113,7 @@ fi
 printf "${NOTE} Downloading the latest Hyprland source code release...\n"
 
 # Fetch the tag name for the latest release using the GitHub API
-latest_tag=$(curl -s https://api.github.com/repos/LinuxBeginnings/Hyprland-Dots/releases/latest | grep "tag_name" | cut -d '"' -f 4)
+latest_tag=$(curl -s https://api.github.com/repos/tak0dan/Sunshine_Hyprland_Dots/releases/latest | grep "tag_name" | cut -d '"' -f 4)
 
 # Check if the tag is obtained successfully
 if [ -z "$latest_tag" ]; then
@@ -122,7 +122,7 @@ if [ -z "$latest_tag" ]; then
 fi
 
 # Fetch the tarball URL for the latest release using the GitHub API
-latest_tarball_url=$(curl -s https://api.github.com/repos/LinuxBeginnings/Hyprland-Dots/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
+latest_tarball_url=$(curl -s https://api.github.com/repos/tak0dan/Sunshine_Hyprland_Dots/releases/latest | grep "tarball_url" | cut -d '"' -f 4)
 
 # Check if the URL is obtained successfully
 if [ -z "$latest_tarball_url" ]; then
@@ -139,15 +139,15 @@ if curl -L "$latest_tarball_url" -o "$file_name"; then
   tar -xzf "$file_name" || exit 1
 
   # delete existing Hyprland-Dots
-  rm -rf LinuxBeginnings-Hyprland-Dots
+  rm -rf Sunshine-Hyprland-Dots
 
   # Identify the extracted directory
   extracted_directory=$(tar -tf "$file_name" | grep -o '^[^/]\+' | uniq)
 
-  # Rename the extracted directory to LinuxBeginnings-Hyprland-Dots
-  mv "$extracted_directory" LinuxBeginnings-Hyprland-Dots || exit 1
+  # Rename the extracted directory to Sunshine-Hyprland-Dots
+  mv "$extracted_directory" Sunshine-Hyprland-Dots || exit 1
 
-  cd "LinuxBeginnings-Hyprland-Dots" || exit 1
+  cd "Sunshine-Hyprland-Dots" || exit 1
 
   # Set execute permission for copy.sh and execute it
   chmod +x copy.sh

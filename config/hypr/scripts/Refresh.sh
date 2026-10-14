@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -81,7 +81,7 @@ ensure_wayland_env() {
 # to rely on bash's dynamic scoping to see restart_waybar's `local waybar_dir`,
 # and a bare ${waybar_dir} expands to nothing - and then to "/config" - the moment
 # that stops being true.
-kooldots_waybar_config() {
+sunshinedots_waybar_config() {
   local fallback_dir=$1
   local dp="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/DisplayProfile.sh" p=""
   if [ -x "$dp" ]; then
@@ -112,7 +112,7 @@ restart_waybar() {
     restart_cmd="\"$scripts_dir/WaybarStartup.sh\" --restart"
   else
     local waybar_cfg
-    waybar_cfg="$(kooldots_waybar_config "$waybar_dir")"
+    waybar_cfg="$(sunshinedots_waybar_config "$waybar_dir")"
     restart_cmd="if command -v .waybar-wrapped >/dev/null 2>&1; then .waybar-wrapped -c \"$waybar_cfg\" -s \"$waybar_dir/style.css\" >/dev/null 2>&1 & else waybar -c \"$waybar_cfg\" -s \"$waybar_dir/style.css\" >/dev/null 2>&1 & fi"
   fi
 

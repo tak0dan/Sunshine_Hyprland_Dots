@@ -40,7 +40,7 @@ Este Código de Conducta se aplica a todos los espacios de la comunidad y tambi�
 
 ## Cumplimiento
 
-Los casos de comportamiento abusivo, acosador o de otra forma inaceptable pueden ser reportados al mantenedor del proyecto, [@tak0dan](https://github.com/tak0dan), por mensaje directo en GitHub. No publiques detalles privados en un issue o pull request público. Todas las quejas serán revisadas e investigadas de manera rápida y justa.
+Los casos de comportamiento abusivo, acosador o de otra forma inaceptable pueden ser reportados al mantenedor del proyecto, [@tak0dan](https://github.com/tak0dan/Sunshine_Hyprland_Dots), por mensaje directo en GitHub. No publiques detalles privados en un issue o pull request público. Todas las quejas serán revisadas e investigadas de manera rápida y justa.
 
 Todos los líderes de la comunidad están obligados a respetar la privacidad y seguridad de quien reporte cualquier incidente.
 

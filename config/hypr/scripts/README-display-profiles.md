@@ -116,7 +116,7 @@ Each layout chooses one of three:
 | `selected` | Bars on the monitors you picked. |
 
 For the last two, the active Waybar layout is copied to
-`$XDG_RUNTIME_DIR/kooldots-display-profiles/config-active` with an `"output"`
+`$XDG_RUNTIME_DIR/sunshinedots-display-profiles/config-active` with an `"output"`
 array injected into every bar. Your own config and your choice of Waybar layout
 (`SUPER`+`ALT`+`B`) are untouched.
 
@@ -272,7 +272,7 @@ alone and let the watcher import the arrangement instead.
 | `Monitor_Profiles/Work.lua` | An example profile: one `preferred`/`auto`/`1` rule per output, matched by port. |
 | `scripts/tests/` | The 548-check suite. It is installed with the rest of `config/hypr`, so it is available on an installed system too - run it with `bash ~/.config/hypr/scripts/tests/run-all.sh`. |
 
-Runtime state lives in `$XDG_RUNTIME_DIR/kooldots-display-profiles/`:
+Runtime state lives in `$XDG_RUNTIME_DIR/sunshinedots-display-profiles/`:
 `display-profile.log`, `monitor-watcher.log`, `current` (the fingerprint and the
 running layout's name), `active-layout.json` and `active-layout.fingerprint`
 (what is on screen now), `config-active`, `pause`, `monitors*.json` scratch
@@ -316,8 +316,8 @@ characters.
 ~/.config/hypr/scripts/DisplayProfile.sh --dry-run auto
 
 # What happened?
-tail -40 "$XDG_RUNTIME_DIR/kooldots-display-profiles/display-profile.log"
-tail -40 "$XDG_RUNTIME_DIR/kooldots-display-profiles/monitor-watcher.log"
+tail -40 "$XDG_RUNTIME_DIR/sunshinedots-display-profiles/display-profile.log"
+tail -40 "$XDG_RUNTIME_DIR/sunshinedots-display-profiles/monitor-watcher.log"
 
 # Is the watcher running, and is it the only one?
 pgrep -af 'Monitor[W]atcher'
@@ -347,7 +347,7 @@ If the watcher says *"another MonitorWatcher is already running"* but `pgrep`
 shows none, something is still holding its lock:
 
 ```bash
-lsof "$XDG_RUNTIME_DIR/kooldots-monitor-watcher.lock"
+lsof "$XDG_RUNTIME_DIR/sunshinedots-monitor-watcher.lock"
 ```
 
 If the layout store is damaged, nothing overwrites it: the system reads it as
@@ -388,7 +388,7 @@ pkill -f 'Monitor[W]atcher' || true
 # so a copy of a file that was already broken there fails a syntax sweep (and a
 # copy of a working one is a second copy of the same rules).
 B=<your-backup-dir>
-cp "$B"/{WaybarStartup.sh,Refresh.sh,Kool_Quick_Settings.sh,LidSwitch.sh,MonitorProfiles.sh} \
+cp "$B"/{WaybarStartup.sh,Refresh.sh,Sunshine_Quick_Settings.sh,LidSwitch.sh,MonitorProfiles.sh} \
    ~/.config/hypr/scripts/
 cp "$B"/user_keybinds.lua ~/.config/hypr/UserConfigs/
 
@@ -397,9 +397,9 @@ cp "$B"/user_keybinds.lua ~/.config/hypr/UserConfigs/
 # patches/80-display-layouts.sh.
 
 rm -f ~/.config/hypr/scripts/{DisplayProfile.sh,DisplayProfileMenu.sh,DisplayProfileSetup.sh,MonitorWatcher.sh,lib_display_store.sh}
-rm -rf "$XDG_RUNTIME_DIR/kooldots-display-profiles" \
-       "$XDG_RUNTIME_DIR"/kooldots-display-profile.lock \
-       "$XDG_RUNTIME_DIR"/kooldots-monitor-watcher.lock
+rm -rf "$XDG_RUNTIME_DIR/sunshinedots-display-profiles" \
+       "$XDG_RUNTIME_DIR"/sunshinedots-display-profile.lock \
+       "$XDG_RUNTIME_DIR"/sunshinedots-monitor-watcher.lock
 hyprctl reload
 ```
 

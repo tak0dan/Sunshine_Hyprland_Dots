@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
 # Purpose:
-#   Orchestrates copying/upgrading LinuxBeginnings's Hyprland dotfiles into ${XDG_CONFIG_HOME:-$HOME/.config}.
+#   Orchestrates copying/upgrading Sunshine Hyprland Dots into ${XDG_CONFIG_HOME:-$HOME/.config}.
 #   Handles interactive prompts, backups/restores, per-app tweaks, and express mode.
 #
 # Layout (high-level; future modularization targets):
@@ -178,20 +178,20 @@ if ! declare -f capture_upgrade_runtime_selection_state >/dev/null 2>&1; then
     local cfg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
     local waybar_dir="$cfg_home/hypr/waybar"
     local legacy_waybar_dir="$cfg_home/waybar"
-    KOOLDOTS_SAVED_WAYBAR_CONFIG=""
-    KOOLDOTS_SAVED_WAYBAR_STYLE=""
+    SUNSHINEDOTS_SAVED_WAYBAR_CONFIG=""
+    SUNSHINEDOTS_SAVED_WAYBAR_STYLE=""
 
     if [ -L "$waybar_dir/config" ]; then
-      KOOLDOTS_SAVED_WAYBAR_CONFIG="$(basename "$(readlink "$waybar_dir/config")")"
+      SUNSHINEDOTS_SAVED_WAYBAR_CONFIG="$(basename "$(readlink "$waybar_dir/config")")"
     elif [ -L "$legacy_waybar_dir/config" ]; then
-      KOOLDOTS_SAVED_WAYBAR_CONFIG="$(basename "$(readlink "$legacy_waybar_dir/config")")"
+      SUNSHINEDOTS_SAVED_WAYBAR_CONFIG="$(basename "$(readlink "$legacy_waybar_dir/config")")"
     fi
     if [ -L "$waybar_dir/style.css" ]; then
-      KOOLDOTS_SAVED_WAYBAR_STYLE="$(basename "$(readlink "$waybar_dir/style.css")")"
+      SUNSHINEDOTS_SAVED_WAYBAR_STYLE="$(basename "$(readlink "$waybar_dir/style.css")")"
     elif [ -L "$legacy_waybar_dir/style.css" ]; then
-      KOOLDOTS_SAVED_WAYBAR_STYLE="$(basename "$(readlink "$legacy_waybar_dir/style.css")")"
+      SUNSHINEDOTS_SAVED_WAYBAR_STYLE="$(basename "$(readlink "$legacy_waybar_dir/style.css")")"
     fi
-    export KOOLDOTS_SAVED_WAYBAR_CONFIG KOOLDOTS_SAVED_WAYBAR_STYLE
+    export SUNSHINEDOTS_SAVED_WAYBAR_CONFIG SUNSHINEDOTS_SAVED_WAYBAR_STYLE
   }
 fi
 if ! declare -f capture_runtime_personal_state >/dev/null 2>&1; then
@@ -202,20 +202,20 @@ if ! declare -f capture_runtime_personal_state >/dev/null 2>&1; then
     local rofi_link="$cfg_home/hypr/rofi/.current_wallpaper"
     local legacy_rofi_link="$cfg_home/rofi/.current_wallpaper"
     local wallpaper_current="$cfg_home/hypr/wallpaper_effects/.wallpaper_current"
-    local state_dir="$cache_home/kooldots-copy"
+    local state_dir="$cache_home/sunshinedots-copy"
     local state_file="$state_dir/wallpaper-current-$$"
     local resolved=""
 
     mkdir -p "$state_dir"
 
-    KOOLDOTS_RUNTIME_WALLPAPER_STATE_FILE="$state_file"
-    KOOLDOTS_RUNTIME_WALLPAPER_SOURCE=""
-    KOOLDOTS_RUNTIME_INITIAL_STARTUP_MARKER=0
-    export KOOLDOTS_RUNTIME_WALLPAPER_STATE_FILE KOOLDOTS_RUNTIME_WALLPAPER_SOURCE KOOLDOTS_RUNTIME_INITIAL_STARTUP_MARKER
+    SUNSHINEDOTS_RUNTIME_WALLPAPER_STATE_FILE="$state_file"
+    SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE=""
+    SUNSHINEDOTS_RUNTIME_INITIAL_STARTUP_MARKER=0
+    export SUNSHINEDOTS_RUNTIME_WALLPAPER_STATE_FILE SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE SUNSHINEDOTS_RUNTIME_INITIAL_STARTUP_MARKER
 
     if [ -f "$cfg_home/hypr/.initial_startup_done" ]; then
-      KOOLDOTS_RUNTIME_INITIAL_STARTUP_MARKER=1
-      export KOOLDOTS_RUNTIME_INITIAL_STARTUP_MARKER
+      SUNSHINEDOTS_RUNTIME_INITIAL_STARTUP_MARKER=1
+      export SUNSHINEDOTS_RUNTIME_INITIAL_STARTUP_MARKER
     fi
 
     if [ -L "$rofi_link" ]; then
@@ -226,13 +226,13 @@ if ! declare -f capture_runtime_personal_state >/dev/null 2>&1; then
 
     if [ -n "$resolved" ] && [ -f "$resolved" ]; then
       cp -f "$resolved" "$state_file" 2>/dev/null || true
-      KOOLDOTS_RUNTIME_WALLPAPER_SOURCE="$resolved"
-      export KOOLDOTS_RUNTIME_WALLPAPER_SOURCE
+      SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE="$resolved"
+      export SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE
       echo "${NOTE} Captured current wallpaper from rofi link: $resolved" 2>&1 | tee -a "$log"
     elif [ -f "$wallpaper_current" ]; then
       cp -f "$wallpaper_current" "$state_file" 2>/dev/null || true
-      KOOLDOTS_RUNTIME_WALLPAPER_SOURCE="$wallpaper_current"
-      export KOOLDOTS_RUNTIME_WALLPAPER_SOURCE
+      SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE="$wallpaper_current"
+      export SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE
       echo "${NOTE} Captured current wallpaper from $wallpaper_current" 2>&1 | tee -a "$log"
     else
       rm -f "$state_file" 2>/dev/null || true
@@ -263,10 +263,10 @@ if ! declare -f restore_upgrade_runtime_selection_state >/dev/null 2>&1; then
 
     # --- Config link validation and restoration ---
     local restored_config=0
-    if [ -n "${KOOLDOTS_SAVED_WAYBAR_CONFIG:-}" ] && [ -f "$waybar_dir/configs/$KOOLDOTS_SAVED_WAYBAR_CONFIG" ]; then
+    if [ -n "${SUNSHINEDOTS_SAVED_WAYBAR_CONFIG:-}" ] && [ -f "$waybar_dir/configs/$SUNSHINEDOTS_SAVED_WAYBAR_CONFIG" ]; then
       rm -f "$config_link"
-      ln -sf "$waybar_dir/configs/$KOOLDOTS_SAVED_WAYBAR_CONFIG" "$config_link" 2>&1 | tee -a "$log"
-      echo "${OK} Restored waybar layout config: $KOOLDOTS_SAVED_WAYBAR_CONFIG" 2>&1 | tee -a "$log"
+      ln -sf "$waybar_dir/configs/$SUNSHINEDOTS_SAVED_WAYBAR_CONFIG" "$config_link" 2>&1 | tee -a "$log"
+      echo "${OK} Restored waybar layout config: $SUNSHINEDOTS_SAVED_WAYBAR_CONFIG" 2>&1 | tee -a "$log"
       restored_config=1
     fi
 
@@ -294,10 +294,10 @@ if ! declare -f restore_upgrade_runtime_selection_state >/dev/null 2>&1; then
 
     # --- Style link validation and restoration ---
     local restored_style=0
-    if [ -n "${KOOLDOTS_SAVED_WAYBAR_STYLE:-}" ] && [ -f "$waybar_dir/style/$KOOLDOTS_SAVED_WAYBAR_STYLE" ]; then
+    if [ -n "${SUNSHINEDOTS_SAVED_WAYBAR_STYLE:-}" ] && [ -f "$waybar_dir/style/$SUNSHINEDOTS_SAVED_WAYBAR_STYLE" ]; then
       rm -f "$style_link"
-      ln -sf "$waybar_dir/style/$KOOLDOTS_SAVED_WAYBAR_STYLE" "$style_link" 2>&1 | tee -a "$log"
-      echo "${OK} Restored waybar style: $KOOLDOTS_SAVED_WAYBAR_STYLE" 2>&1 | tee -a "$log"
+      ln -sf "$waybar_dir/style/$SUNSHINEDOTS_SAVED_WAYBAR_STYLE" "$style_link" 2>&1 | tee -a "$log"
+      echo "${OK} Restored waybar style: $SUNSHINEDOTS_SAVED_WAYBAR_STYLE" 2>&1 | tee -a "$log"
       restored_style=1
     fi
 
@@ -330,10 +330,10 @@ if ! declare -f restore_runtime_personal_state >/dev/null 2>&1; then
     local cfg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
     local wallpaper_current="$cfg_home/hypr/wallpaper_effects/.wallpaper_current"
     local rofi_link="$cfg_home/hypr/rofi/.current_wallpaper"
-    local state_file="${KOOLDOTS_RUNTIME_WALLPAPER_STATE_FILE:-}"
-    local source_path="${KOOLDOTS_RUNTIME_WALLPAPER_SOURCE:-}"
+    local state_file="${SUNSHINEDOTS_RUNTIME_WALLPAPER_STATE_FILE:-}"
+    local source_path="${SUNSHINEDOTS_RUNTIME_WALLPAPER_SOURCE:-}"
 
-    if [ "${KOOLDOTS_RUNTIME_INITIAL_STARTUP_MARKER:-0}" -eq 1 ]; then
+    if [ "${SUNSHINEDOTS_RUNTIME_INITIAL_STARTUP_MARKER:-0}" -eq 1 ]; then
       mkdir -p "$cfg_home/hypr"
       touch "$cfg_home/hypr/.initial_startup_done" 2>/dev/null || true
     fi
@@ -491,7 +491,7 @@ config_home() {
   echo "${XDG_CONFIG_HOME:-$HOME/.config}"
 }
 
-is_kooldots_config() {
+is_sunshinedots_config() {
   local hypr_dir
   hypr_dir="$(config_home)/hypr"
   [ -d "$hypr_dir" ] || return 1
@@ -524,11 +524,11 @@ is_oem_lua_config() {
   [ -f "$cfg_home/hyprland.lua" ] || [ -f "$hypr_dir/hyprland.lua" ]
 }
 
-require_kooldots_for_upgrade() {
-  if is_kooldots_config; then
+require_sunshinedots_for_upgrade() {
+  if is_sunshinedots_config; then
     return 0
   fi
-  echo "${WARN} Existing KoolDots config not detected - run fresh install"
+  echo "${WARN} Existing Sunshine Hyprland Dots config not detected - run fresh install"
   return 1
 }
 
@@ -540,7 +540,7 @@ prepare_fresh_install_hypr() {
   cfg_home="$(config_home)"
   hypr_dir="$cfg_home/hypr"
 
-  if ! is_kooldots_config && ! is_oem_lua_config; then
+  if ! is_sunshinedots_config && ! is_oem_lua_config; then
     return 0
   fi
 
@@ -622,7 +622,7 @@ if [ -z "$RUN_MODE" ]; then
         EXPRESS_MODE=0
         ;;
       upgrade)
-        if ! require_kooldots_for_upgrade; then
+        if ! require_sunshinedots_for_upgrade; then
           continue
         fi
         RUN_MODE="upgrade"
@@ -634,7 +634,7 @@ if [ -z "$RUN_MODE" ]; then
           echo "${WARN} Express mode requires installed dotfiles v${MIN_EXPRESS_VERSION} or newer. Please choose another option."
           continue
         fi
-        if ! require_kooldots_for_upgrade; then
+        if ! require_sunshinedots_for_upgrade; then
           continue
         fi
         RUN_MODE="express"
@@ -667,7 +667,7 @@ if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ] || [ "$RUN_MODE" =
 fi
 
 if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ]; then
-  if ! require_kooldots_for_upgrade; then
+  if ! require_sunshinedots_for_upgrade; then
     exit 1
   fi
 fi
@@ -1133,10 +1133,10 @@ if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ]; then
   migrate_hypr_to_lua_if_needed "$LOG" "${MIGRATE_HYPR_TO_LUA:-0}" || true
 fi
 ensure_lua_keybinds "$LOG"
-if [ -n "${KOOLDOTS_SELECTED_KB_LAYOUT:-}" ]; then
-  set_keyboard_layout_configs "$KOOLDOTS_SELECTED_KB_LAYOUT" "${KOOLDOTS_SELECTED_KB_VARIANT:-}" "${KOOLDOTS_SELECTED_KB_MODEL:-}" "$LOG"
+if [ -n "${SUNSHINEDOTS_SELECTED_KB_LAYOUT:-}" ]; then
+  set_keyboard_layout_configs "$SUNSHINEDOTS_SELECTED_KB_LAYOUT" "${SUNSHINEDOTS_SELECTED_KB_VARIANT:-}" "${SUNSHINEDOTS_SELECTED_KB_MODEL:-}" "$LOG"
 fi
-if [ -n "${KOOLDOTS_SELECTED_EDITOR:-}" ] || [ -n "${KOOLDOTS_SELECTED_VISUAL:-}" ]; then
+if [ -n "${SUNSHINEDOTS_SELECTED_EDITOR:-}" ] || [ -n "${SUNSHINEDOTS_SELECTED_VISUAL:-}" ]; then
   apply_editor_selection_to_userconfigs "$LOG"
 fi
 printf "\n%.0s" {1..1}
@@ -1463,7 +1463,7 @@ if [ -f "$DOTFILES_DIR/config/hypr/scripts/WallustConfig.sh" ]; then
 fi
 if [ "$EXPRESS_MODE" -eq 1 ]; then
   echo "${NOTE} Express upgrade selected: skipping wallust run entirely." 2>&1 | tee -a "$LOG"
-elif [ "$RUN_MODE" != "install" ] && [ "${KOOLDOTS_RUNTIME_THEME_RESTORED:-0}" -eq 1 ]; then
+elif [ "$RUN_MODE" != "install" ] && [ "${SUNSHINEDOTS_RUNTIME_THEME_RESTORED:-0}" -eq 1 ]; then
   echo "${NOTE} Preserved existing Wallust/global theme colors from pre-upgrade state; skipping wallust regeneration." 2>&1 | tee -a "$LOG"
 else
   wallust "${wallust_args[@]}" run -s "$wallpaper" 2>&1 | tee -a "$LOG"
@@ -1483,9 +1483,9 @@ seed_custom_info_json "$LOG"
 if [ "$RUN_MODE" = "install" ]; then enable_fastfetch_on_shell "$LOG"; fi
 
 printf "\n%.0s" {1..2}
-printf "${OK} GREAT! KooL's Hyprland-Dots is now Loaded & Ready !!! "
+printf "${OK} GREAT! Sunshine Hyprland Dots is now Loaded & Ready !!! "
 printf "\n%.0s" {1..1}
 printf "${INFO} However, it is ${MAGENTA}HIGHLY SUGGESTED${RESET} to logout and re-login or better reboot to avoid any issues"
 printf "\n%.0s" {1..1}
-printf "${SKY_BLUE}Thank you${RESET} for using ${MAGENTA}KooL's Hyprland Configuration${RESET}... ${YELLOW}ENJOY!!!${RESET}"
+printf "${SKY_BLUE}Thank you${RESET} for using ${MAGENTA}Sunshine Hyprland Configuration${RESET}... ${YELLOW}ENJOY!!!${RESET}"
 printf "\n%.0s" {1..3}

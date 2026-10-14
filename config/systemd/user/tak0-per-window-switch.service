@@ -1,5 +1,5 @@
 [Unit]
-Description=KoolDots per-window keyboard layout listener
+Description=Sunshine Hyprland Dots per-window keyboard layout listener
 StartLimitIntervalSec=0
 
 [Service]

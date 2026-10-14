@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -22,7 +22,7 @@
 # shellcheck source=./lib.sh
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
-SWAYNC_CSS="${KOOLDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}/swaync/style.css"
+SWAYNC_CSS="${SUNSHINEDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}/swaync/style.css"
 
 if [ ! -f "$SWAYNC_CSS" ]; then
   patch_log "swaync style.css not found; skipping wallust colors import fix."
@@ -49,7 +49,7 @@ if [ "$stale" -eq 0 ]; then
   exit 0
 fi
 
-tmp="$(mktemp "${TMPDIR:-/tmp}/kooldots-patch.XXXXXX")" || {
+tmp="$(mktemp "${TMPDIR:-/tmp}/sunshinedots-patch.XXXXXX")" || {
   patch_log "could not create a temporary file; skipping swaync import fix."
   exit 0
 }
@@ -65,7 +65,7 @@ else
 fi
 rm -f "$tmp"
 
-if [ ! -f "${KOOLDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}/hypr/waybar/wallust/colors-waybar.css" ]; then
+if [ ! -f "${SUNSHINEDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}/hypr/waybar/wallust/colors-waybar.css" ]; then
   patch_log "note: waybar wallust colors not found yet; re-apply a wallpaper to (re)generate them."
 fi
 

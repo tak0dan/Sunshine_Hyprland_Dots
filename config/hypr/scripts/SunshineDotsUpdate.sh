@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
-# Checks for updates to KooL Hyprland dotfiles by comparing local version
+# Checks for updates to Sunshine Hyprland dotfiles by comparing local version
 # to upstream GitHub repository.
 
 set -euo pipefail
@@ -14,10 +14,10 @@ set -euo pipefail
 config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
 env_lua="$config_dir/lua/env.lua"
 iDIR="${XDG_CONFIG_HOME:-$HOME/.config}/swaync/images"
-CHANGELOG_URL="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Changelogs"
-REMOTE_ENV_URL="https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/config/hypr/lua/env.lua"
-REMOTE_API_CONTENTS="https://api.github.com/repos/LinuxBeginnings/Hyprland-Dots/contents/config/hypr"
-REMOTE_TREE_URL="https://github.com/LinuxBeginnings/Hyprland-Dots/tree/main/config/hypr"
+CHANGELOG_URL="https://github.com/tak0dan/Sunshine_Hyprland_Dots/wiki/Changelogs"
+REMOTE_ENV_URL="https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/config/hypr/lua/env.lua"
+REMOTE_API_CONTENTS="https://api.github.com/repos/tak0dan/Sunshine_Hyprland_Dots/contents/config/hypr"
+REMOTE_TREE_URL="https://github.com/tak0dan/Sunshine_Hyprland_Dots/tree/main/config/hypr"
 
 # Resolve notification icon
 get_icon() {
@@ -77,8 +77,8 @@ fi
 local_version="${local_version#v}"
 
 if [[ -z "$local_version" ]]; then
-  send_notification "$(get_icon "error.png")" "KooL Hyprland" "Unable to detect installed dotfiles version." "critical"
-  echo "Error: Unable to detect installed KooL's dots version in $config_dir" >&2
+  send_notification "$(get_icon "error.png")" "Sunshine Hyprland" "Unable to detect installed dotfiles version." "critical"
+  echo "Error: Unable to detect installed Sunshine's dots version in $config_dir" >&2
   exit 1
 fi
 
@@ -112,7 +112,7 @@ fi
 remote_version="${remote_version#v}"
 
 if [[ -z "$remote_version" ]]; then
-  send_notification "$(get_icon "error.png")" "KooL Hyprland" "Unable to determine latest GitHub version." "critical"
+  send_notification "$(get_icon "error.png")" "Sunshine Hyprland" "Unable to determine latest GitHub version." "critical"
   echo "Error: Unable to determine latest version from GitHub." >&2
   exit 1
 fi
@@ -122,7 +122,7 @@ highest_version=$(printf '%s\n%s\n' "$local_version" "$remote_version" | sort -V
 
 if [[ "$highest_version" == "$local_version" ]]; then
   # No update available
-  send_notification "$(get_icon "note.png")" "KooL Hyprland" "Current installed version v${local_version} is most recent" "normal"
+  send_notification "$(get_icon "note.png")" "Sunshine Hyprland" "Current installed version v${local_version} is most recent" "normal"
   echo "Current installed version v${local_version} is most recent"
   exit 0
 fi
@@ -140,14 +140,14 @@ show_update_window() {
   if command -v yad >/dev/null 2>&1; then
     local yad_icon
     yad_icon=$(get_icon "ja.png")
-    local yad_text="<b><big>KooL Hyprland Dots Update Available!</big></b>\n\n"
+    local yad_text="<b><big>Sunshine Hyprland Dots Update Available!</big></b>\n\n"
     yad_text+="<b>Current installed version:</b> ${cur_v}\n"
     yad_text+="<b>Most current version detected:</b> ${new_v}\n\n"
     yad_text+="<b>Changelog:</b>\n<a href=\"${CHANGELOG_URL}\">${CHANGELOG_URL}</a>\n"
 
     local ret=0
     yad --center \
-      --title="KooL Hyprland Update" \
+      --title="Sunshine Hyprland Update" \
       --window-icon="$yad_icon" \
       --text="$yad_text" \
       --button="View Changelogs:2" \
@@ -163,11 +163,11 @@ show_update_window() {
     return 0
   fi
 
-  # Priority 2: Rofi (guaranteed available in KooL Hyprland)
+  # Priority 2: Rofi (guaranteed available in Sunshine Hyprland)
   if command -v rofi >/dev/null 2>&1; then
     "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/RofiFocusedWallpaperLink.sh" >/dev/null 2>&1 || true
 
-    local rofi_msg="<b>Update Available for KooL Hyprland Dots!</b>\n\n"
+    local rofi_msg="<b>Update Available for Sunshine Hyprland Dots!</b>\n\n"
     rofi_msg+="• Current installed version:      <b>${cur_v}</b>\n"
     rofi_msg+="• Most current version detected:  <b>${new_v}</b>\n\n"
     rofi_msg+="Changelog: ${CHANGELOG_URL}"
@@ -189,8 +189,8 @@ show_update_window() {
   # Priority 3: Zenity (if installed)
   if command -v zenity >/dev/null 2>&1; then
     zenity --info \
-      --title="KooL Hyprland Update" \
-      --text="Update available for KooL Hyprland Dots!\n\nCurrent installed version: ${cur_v}\nMost current version detected: ${new_v}\n\nChangelog:\n${CHANGELOG_URL}" \
+      --title="Sunshine Hyprland Update" \
+      --text="Update available for Sunshine Hyprland Dots!\n\nCurrent installed version: ${cur_v}\nMost current version detected: ${new_v}\n\nChangelog:\n${CHANGELOG_URL}" \
       --ok-label="OK" 2>/dev/null || true
     return 0
   fi

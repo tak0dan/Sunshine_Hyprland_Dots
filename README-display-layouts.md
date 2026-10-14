@@ -91,7 +91,7 @@ rotated monitor, a closed lid, the nwg-displays bridge and the installer patch.
 
 **Existing files changed**, each with a fallback so the dots still work without
 this feature: `WaybarStartup.sh` and `Refresh.sh` (ask the controller which
-Waybar config to run, and fall back to the plain one), `Kool_Quick_Settings.sh`
+Waybar config to run, and fall back to the plain one), `Sunshine_Quick_Settings.sh`
 (the nwg-displays entry), `LidSwitch.sh`, `MonitorProfiles.sh` (now a front end
 for this system), `scripts/lib_copy.sh` (ships the store, add-only),
 `UserConfigs/user_keybinds.lua` and `UserConfigs/user_startup.lua` — and

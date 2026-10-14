@@ -1,6 +1,6 @@
 # How to Override GTK Theme, Cursors, and Icons
 
-In **KoolDots (2026)**, the desktop environment automatically adapts themes and colors based on wallpapers or dynamic presets. If you prefer to **lock down a specific GTK theme, cursor theme, or icon set** so that it always applies across all your applications, this guide explains how to configure persistent overrides.
+In **Sunshine Hyprland Dots (2026)**, the desktop environment automatically adapts themes and colors based on wallpapers or dynamic presets. If you prefer to **lock down a specific GTK theme, cursor theme, or icon set** so that it always applies across all your applications, this guide explains how to configure persistent overrides.
 
 > **Important Note on Icons:**
 > Neither GTK nor Qt supports environment variables (such as `ICON_THEME` or `GTK_ICON_THEME`) for icon themes—applications will simply ignore them. Icon themes must be configured via **`nwg-look`**, **`gsettings`**, or **GTK/Qt settings files** as detailed in [Section 4](#4-how-to-change-and-lock-icon-themes).
@@ -25,9 +25,9 @@ Adding toolkit variables to `~/.config/hypr/UserConfigs/user_env.lua` ensures yo
 
 ## 2. Step-by-Step: Editing `user_env.lua`
 
-### Method A: Via Kool Quick Settings (Recommended)
+### Method A: Via Sunshine Quick Settings (Recommended)
 
-1. Press `SUPER + SHIFT + E` on your keyboard to open the **Kool Quick Settings** menu.
+1. Press `SUPER + SHIFT + E` on your keyboard to open the **Sunshine Quick Settings** menu.
 2. Select **`[[ User Settings ]]`** from the category menu.
 3. Select **`Edit User ENV variables`**.
 4. The file `~/.config/hypr/UserConfigs/user_env.lua` will automatically open in your default editor.
@@ -95,7 +95,7 @@ Because icon themes are not controlled by environment variables, use one of the 
 
 ### Method A: Via `nwg-look` (Recommended GUI)
 
-1. Open **Kool Quick Settings** (`SUPER + SHIFT + E`), go to **`[[ Misc ]]`**, and select **`GTK Settings (nwg-look)`** (or run `nwg-look` in a terminal).
+1. Open **Sunshine Quick Settings** (`SUPER + SHIFT + E`), go to **`[[ Misc ]]`**, and select **`GTK Settings (nwg-look)`** (or run `nwg-look` in a terminal).
 2. Go to the **Icon Theme** tab.
 3. Select your desired icon theme (e.g., `candy-icons`, `Papirus-Dark`).
 4. Click **Apply**.
@@ -127,7 +127,7 @@ gtk-icon-theme-name = candy-icons
 
 ### Method D: For Qt Applications
 
-KoolDots configures Qt applications with `qt6ct` (`hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")`). To set your icon theme for Qt applications:
+Sunshine Hyprland Dots configures Qt applications with `qt6ct` (`hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")`). To set your icon theme for Qt applications:
 1. Run `qt6ct` (or `qt5ct`).
 2. Navigate to the **Icon Theme** tab, select your icon theme, and click **Apply**.
 

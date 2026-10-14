@@ -1,13 +1,13 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
 
 -- Converted from config/hypr/UserConfigs/01-UserDefaults.conf (active values only).
 
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 local editor = os.getenv("EDITOR")
 if editor == nil or editor == "" then
   editor = "nano"
@@ -16,11 +16,11 @@ local visual = os.getenv("VISUAL")
 if visual == nil then
   visual = ""
 end
-KOOLDOTS_DEFAULTS.edit = editor
-KOOLDOTS_DEFAULTS.visual = visual
-KOOLDOTS_DEFAULTS.term = "kitty"
-KOOLDOTS_DEFAULTS.files = "dolphin"
-KOOLDOTS_DEFAULTS.search_engine = "https://www.google.com/search?q={}"
+SUNSHINEDOTS_DEFAULTS.edit = editor
+SUNSHINEDOTS_DEFAULTS.visual = visual
+SUNSHINEDOTS_DEFAULTS.term = "kitty"
+SUNSHINEDOTS_DEFAULTS.files = "dolphin"
+SUNSHINEDOTS_DEFAULTS.search_engine = "https://www.google.com/search?q={}"
 
 -- Optional user overrides live outside the pristine lua/ source tree.
 do

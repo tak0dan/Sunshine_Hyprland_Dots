@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -200,7 +200,7 @@ set_layout() {
   actual="$(wait_for_layout "$target")"
   if [[ "$actual" == "$target" ]]; then
     persist_current_workspace_layout "$target"
-    hypr_emit_event "kool:layout"
+    hypr_emit_event "sunshine:layout"
     if [[ "$quiet_mode" -eq 0 ]]; then
       notify-send -e -u low -i "$notif" " ${actual^} Layout · WS ${workspace_label}${monitor_name:+ @ ${monitor_name}}"
     fi

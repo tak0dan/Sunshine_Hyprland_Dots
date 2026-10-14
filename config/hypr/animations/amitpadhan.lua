@@ -1,4 +1,4 @@
--- 💫 https://github.com/LinuxBeginnings 💫
+-- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫
 -- Inspired by amitpadhan525
 -- https://github.com/amitpadhan525
 

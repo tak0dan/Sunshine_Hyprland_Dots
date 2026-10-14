@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
-# Rofi menu for KooL Hyprland Quick Settings (SUPER SHIFT E)
+# Rofi menu for Sunshine Hyprland Quick Settings (SUPER SHIFT E)
 # Updated for UserConfigs/configs separation
 
 config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -22,9 +22,9 @@ visual="${visual:-${VISUAL:-}}"
 
 # 1. Parse active overrides from user_defaults.lua
 if [[ -f "$lua_defaults_file" ]]; then
-  lua_term=$(sed -n 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.term[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
-  lua_edit=$(sed -n 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
-  lua_visual=$(sed -n 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.visual[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
+  lua_term=$(sed -n 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.term[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
+  lua_edit=$(sed -n 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
+  lua_visual=$(sed -n 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.visual[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_defaults_file" | tail -n1)
   [[ -n "$lua_term" ]] && term="$lua_term"
   [[ -n "$lua_edit" ]] && edit="$lua_edit"
   [[ -n "$lua_visual" ]] && visual="$lua_visual"
@@ -40,11 +40,11 @@ for env_file in "$user_env_lua" "$system_env_lua"; do
 done
 # 3. Fallback to system lua defaults
 if [[ -z "${lua_term:-}" && -f "$lua_system_defaults_file" ]]; then
-  sys_term=$(sed -n 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.term[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_system_defaults_file" | tail -n1)
+  sys_term=$(sed -n 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.term[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_system_defaults_file" | tail -n1)
   [[ -n "$sys_term" ]] && term="$sys_term"
 fi
 if [[ -z "${edit:-}" && -f "$lua_system_defaults_file" ]]; then
-  sys_edit=$(sed -n 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_system_defaults_file" | tail -n1)
+  sys_edit=$(sed -n 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.edit[[:space:]]*=[[:space:]]*"\(.*\)"[[:space:]]*$/\1/p' "$lua_system_defaults_file" | tail -n1)
   [[ -n "$sys_edit" ]] && edit="$sys_edit"
 fi
 
@@ -561,7 +561,7 @@ handle_choice() {
     # The path keeps its .conf suffix on purpose: nwg derives the Lua sibling it
     # also writes from it (removesuffix(".conf") + ".lua"), and a path that does
     # not end in .conf makes it fall back to ~/.config/hypr/monitors.lua instead.
-    qs_state_dir="${XDG_RUNTIME_DIR:-/tmp}/kooldots-display-profiles"
+    qs_state_dir="${XDG_RUNTIME_DIR:-/tmp}/sunshinedots-display-profiles"
     qs_discard="$qs_state_dir/nwg-monitors.discard.conf"
     mkdir -p -- "$qs_state_dir"
     rm -f -- "$qs_discard" "$qs_state_dir/nwg-monitors.discard.lua"
@@ -632,7 +632,7 @@ handle_choice() {
     (
       if is_tui_editor "${selected_cmd[@]}"; then
         if [[ -x "$scriptsDir/LaunchTerminal.sh" ]]; then
-          "$scriptsDir/LaunchTerminal.sh" "$term" "${selected_cmd[*]} '$file'; '$scriptsDir/Kool_Quick_Settings.sh' --check-lua '$file'"
+          "$scriptsDir/LaunchTerminal.sh" "$term" "${selected_cmd[*]} '$file'; '$scriptsDir/Sunshine_Quick_Settings.sh' --check-lua '$file'"
         elif command -v kitty >/dev/null 2>&1; then
           kitty "${selected_cmd[@]}" "$file"
           check_lua_syntax "$file"

@@ -38,7 +38,7 @@ Ce code de conduite s'applique à la fois au sein des espaces du projet ainsi qu
 
 ## Application
 
-Les cas de comportements abusifs, harcelants ou tout autre comportement inacceptables peuvent être signalés au mainteneur du projet, [@tak0dan](https://github.com/tak0dan), par message privé sur GitHub. Ne publiez pas de détails privés dans une issue ou une pull request publique.
+Les cas de comportements abusifs, harcelants ou tout autre comportement inacceptables peuvent être signalés au mainteneur du projet, [@tak0dan](https://github.com/tak0dan/Sunshine_Hyprland_Dots), par message privé sur GitHub. Ne publiez pas de détails privés dans une issue ou une pull request publique.
 Toutes les plaintes seront examinées et feront l'objet d'une enquête rapide et équitable.
 
 Tou·te·s les dirigeant·e·s de la communauté sont tenu·e·s de respecter la vie privée et la sécurité des personnes ayant signalé un incident.
