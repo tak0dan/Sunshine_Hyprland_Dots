@@ -239,3 +239,38 @@ apply_fork_wallpapers() {
   set_fork_desktop_wallpaper "$log" "$flower"
   set_fork_sddm_background "$log" "$sun" || true
 }
+
+# Packages the per-window keyboard layout listener needs (jq, socat).
+install_fork_per_window_deps() {
+  local log="${1:-/dev/null}"
+  if fork_install_packages "$log" jq socat; then
+    echo "${OK:-[OK]} jq and socat installed for the per-window keyboard layout listener." 2>&1 | tee -a "$log"
+  else
+    echo "${WARN:-[WARN]} jq or socat could not be installed; the per-window keyboard layout listener will not work." 2>&1 | tee -a "$log"
+  fi
+}
+
+# Enable and start the per-window keyboard layout listener as a user service.
+# The unit is copied with config/systemd/ earlier in copy.sh.
+enable_fork_per_window_layout() {
+  local log="${1:-/dev/null}"
+  local unit="tak0-per-window-switch.service"
+  local unit_file="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/$unit"
+
+  if ! command -v systemctl >/dev/null 2>&1; then
+    echo "${WARN:-[WARN]} systemctl not found; per-window keyboard layout listener not enabled." 2>&1 | tee -a "$log"
+    return 1
+  fi
+  if [ ! -f "$unit_file" ]; then
+    echo "${WARN:-[WARN]} $unit_file not found; per-window keyboard layout listener not enabled." 2>&1 | tee -a "$log"
+    return 1
+  fi
+
+  systemctl --user daemon-reload 2>&1 | tee -a "$log" || true
+  if systemctl --user enable "$unit" 2>&1 | tee -a "$log" && systemctl --user restart "$unit" 2>&1 | tee -a "$log"; then
+    echo "${OK:-[OK]} Per-window keyboard layout listener enabled ($unit)." 2>&1 | tee -a "$log"
+  else
+    echo "${WARN:-[WARN]} Could not enable $unit. Run: systemctl --user enable --now $unit" 2>&1 | tee -a "$log"
+    return 1
+  fi
+}

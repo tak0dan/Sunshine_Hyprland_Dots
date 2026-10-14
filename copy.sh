@@ -1189,6 +1189,12 @@ if command -v systemctl >/dev/null 2>&1; then
   fi
 fi
 
+# Per-window keyboard layout listener: install its dependencies and enable the user service
+if [ "$RUN_MODE" = "install" ] || [ "$RUN_MODE" = "upgrade" ]; then
+  install_fork_per_window_deps "$LOG"
+  enable_fork_per_window_layout "$LOG" || true
+fi
+
 chassis_type=$(detect_waybar_config)
 if [ "$chassis_type" = "desktop" ]; then
   config_file="$waybar_config"
