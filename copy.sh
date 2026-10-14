@@ -1357,7 +1357,15 @@ elif [ "$wallpaper_bank_installed" -eq 1 ]; then
     done
   fi
 else
-  echo "${MAGENTA}By default only a few wallpapers are copied${RESET}..."
+  if [ "${RUN_MODE:-}" = "install" ]; then
+    # Fresh install: the dotfiles ship only the SDDM and desktop defaults. Every other
+    # wallpaper comes from the wallpaper bank, so fetch it without asking.
+    echo "${NOTE} Fetching the wallpaper bank. The rest of the wallpapers come from there..."
+    if ! download_wallpaper_bank; then
+      echo "${WARN} Could not fetch the wallpaper bank. Only the default wallpapers are installed." 2>&1 | tee -a "$LOG"
+    fi
+  else
+  echo "${MAGENTA}Additional wallpapers come from the wallpaper bank${RESET}..."
   while true; do
     echo "${NOTE} A number of these wallpapers are AI generated or enhanced. Select (N/n) if this is an issue for you. "
     echo -n "${CAT} Would you like to download additional wallpapers? ${WARN} This is 1GB in size (y/n): "
@@ -1382,6 +1390,7 @@ else
       ;;
     esac
   done
+  fi
 fi
 
 # Execute the cleanup function
