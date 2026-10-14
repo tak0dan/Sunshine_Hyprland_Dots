@@ -1,163 +1,89 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
+#  Sunshine Hyprland Dots (2026)
 #  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
+# One-line entry point. Clones this repo, then runs the install script for
+# the detected distro from distro/.
+#   sh <(curl -L https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/Distro-Hyprland.sh)
 
-# Script design to clone the Sunshine per-distro install scripts
+REPO_URL="https://github.com/tak0dan/Sunshine_Hyprland_Dots.git"
+REPO_DIR="$HOME/Sunshine_Hyprland_Dots"
 
-# Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
-NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
 INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
-WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
-CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
-MAGENTA="$(tput setaf 5)"
-ORANGE="$(tput setaf 214)"
-WARNING="$(tput setaf 1)"
-YELLOW="$(tput setaf 3)"
-GREEN="$(tput setaf 2)"
-BLUE="$(tput setaf 4)"
-SKY_BLUE="$(tput setaf 6)"
-RESET="$(tput sgr0)"
+NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
 
-# Detect the current distribution using /etc/os-release
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    distro_name=$NAME
-    distro_version=$VERSION_ID
-else
-    echo "${ERROR} Unable to detect the distribution. Exiting."
+# Detect the distro from /etc/os-release and the available package manager.
+# Prints the name of the script in distro/ (without .sh), or nothing.
+detect_distro() {
+  local id="" id_like="" version=""
+  if [ -f /etc/os-release ]; then
+    id=$(. /etc/os-release && printf '%s' "${ID:-}")
+    id_like=$(. /etc/os-release && printf '%s' "${ID_LIKE:-}")
+    version=$(. /etc/os-release && printf '%s' "${VERSION_ID:-}")
+  fi
+
+  case " $id $id_like " in
+    *" nixos "*) echo nixos; return ;;
+    *" arch "*|*" manjaro "*|*" endeavouros "*|*" cachyos "*|*" garuda "*) echo arch; return ;;
+    *" ubuntu "*)
+      case "$version" in
+        24.04) echo ubuntu-24.04 ;;
+        26.04) echo ubuntu-26.04 ;;
+      esac
+      return ;;
+    *" debian "*) echo debian; return ;;
+    *" fedora "*) echo fedora; return ;;
+    *" suse "*|*" opensuse-tumbleweed "*) echo opensuse; return ;;
+    *" void "*) echo void; return ;;
+  esac
+
+  # Unknown ID: fall back to the package manager that is present.
+  if command -v pacman >/dev/null 2>&1; then echo arch
+  elif command -v dnf >/dev/null 2>&1; then echo fedora
+  elif command -v zypper >/dev/null 2>&1; then echo opensuse
+  elif command -v xbps-install >/dev/null 2>&1; then echo void
+  elif command -v apt-get >/dev/null 2>&1; then echo debian
+  fi
+}
+
+# git is needed to clone the repo. Install it with the distro's package manager.
+ensure_git() {
+  command -v git >/dev/null 2>&1 && return 0
+  echo "${INFO} git not found. Installing git..."
+  if command -v pacman >/dev/null 2>&1; then sudo pacman -S --needed --noconfirm git
+  elif command -v apt-get >/dev/null 2>&1; then sudo apt-get install -y git
+  elif command -v dnf >/dev/null 2>&1; then sudo dnf install -y git
+  elif command -v zypper >/dev/null 2>&1; then sudo zypper --non-interactive install git
+  elif command -v xbps-install >/dev/null 2>&1; then sudo xbps-install -y git
+  else
+    echo "${ERROR} Could not install git. Install it and re-run."
     exit 1
-fi
+  fi
+}
 
-# Define package managers, Git install commands, and dynamic variables for each distro
-if [ "$distro_name" = "Debian GNU/Linux" ]; then
-    PACKAGE_MANAGER="apt"
-    INSTALL_CMD="sudo apt install -y"
-    GIT_INSTALL_CMD="sudo apt install -y git"
-    Distro="Sunshine_Debian_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
-elif [ "$distro_name" = "Ubuntu" ]; then
-    PACKAGE_MANAGER="apt"
-    INSTALL_CMD="sudo apt install -y"
-    GIT_INSTALL_CMD="sudo apt install -y git"
+ensure_git
 
-    case "$distro_version" in
-        "24.04")
-            Distro="Sunshine_Ubuntu_Hyprland"
-            Github_URL="https://github.com/tak0dan/$Distro.git"
-            Github_URL_branch="24.04"
-            Distro_DIR="$HOME/$Distro-$Github_URL_branch"
-            echo "${INFO} Ubuntu 24.04 detected. Customizing setup for Ubuntu 24.04."
-            ;;
-        "24.10")
-            Distro="Sunshine_Ubuntu_Hyprland"
-            Github_URL="https://github.com/tak0dan/$Distro.git"
-            Github_URL_branch="24.10"
-            Distro_DIR="$HOME/$Distro-$Github_URL_branch"
-            echo "${INFO} Ubuntu 24.10 detected. Customizing setup for Ubuntu 24.10."
-            ;;
-        "25.04")
-            Distro="Sunshine_Ubuntu_Hyprland"
-            Github_URL="https://github.com/tak0dan/$Distro.git"
-            Github_URL_branch="25.04"
-            Distro_DIR="$HOME/$Distro-$Github_URL_branch"
-            echo "${INFO} Ubuntu 25.04 detected. Customizing setup for Ubuntu 25.04."
-            ;;
-        "25.10")
-            Distro="Sunshine_Ubuntu_Hyprland"
-            Github_URL="https://github.com/tak0dan/$Distro.git"
-            Github_URL_branch="25.10"
-            Distro_DIR="$HOME/$Distro-$Github_URL_branch"
-            echo "${INFO} Ubuntu 25.10 detected. Customizing setup for Ubuntu 25.10."
-            ;;
-        "26.04-development")
-            Distro="Sunshine_Ubuntu_Hyprland"
-            Github_URL="https://github.com/tak0dan/$Distro.git"
-            Github_URL_branch="26.04-development"
-            Distro_DIR="$HOME/$Distro-$Github_URL_branch"
-            echo "${INFO} Ubuntu 26.04 (development) detected. Customizing setup for Ubuntu 26.04 development branch."
-            ;;
-        *)
-            Distro="Sunshine_Ubuntu_Hyprland"
-            echo "${ERROR} Unsupported distribution: $distro_version. Exiting."
-            exit 1
-            ;;
-    esac
-
-elif command -v pacman &> /dev/null; then
-    PACKAGE_MANAGER="pacman"
-    INSTALL_CMD="sudo pacman -S --noconfirm"
-    GIT_INSTALL_CMD="sudo pacman -S git --noconfirm"
-    Distro="Sunshine_Arch_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
-elif command -v dnf &> /dev/null; then
-    PACKAGE_MANAGER="dnf"
-    INSTALL_CMD="sudo dnf install -y"
-    GIT_INSTALL_CMD="sudo dnf install -y git"
-    Distro="Sunshine_Fedora_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
-elif command -v zypper &> /dev/null; then
-    PACKAGE_MANAGER="zypper"
-    INSTALL_CMD="sudo zypper install -y"
-    GIT_INSTALL_CMD="sudo zypper install -y git"
-    Distro="Sunshine_OpenSUSE_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
-elif command -v xbps-install &> /dev/null; then
-    PACKAGE_MANAGER="xbps"
-    INSTALL_CMD="sudo xbps-install -Sy"
-    GIT_INSTALL_CMD="sudo xbps-install -Sy git"
-    Distro="Sunshine_Void_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
-elif [ "$distro_name" = "NixOS" ]; then
-    PACKAGE_MANAGER="nix"
-    INSTALL_CMD="nix-shell"
-    GIT_INSTALL_CMD="nix-shell -p git curl pciutils"
-    Distro="Sunshine_NixOS_Hyprland"
-    Github_URL="https://github.com/tak0dan/$Distro.git"
-    Distro_DIR="$HOME/$Distro"
+if [ -d "$REPO_DIR/.git" ]; then
+  echo "${INFO} Updating ${REPO_DIR}..."
+  git -C "$REPO_DIR" pull --ff-only || echo "${NOTE} Could not fast-forward ${REPO_DIR}; using the existing checkout."
 else
-    echo "${ERROR} Unsupported distribution: $distro_name. Exiting."
-    exit 1
+  echo "${INFO} Cloning ${REPO_URL} into ${REPO_DIR}..."
+  git clone --depth=1 "$REPO_URL" "$REPO_DIR" || { echo "${ERROR} Clone failed."; exit 1; }
 fi
 
-# Check for Git and install if not found
-if ! command -v git &> /dev/null; then
-    echo "${INFO} Git not found! ${SKY_BLUE}Installing Git...${RESET}"
-    if ! $GIT_INSTALL_CMD; then
-        echo "${ERROR} Failed to install Git. Exiting."
-        exit 1
-    fi
+distro=$(detect_distro)
+if [ -z "$distro" ] || [ ! -f "$REPO_DIR/distro/$distro.sh" ]; then
+  echo "${ERROR} Unsupported system. Supported:"
+  echo "  arch, debian, ubuntu-24.04, ubuntu-26.04, fedora, opensuse, void, nixos"
+  echo "  Scripts are in $REPO_DIR/distro/"
+  exit 1
 fi
 
-# Check if the directory already exists and perform clone or update
-if [ -d "$Distro_DIR" ]; then
-    echo "${YELLOW}$Distro_DIR exists. Updating the repository... ${RESET}"
-    cd "$Distro_DIR"
-    git stash && git pull
-    chmod +x install.sh
-    ./install.sh
-else
-    echo "${MAGENTA}$Distro_DIR does not exist. Cloning the repository...${RESET}"
-    
-    # Clone the specific branch for Ubuntu versions only
-    if [ "$distro_name" = "Ubuntu" ]; then
-        echo "${INFO} Cloning from branch ${Github_URL_branch} for Ubuntu $distro_version."
-        git clone --depth=1 -b "$Github_URL_branch" "$Github_URL" "$Distro_DIR"
-    else
-        git clone --depth=1 "$Github_URL" "$Distro_DIR"
-    fi
-    
-    cd "$Distro_DIR"
-    chmod +x install.sh
-    ./install.sh
-fi
+echo "${OK} Detected ${distro}. Running distro/${distro}.sh"
+chmod +x "$REPO_DIR/distro/$distro.sh"
+exec bash "$REPO_DIR/distro/$distro.sh"

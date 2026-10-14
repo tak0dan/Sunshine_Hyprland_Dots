@@ -7,6 +7,9 @@
 <p align="center">
   Pre-configured Hyprland desktop with a warm, sun-themed look.
 </p>
+<p align="center">
+  Originally - forked from LinuxBeginnings/Hyprland Dots (https://github.com/LinuxBeginnings/Hyprland-Dots.git)
+</p>
 
 <div align="center">
 <br>
@@ -54,19 +57,25 @@ You need `curl` for this.
 sh <(curl -L https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/Distro-Hyprland.sh)
 ```
 
-`Distro-Hyprland.sh` reads `/etc/os-release` and the available package managers, picks the
-matching per-distro install script, clones it, and starts its `install.sh`. That script installs
-Hyprland and its dependencies, then clones these dotfiles and runs `copy.sh`.
+`Distro-Hyprland.sh` clones this repo to `~/Sunshine_Hyprland_Dots`, reads `/etc/os-release`,
+and runs the install script for your distro from [`distro/`](distro/). Each script installs
+the packages for that distro, checks that Hyprland is present, and then runs `copy.sh`.
 
-| Distro | Per-distro install script |
+| Distro | Install script |
 | --- | --- |
-| Arch Linux (and derivatives) | [Sunshine_Arch_Hyprland](https://github.com/tak0dan/Sunshine_Arch_Hyprland) |
-| Debian | [Sunshine_Debian_Hyprland](https://github.com/tak0dan/Sunshine_Debian_Hyprland) |
-| Ubuntu 24.04 / 26.04 | [Sunshine_Ubuntu_Hyprland](https://github.com/tak0dan/Sunshine_Ubuntu_Hyprland) (one branch per release) |
-| Fedora | [Sunshine_Fedora_Hyprland](https://github.com/tak0dan/Sunshine_Fedora_Hyprland) |
-| openSUSE | [Sunshine_OpenSUSE_Hyprland](https://github.com/tak0dan/Sunshine_OpenSUSE_Hyprland) |
-| Void Linux | [Sunshine_Void_Hyprland](https://github.com/tak0dan/Sunshine_Void_Hyprland) |
-| NixOS | [Sunshine_NixOS_Hyprland](https://github.com/tak0dan/Sunshine_NixOS_Hyprland) |
+| Arch Linux (and CachyOS, EndeavourOS, Garuda, Manjaro) | [`distro/arch.sh`](distro/arch.sh) |
+| Debian (trixie, testing, sid) | [`distro/debian.sh`](distro/debian.sh) |
+| Ubuntu 24.04 LTS | [`distro/ubuntu-24.04.sh`](distro/ubuntu-24.04.sh) |
+| Ubuntu 26.04 LTS | [`distro/ubuntu-26.04.sh`](distro/ubuntu-26.04.sh) |
+| Fedora | [`distro/fedora.sh`](distro/fedora.sh) |
+| openSUSE Tumbleweed | [`distro/opensuse.sh`](distro/opensuse.sh) |
+| Void Linux | [`distro/void.sh`](distro/void.sh) |
+| NixOS | [`distro/nixos.sh`](distro/nixos.sh) |
+
+> [!WARNING]
+> Only Arch has been tested on this fork. The other scripts use package names I could not
+> check on those distros. A name that does not resolve is reported at the end of the install,
+> and you can install it by hand before re-running.
 
 > [!CAUTION]
 > If you use **fish** as your shell, do not run the one-line command. Clone the per-distro repo
