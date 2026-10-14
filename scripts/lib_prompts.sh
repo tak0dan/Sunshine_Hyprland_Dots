@@ -332,7 +332,7 @@ prompt_lua_migration() {
   local hypr_dir
   hypr_dir="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
 
-  MIGRATE_HYPR_TO_LUA=1
+  MIGRATE_HYPR_TO_LUA=0
 
   # Already on Lua entrypoint: still refresh/migrate overlays after upgrade copy.
   if [ -f "$hypr_dir/hyprland.lua" ]; then

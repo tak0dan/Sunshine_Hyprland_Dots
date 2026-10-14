@@ -61,12 +61,8 @@ cleanup_backups() {
     done
 
     if [ "$mode" = "auto" ]; then
-      for BACKUP in "${BACKUP_DIRS[@]}"; do
-        if [ "$BACKUP" != "$latest_backup" ]; then
-          rm -rf "$BACKUP"
-        fi
-      done
-      echo "${INFO:-[INFO]} Express mode: trimmed backups for ${YELLOW:-}${DIR##*/}${RESET:-}, keeping ${MAGENTA:-}${latest_backup##*/}${RESET:-}." 2>&1 | tee -a "$log"
+      # Never delete backups automatically. Older ones are kept for manual review.
+      echo "${INFO:-[INFO]} Keeping all ${#BACKUP_DIRS[@]} backups for ${YELLOW:-}${DIR##*/}${RESET:-}; nothing is deleted automatically." 2>&1 | tee -a "$log"
       continue
     fi
 

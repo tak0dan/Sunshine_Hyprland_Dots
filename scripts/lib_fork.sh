@@ -149,6 +149,11 @@ enable_fastfetch_on_shell() {
     if grep -qF "$marker" "$rc"; then
       continue
     fi
+    # Do not add a second fastfetch call when the user already runs one.
+    if grep -qE '(^|[;& ])fastfetch([ -]|$)|fastfetch-wrapper' "$rc"; then
+      echo "${NOTE:-[NOTE]} ${rc} already runs fastfetch; not adding another call." 2>&1 | tee -a "$log"
+      continue
+    fi
     cat >> "$rc" <<'EOF'
 
 # >>> KoolDots fastfetch >>>
@@ -255,6 +260,13 @@ install_fork_per_window_deps() {
 enable_fork_per_window_layout() {
   local log="${1:-/dev/null}"
   local unit="tak0-per-window-switch.service"
+  local answer=""
+  echo "${CAT:-[ACTION]} Enable the per-window keyboard layout listener as a user service? (y/N): " | tr -d '\n'
+  read -r answer </dev/tty || answer=""
+  case "$answer" in
+    [Yy]) ;;
+    *) echo "${NOTE:-[NOTE]} Per-window listener left disabled." 2>&1 | tee -a "$log"; return 0 ;;
+  esac
   local unit_file="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/$unit"
 
   if ! command -v systemctl >/dev/null 2>&1; then
@@ -271,6 +283,28 @@ enable_fork_per_window_layout() {
     echo "${OK:-[OK]} Per-window keyboard layout listener enabled ($unit)." 2>&1 | tee -a "$log"
   else
     echo "${WARN:-[WARN]} Could not enable $unit. Run: systemctl --user enable --now $unit" 2>&1 | tee -a "$log"
+    return 1
+  fi
+}
+
+# Save a timestamped archive of every config directory the installer may touch,
+# before it changes anything. Archives are never deleted by the installer.
+snapshot_user_config() {
+  local log="${1:-/dev/null}"
+  local cfg="${XDG_CONFIG_HOME:-$HOME/.config}"
+  local dest="$HOME/.kooldots-snapshots"
+  local stamp; stamp=$(date +%Y%m%d-%H%M%S)
+  local dirs=() d
+  for d in hypr waybar rofi swaync wlogout quickshell fastfetch kitty ghostty wallust btop cava Kvantum qt5ct qt6ct swappy yazi starship nwg-dock-hyprland systemd; do
+    [ -e "$cfg/$d" ] && dirs+=("$d")
+  done
+  [ -e "$HOME/.zshrc" ] && dirs+=("../.zshrc")
+  [ -e "$HOME/.bashrc" ] && dirs+=("../.bashrc")
+  mkdir -p "$dest" || return 1
+  if tar -czf "$dest/config-$stamp.tar.gz" -C "$cfg" "${dirs[@]}" 2>>"$log"; then
+    echo "${OK:-[OK]} Snapshot of your current config saved to $dest/config-$stamp.tar.gz" 2>&1 | tee -a "$log"
+  else
+    echo "${ERROR:-[ERROR]} Could not save a snapshot. Stopping before any change." 2>&1 | tee -a "$log"
     return 1
   fi
 }

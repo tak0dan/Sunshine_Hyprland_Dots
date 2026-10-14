@@ -661,6 +661,11 @@ if [ -z "$RUN_MODE" ]; then
   fi
 fi
 
+# Save the current config before any change. The archive is never deleted.
+if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ] || [ "$RUN_MODE" = "install" ]; then
+  snapshot_user_config /dev/null || exit 1
+fi
+
 if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ]; then
   if ! require_kooldots_for_upgrade; then
     exit 1
