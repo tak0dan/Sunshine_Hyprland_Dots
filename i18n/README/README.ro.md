@@ -1,195 +1,172 @@
 [![en](https://img.shields.io/badge/lang-en-yellow.svg)](../../README.md)
-[![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./README.jp.md)
-[![ru](https://img.shields.io/badge/lang-ru-red.svg)](./README.ru.md)
-[![ua](https://img.shields.io/badge/lang-ua-white.svg)](./README.ua.md)
 [![de](https://img.shields.io/badge/lang-de-magenta.svg)](./README.de.md)
 [![fr](https://img.shields.io/badge/lang-fr-cyan.svg)](./README.fr.md)
-
-<h3 align="center">
-<img align="center" width="80%" src=https://github.com/user-attachments/assets/bc18bd4d-944b-4d5f-a119-7578fa38f9b4 />
-</h3>
+[![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./README.jp.md)
+[![ro](https://img.shields.io/badge/lang-ro-green.svg)](./README.ro.md)
+[![ua](https://img.shields.io/badge/lang-ua-white.svg)](./README.ua.md)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/assets/latte.png" width="400" />
+  <img src="../../assets/sunshine-icon.png" width="200" alt="Sunshine" />
 </p>
 
+<h1 align="center">Sunshine Hyprland Dotfiles</h1>
+
+<p align="center">
+  Un desktop Hyprland preconfigurat, cu un aspect cald, inspirat de soare.
+</p>
+<p align="center">
+  Inițial forkat din LinuxBeginnings/Hyprland-Dots (https://github.com/LinuxBeginnings/Hyprland-Dots.git)
+</p>
 
 <div align="center">
 <br>
-  <a href="#-instrucțiuni-de-copiere--instalare--actualizare-"><kbd> <br> Instalare <br> </kbd></a>&ensp;&ensp;
-  <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/discussions"><kbd> <br> Discuții <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds"><kbd> <br> Comenzi rapide <br> </kbd></a>&ensp;&ensp;
-  <a href="https://discord.gg/kool-tech-world"><kbd> <br> Discord <br> </kbd></a>
+  <a href="#instalare"><kbd> <br> Instalare <br> </kbd></a>&ensp;&ensp;
+  <a href="#actualizare"><kbd> <br> Actualizare <br> </kbd></a>&ensp;&ensp;
+  <a href="#imagini-de-fundal"><kbd> <br> Imagini de fundal <br> </kbd></a>&ensp;&ensp;
+  <a href="#combinatii-de-taste"><kbd> <br> Combinații de taste <br> </kbd></a>&ensp;&ensp;
+  <a href="#contribuie"><kbd> <br> Contribuie <br> </kbd></a>&ensp;&ensp;
 </div><br>
 
-<div align="center">
-
-
-<br/>
-</div>
-
-<h3 align="center">
-    <img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-    Prezentarea fișierelor Dotfiles Hyprland ale lui KooL 
-    <img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-</h3>
-
-<div align="center">
-
-https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
-
-</div>
-
-### 📹 Ghiduri video
-- la finalul paginii
-
-### 🎞️ Demo AGS Overview
-- în caz că te întrebi, aici este un demo scurt al AGS overview [Link YouTube](https://youtu.be/zY5SLNPBJTs)
-
-</details>
-
 ---
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=22&pause=1000&color=F7077E&vCenter=true&width=435&height=30&lines=INSTALARE)](https://git.io/typing-svg)
-### 🚩 🏁 Scripturi automate de instalare Hyprland pentru distribuții, clonare și pornire 🇵🇭
-> [!ATENȚIE] 
-> Dacă folosești FISH SHELL, NU utiliza această funcție. Clonează Distro-Hyprland și rulează install.sh în schimb.
 
-- NOTĂ: ai nevoie de pachetul `curl` pentru ca aceasta să funcționeze
+## Ce include
 
-```bash
-sh <(curl -L https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/Distro-Hyprland.sh)
-```
+- Configurație Hyprland scrisă în Lua, împărțită în fișiere de sistem și suprascrieri de utilizator
+- Waybar, Rofi, overview-ul Quickshell, swaync, wlogout, Hyprlock, Hypridle
+- Kitty ca terminal. Este singura fereastră transparentă, prin `background_opacity`.
+  Celelalte ferestre sunt complet opace.
+- Dolphin ca manager de fișiere
+- Fastfetch cu logo-ul SUN și un modul propriu „tracked dates”. Rulează la pornirea unui shell interactiv.
+- Schimbarea layout-ului tastaturii pe fereastră, rulând ca serviciu systemd de utilizator
+- Tematizare Wallust bazată pe imaginea de fundal a desktopului
 
-- acum poți folosi comanda de mai sus pentru a clona automat scripturile de instalare Distro-Hyprland de mai jos
-- va clona scripturile de instalare și va porni `install.sh` 😎
+### Pachete adăugate de installer
 
-### 👁️‍🗨️ Scripturile mele de instalare Hyprland 👁️‍🗨️
-- Scripturi automate Hyprland pentru distribuția aleasă, care vor descărca aceste dotfiles dacă optezi pentru instalarea acestor configurații
+Aceste dotfiles nu instalează Hyprland în sine. Asta fac scripturile de instalare pentru fiecare distribuție.
+Installer-ul adaugă apoi aceste pachete:
 
-- [Arch-Linux](https://github.com/LinuxBeginnings/Arch-Hyprland)
-- [OpenSUSE(Tumbleweed)](https://github.com/LinuxBeginnings/OpenSuse-Hyprland)
-- [Fedora-Linux](https://github.com/LinuxBeginnings/Fedora-Hyprland)
-- [Debian-Linux (Trixie & SID)](https://github.com/LinuxBeginnings/Debian-Hyprland)
-- [NixOS](https://github.com/LinuxBeginnings/NixOS-Hyprland)
-- [Ubuntu 24.04 LTS](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.04)
-- [Ubuntu 24.10](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.10)
-- [Ubuntu 25.04 - (FAZĂ ALPHA)](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/25.04)
+- `dolphin`: manager de fișiere
+- Editorul ales: `vim`, `neovim`, `nano` sau `kate`. `nano` este instalat mereu, ca rezervă.
+- `jq` și `socat`: folosite de ascultătorul pentru layout-ul tastaturii pe fereastră
+
+Manageri de pachete suportați: `pacman` (Arch), `apt` (Debian/Ubuntu), `dnf` (Fedora),
+`zypper` (openSUSE) și `xbps` (Void).
 
 ---
 
-### 🪧 Atenție 🪧
-- Acest repo NU conține și NU va instala niciun pachet. Acestea sunt doar configurații Hyprland pre-configurate sau dotfiles
-- consultă scripturile de instalare pentru a vedea ce pachete trebuie instalate... dar cel puțin, pachetele Hyprland sunt necesare 😏😏😏 evident!!
-- Acest repo va fi descărcat de scripturile de instalare Distro-Hyprland de mai sus dacă optezi pentru descărcarea dotfiles-urilor pre-configurate
+## Instalare
 
-### 👀 Capturi de ecran 👀
-- Toate capturile de ecran sunt colectate aici [Capturi de ecran](https://github.com/LinuxBeginnings/screenshots/tree/main/Hyprland-ScreenShots)
+### Instalare dintr-o linie (recomandată)
 
-### 📦 Ce mai e nou?
-- Pentru a urmări ușor modificările, voi actualiza [Jurnalul de modificări](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Changelogs). Capturile de ecran vor fi incluse dacă modificările merită menționate!
+Ai nevoie de `curl` pentru asta.
 
-> [!NOTĂ]
-> Reține că, în mod implicit, dotfiles-urile lui Kool sunt ajustate/configurate pentru afișaje 2k (1440p) fără scalare.
-
-### 💥 Instrucțiuni de copiere / instalare / actualizare 💥
-- [`MAI MULTE INFORMAȚII AICI`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update) 
-> [!Notă] 
-> Scriptul automat de copiere „copy.sh” va crea copii de rezervă ale directoarelor care urmează să fie copiate. Totuși, este o idee bună să faci manual o copie de rezervă, în caz că scriptul nu reușește să o facă!
-
-- clonează acest repo folosind git. Schimbă directorul, fă scriptul executabil și rulează-l
-
-> pentru a descărca din ramura Master
 ```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git
-cd Hyprland-Dots
+sh <(curl -L https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/Distro-Hyprland.sh)
 ```
 
-> pentru a descărca din ramura Development (dezvoltare și testare)
-```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git -b development
-cd Hyprland-Dots
-```
+`Distro-Hyprland.sh` clonează acest repo în `~/Sunshine_Hyprland_Dots`, citește `/etc/os-release`
+și rulează scriptul de instalare pentru distribuția ta din [`distro/`](../../distro/). Fiecare script instalează
+pachetele distribuției respective, verifică dacă Hyprland este prezent și apoi rulează `copy.sh`.
 
-- copiere/instalare automată a dotfiles-urilor pre-configurate (recomandat pentru actualizări)
+| Distribuție | Script de instalare |
+| --- | --- |
+| Arch Linux (și CachyOS, EndeavourOS, Garuda, Manjaro) | [`distro/arch.sh`](../../distro/arch.sh) |
+| Debian (trixie, testing, sid) | [`distro/debian.sh`](../../distro/debian.sh) |
+| Ubuntu 24.04 LTS | [`distro/ubuntu-24.04.sh`](../../distro/ubuntu-24.04.sh) |
+| Ubuntu 26.04 LTS | [`distro/ubuntu-26.04.sh`](../../distro/ubuntu-26.04.sh) |
+| Fedora | [`distro/fedora.sh`](../../distro/fedora.sh) |
+| openSUSE Tumbleweed | [`distro/opensuse.sh`](../../distro/opensuse.sh) |
+| Void Linux | [`distro/void.sh`](../../distro/void.sh) |
+| NixOS | [`distro/nixos.sh`](../../distro/nixos.sh) |
+
+> [!WARNING]
+> Doar Arch a fost testat pe acest fork. Celelalte scripturi folosesc nume de pachete pe care nu le-am putut
+> verifica pe aceste distribuții. Un nume care nu se rezolvă este raportat la finalul instalării,
+> iar tu îl poți instala manual înainte de a rula din nou scriptul.
+
+> [!CAUTION]
+> Dacă folosești **fish** ca shell, nu rula comanda dintr-o linie. Clonează repo-ul
+> distribuției tale și rulează direct `install.sh` din el.
+
+### Instalare manuală
+
+Dacă ai deja Hyprland instalat sau vrei să alegi singur pașii:
+
 ```bash
+git clone --depth=1 https://github.com/tak0dan/Sunshine_Hyprland_Dots.git && cd Sunshine_Hyprland_Dots
 chmod +x copy.sh
 ./copy.sh
 ```
 
-- pentru a copia/instala din versiuni (stabile) (notă: aceasta este cu o versiune mai veche decât cea din ramura principală)
+`copy.sh` pune întrebări pe parcurs: layout-ul tastaturii, rezoluția monitorului, editorul implicit
+și dacă să descarce imagini de fundal suplimentare. Rulează la fel pentru o instalare nouă și pentru o actualizare.
+
+> [!NOTE]
+> `copy.sh` face copii de rezervă ale directoarelor de configurare pe care urmează să le înlocuiască.
+> Verifică-ți `~/.config` pentru aceste copii înainte să le ștergi și păstrează-ți propria copie
+> dacă ai o configurație care funcționează. Dacă ai deja o configurație Hyprland, dezinstaleaz-o întâi
+> sau instalează într-un cont de utilizator nou.
+
+---
+
+## Actualizare
+
+Rulează din nou `copy.sh` din repo-ul clonat. Detectează instalarea existentă și o actualizează,
+păstrând modificările tale (combinații de taste, aplicații la pornire și scripturile proprii). Alegerile de editor
+și de imagine de fundal făcute la instalare sunt păstrate.
+
+Pentru a actualiza chiar repo-ul:
+
 ```bash
-chmod +x release.sh
-./release.sh
+cd Sunshine_Hyprland_Dots && git pull && ./copy.sh
 ```
 
-- Funcția UPGRADE.sh
-> [!IMPORTANT]
-> Ai nevoie de rsync pentru ca aceasta să funcționeze
-> trebuie să ai deja configurat și funcțional Hyprland-ul lui KooL înainte de a folosi această funcție
-```bash
-chmod +x upgrade.sh
-./upgrade.sh
-```
+---
 
-## ❗❗❗ ATENȚIE PENTRU UTILIZATORII DEBIAN ȘI UBUNTU!
-- Primesc o mulțime de mesaje despre actualizarea dotfiles-urilor Hyprland ale lui KooL. Am făcut o notă mare în [`WIKI`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update)
+## Valori implicite la instalare
 
-#### ⚠️⚠️⚠️ ATENȚIE - COPII DE REZERVĂ CREATE DE SCRIPT
-> [!ATENȚIE]
-> copy.sh, release.sh și chiar upgrade.sh creează o copie de rezervă!
-> Verifică manual conținutul din $HOME/.config
-> Șterge manual toate copiile de rezervă de care nu ai nevoie
+- **Imaginea de fundal a desktopului:** flower bloom
+- **Fundalul de login SDDM:** soarele
+- **Editor implicit:** cel ales din meniul installer-ului. Kate este setat ca `VISUAL`, iar nano rămâne `EDITOR`.
+- **Fastfetch:** rulează la pornirea shell-ului. Intrarea lui „tracked dates” primește data instalării, pe care o poți edita în `~/.config/fastfetch/custom-info.json`.
 
-#### 🛎️ o mică notă despre imagini de fundal
-- în mod implicit, doar câteva imagini de fundal vor fi copiate (1 pentru modul întunecat și deschis, plus încă 3). Ți se va oferi opțiunea de a descărca mai multe imagini de fundal. Poți previzualiza/verifica imaginile de fundal suplimentare de la [`ACEST`](https://github.com/LinuxBeginnings/Wallpaper-Bank/tree/main/wallpapers) Link
+---
 
-#### ⚠️⚠️⚠️ OBLIGATORIU! după copierea / instalarea acestor dotfiles
-+ Apasă SUPER W și setează o imagine de fundal. Aceasta este și pentru a inițializa wallust pentru temele waybar, kitty (tty) și rofi. Totuși, dacă folosești copy.sh sau release.sh, va exista o imagine de fundal inițială presetată și nu va trebui să faci asta
+## Imagini de fundal
 
-+ Proprietari de Nvidia. Asigură-te că editezi `~/.config/hypr/UserConfigs/ENVariables.conf` (foarte recomandat).
-- Utilizatori / proprietari de Nvidia, după instalare, verifică [`ACESTA`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)
+Installer-ul copiază imaginile din acest repo și îți oferă să descarci colecția de imagini de fundal din
+[Sunshine_Hyprland_Wallpapers](https://github.com/tak0dan/Sunshine_Hyprland_Wallpapers).
+Colecția este mare, deci descărcarea este opțională. Cele două imagini implicite sunt copiate mereu.
 
-+ Dacă ți-ai setat deja propriile comenzi rapide, monitoare etc., doar copiază-le din copia de rezervă creată înainte de a te deconecta sau reporni. (recomandat)
+---
 
-#### 📖 Probleme cunoscute și posibile soluții
-- verifică această pagină [Întrebări frecvente](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/FAQ) și [PROBLEME NESOLUȚIONATE](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Known_Issues)
+## Combinații de taste
 
-#### 🙋 ÎNTREBĂRI ?!?! ⁉️
-- Întrebări frecvente! Da, poți folosi aceste dotfiles pe alte distribuții! Asigură-te doar că instalezi pachetele corespunzătoare mai întâi! Dacă te face să te simți mai bine, folosesc aceeași configurație pe Gentoo-ul meu :)
-- SFAT RAPID! Apasă pe modulul HINT! din Waybar (notă: disponibil doar în layout-urile Waybar implicit și Simple-L [SUS]). Poate fi lansat cu comanda rapidă `SUPER H`
-- Mai multe întrebări? click aici pentru a răsfoi acest [WIKI](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/)
-- Dacă vrei vechile configurații, acestea sunt colectate în repo-ul meu „Archive”. Vezi [AICI](https://github.com/LinuxBeginnings/Hyprland-Dots-releases-Archive)
+Combinațiile de taste sunt definite în configurația Lua. `SUPER + SHIFT + K` deschide o listă căutabilă cu combinațiile active.
+Pentru a le modifica, vezi [HOWTO: Schimbarea combinațiilor de taste](../../docs/HOWTO-Change-Keybindgs.md).
 
-#### ⌨ Comenzi rapide
-- Comenzi rapide [`CLICK`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds)
+---
 
-#### 🙏 Cerere specială
-- Dacă ai îmbunătățiri pentru dotfiles sau configurații, nu ezita să trimiți un PR pentru îmbunătățiri. Întotdeauna primesc cu bucurie îmbunătățiri, deoarece și eu învăț, la fel ca voi!
+## Personalizare
 
-#### ✍️ Contribuții
-- Vrei să contribui? Click [`AICI`](https://github.com/LinuxBeginnings/Hyprland-Dots/blob/main/CONTRIBUTING.md) pentru un ghid despre cum să contribui
+Pune modificările tale în `~/.config/hypr/UserConfigs/`. Fișierele de acolo suprascriu valorile implicite
+ale sistemului și supraviețuiesc actualizărilor:
 
-#### 🤷‍♂️ DE FĂCUT!
-- [ ] Ajustarea dotfiles-urilor - 🚧 în progres constant 
-- ~~[ ] Posibil trecerea la starship? Deși starship are teme limitate comparativ cu oh-my-zsh.~~ fără planuri pentru moment
+- `user_keybinds.lua`, `user_startup.lua`, `user_window_rules.lua`, `user_decorations.lua`, `user_settings.lua`
+- `user_defaults.lua`: aplicațiile implicite (manager de fișiere, editor, terminal)
+- `kitty.conf`: setările terminalului
 
-#### 🔮 Server Discord
-- te invit să te alături serverului meu [Discord](https://discord.com/invite/kool-tech-world)
+Ghidurile sunt în [`docs/`](../../docs/).
 
-#### 💖 Suport
-- o stea pe repo-urile mele de Github ar fi minunată 🌟
+---
 
-- Abonează-te la canalul meu de YouTube [YouTube](https://www.youtube.com/@Ja.KooLit) 
+## Contribuie
 
-- de asemenea, poți oferi suport prin cafele sau btc 😊
+Pull request-urile sunt binevenite către `main`. Păstrează modificările concentrate și testează pe distribuția pe care o schimbi.
+Vezi [CONTRIBUTING.md](../../CONTRIBUTING.md) și [COMMIT_MESSAGE_GUIDELINES.md](../../COMMIT_MESSAGE_GUIDELINES.md).
 
+---
 
-sau
+## Licență
 
-
-Sau poți dona criptomonede pe portofelul meu btc :)  
-
-
-## 🫰 Mulțumesc pentru stele 🩷
+GNU GPLv3. Vezi [LICENSE.md](../../LICENSE.md).

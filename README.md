@@ -1,3 +1,10 @@
+[![en](https://img.shields.io/badge/lang-en-yellow.svg)](./README.md)
+[![de](https://img.shields.io/badge/lang-de-magenta.svg)](./i18n/README/README.de.md)
+[![fr](https://img.shields.io/badge/lang-fr-cyan.svg)](./i18n/README/README.fr.md)
+[![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./i18n/README/README.jp.md)
+[![ro](https://img.shields.io/badge/lang-ro-green.svg)](./i18n/README/README.ro.md)
+[![ua](https://img.shields.io/badge/lang-ua-white.svg)](./i18n/README/README.ua.md)
+
 <p align="center">
   <img src="assets/sunshine-icon.png" width="200" alt="Sunshine" />
 </p>
