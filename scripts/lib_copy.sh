@@ -367,6 +367,11 @@ copy_phase2() {
     echo -e "${NOTE:-[NOTE]} - Restored ${YELLOW:-}waybar${RESET:-} configuration (managed separately by copy_waybar())." 2>&1 | tee -a "$log"
   fi
 
+  # Upgrades stop here: wallust, GTK and terminal configs are never touched.
+  if [ "${RUN_MODE:-}" != "install" ]; then
+    return 0
+  fi
+
   # Handle ~/.config/wallust like rofi migration:
   # keep wallust data under ~/.config/hypr/wallust and leave ~/.config/wallust empty
   local wallust_dir="${XDG_CONFIG_HOME:-$HOME/.config}/wallust"
