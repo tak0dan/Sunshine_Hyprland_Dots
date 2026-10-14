@@ -739,7 +739,7 @@ fi
 LOG="$LOG_DIR/install-$(date +%d-%H%M%S)_dotfiles.log"
 
 # update home directories (guard if command missing)
-if command -v xdg-user-dirs-update >/dev/null 2>&1; then
+if [ "$RUN_MODE" = "install" ] && command -v xdg-user-dirs-update >/dev/null 2>&1; then
   xdg-user-dirs-update 2>&1 | tee -a "$LOG" || true
 else
   echo "${WARN} xdg-user-dirs-update not found; skipping home dir update." 2>&1 | tee -a "$LOG"
