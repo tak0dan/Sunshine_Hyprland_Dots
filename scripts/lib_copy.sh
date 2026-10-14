@@ -239,6 +239,12 @@ copy_waybar() {
   local OLD_DIRPATHw="${XDG_CONFIG_HOME:-$HOME/.config}/$DIRW"
   local DIRPATHw="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/$DIRW"
 
+  # Upgrades keep an existing waybar, wallust, GTK and terminal config exactly as it is.
+  if [ "$run_mode" != "install" ] && [ -d "$DIRPATHw" ]; then
+    echo -e "${NOTE:-[NOTE]} - Keeping your existing waybar, wallust, GTK and terminal configs unchanged." 2>&1 | tee -a "$log"
+    return 0
+  fi
+
   mkdir -p "$(dirname "$DIRPATHw")"
 
   # One-time migration: a pre-migration install has waybar at the legacy
@@ -335,8 +341,7 @@ copy_phase2() {
     # Upgrades never replace an existing directory: only files that are missing
     # are added, so the user's own configs and scripts stay untouched.
     if [ "${RUN_MODE:-}" != "install" ] && [ -d "$DIRPATH" ]; then
-      echo -e "${NOTE:-[NOTE]} - Keeping your existing ${YELLOW:-}$DIR_NAME${RESET:-} config; adding only missing files." 2>&1 | tee -a "$log"
-      cp -rn "$base/config/$DIR_NAME/." "$DIRPATH/" 2>&1 | tee -a "$log" || true
+      echo -e "${NOTE:-[NOTE]} - Keeping your existing ${YELLOW:-}$DIR_NAME${RESET:-} config unchanged." 2>&1 | tee -a "$log"
       continue
     fi
     if [ -d "$DIRPATH" ]; then
@@ -526,6 +531,11 @@ migrate_hypr_to_lua_if_needed() {
 }
 
 ensure_lua_keybinds() {
+  local log_arg="$1"
+  if [ "${RUN_MODE:-}" != "install" ] && [ "${MIGRATE_HYPR_TO_LUA:-0}" != "1" ]; then
+    echo "${NOTE:-[NOTE]} - Keeping your Hyprland config files unchanged (no Lua sync on upgrade)." 2>&1 | tee -a "$log_arg"
+    return 0
+  fi
   local log="$1"
   local base="${DOTFILES_DIR:-.}"
   local src_root="$base/config/hypr"

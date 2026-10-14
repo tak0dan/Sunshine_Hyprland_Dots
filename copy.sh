@@ -1097,10 +1097,10 @@ if [ "$RUN_MODE" = "install" ]; then
     echo "${OK} - Quickshell qs-hyprview config copied successfully" 2>&1 | tee -a "$LOG"
   fi
 else
-  # Upgrade/express: sync repo quickshell files in place so user-created
-  # quickshell apps are preserved instead of being moved to a backup.
-  echo "${INFO} - Syncing quickshell config (preserving user custom apps)..." 2>&1 | tee -a "$LOG"
-  if ! sync_quickshell_config "$LOG"; then
+  # Upgrade/express: never touch an existing quickshell directory.
+  if [ -d "$DIRPATH_QS" ]; then
+    echo "${NOTE} - Keeping your existing quickshell config unchanged." 2>&1 | tee -a "$LOG"
+  elif ! sync_quickshell_config "$LOG"; then
     echo "${ERROR} - Failed to sync ${YELLOW}quickshell${RESET} config." 2>&1 | tee -a "$LOG"
   fi
 fi
@@ -1118,7 +1118,11 @@ restore_user_scripts "$LOG" "$EXPRESS_MODE"
 printf "\n%.0s" {1..1}
 
 restore_hypr_files "$LOG" "$EXPRESS_MODE"
-apply_user_patches "$LOG"
+if [ "$RUN_MODE" = "install" ]; then
+  apply_user_patches "$LOG"
+else
+  echo "${NOTE} - Keeping your config files unchanged (user-config patches run on fresh installs only)." 2>&1 | tee -a "$LOG"
+fi
 restore_runtime_personal_state "$LOG"
 # After restores, migrate restored Hyprlang customizations to Lua when approved.
 if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ]; then
@@ -1162,22 +1166,24 @@ else
   echo "${ERROR} Failed to copy some ${YELLOW}wallpapers${RESET}" | tee -a "$LOG"
 fi
 
-# Set some files as executable
+# Set some files as executable (fresh installs only: upgrades do not change file modes)
+if [ "$RUN_MODE" = "install" ]; then
 chmod +x "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/"* 2>&1 | tee -a "$LOG"
 chmod +x "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/UserScripts/"* 2>&1 | tee -a "$LOG"
 # Set executable for initial-boot.sh
 chmod +x "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/initial-boot.sh" 2>&1 | tee -a "$LOG"
+fi
 
 # Copy systemd user overrides (e.g., hyprpolkitagent)
 SYSTEMD_SRC="$DOTFILES_DIR/config/systemd"
 SYSTEMD_DEST="${XDG_CONFIG_HOME:-$HOME/.config}/systemd"
-if [ -d "$SYSTEMD_SRC" ]; then
+if [ "$RUN_MODE" = "install" ] && [ -d "$SYSTEMD_SRC" ]; then
   mkdir -p "$SYSTEMD_DEST"
   cp -r "$SYSTEMD_SRC/." "$SYSTEMD_DEST/" 2>&1 | tee -a "$LOG"
 fi
 
 # Reload user systemd and ensure hyprpolkitagent is enabled/running
-if command -v systemctl >/dev/null 2>&1; then
+if [ "$RUN_MODE" = "install" ] && command -v systemctl >/dev/null 2>&1; then
   if systemctl --user list-unit-files 2>/dev/null | grep -q '^hyprpolkitagent\.service'; then
     if ! pgrep -u "$UID" -f 'xfce-polkit|polkit-gnome-authentication-agent-1|polkit-kde-authentication-agent-1|hyprpolkitagent' >/dev/null 2>&1; then
       systemctl --user daemon-reload 2>&1 | tee -a "$LOG" || true
@@ -1464,7 +1470,7 @@ ensure_shell_profile_sources_etc_profile "$LOG"
 
 # Fork: fastfetch defaults (SUN logo + custom-info module)
 seed_custom_info_json "$LOG"
-enable_fastfetch_on_shell "$LOG"
+if [ "$RUN_MODE" = "install" ]; then enable_fastfetch_on_shell "$LOG"; fi
 
 printf "\n%.0s" {1..2}
 printf "${OK} GREAT! KooL's Hyprland-Dots is now Loaded & Ready !!! "
