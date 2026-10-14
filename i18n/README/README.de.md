@@ -1,227 +1,172 @@
 [![en](https://img.shields.io/badge/lang-en-yellow.svg)](../../README.md)
+[![de](https://img.shields.io/badge/lang-de-magenta.svg)](./README.de.md)
+[![fr](https://img.shields.io/badge/lang-fr-cyan.svg)](./README.fr.md)
 [![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./README.jp.md)
 [![ro](https://img.shields.io/badge/lang-ro-green.svg)](./README.ro.md)
-[![ru](https://img.shields.io/badge/lang-ru-red.svg)](./README.ru.md)
 [![ua](https://img.shields.io/badge/lang-ua-white.svg)](./README.ua.md)
-[![fr](https://img.shields.io/badge/lang-fr-cyan.svg)](./README.fr.md)
-
-<h3 align="center">
-<img align="center" width="80%" src=https://github.com/user-attachments/assets/bc18bd4d-944b-4d5f-a119-7578fa38f9b4 />
-</h3>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/assets/latte.png" width="400" />
+  <img src="../../assets/sunshine-icon.png" width="200" alt="Sunshine" />
+</p>
+
+<h1 align="center">Sunshine Hyprland Dotfiles</h1>
+
+<p align="center">
+  Vorkonfigurierter Hyprland-Desktop mit einem warmen, sonnigen Look.
+</p>
+<p align="center">
+  Ursprünglich geforkt von LinuxBeginnings/Hyprland-Dots (https://github.com/LinuxBeginnings/Hyprland-Dots.git)
 </p>
 
 <div align="center">
 <br>
-  <a href="#-kopieren--installation--update-anleitung-"><kbd> <br> Installation <br> </kbd></a>&ensp;&ensp;
-  <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/discussions"><kbd> <br> Discussions <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds"><kbd> <br> Keybinds <br> </kbd></a>&ensp;&ensp;
-  <a href="https://discord.gg/kool-tech-world"><kbd> <br> Discord <br> </kbd></a>
+  <a href="#installation"><kbd> <br> Installation <br> </kbd></a>&ensp;&ensp;
+  <a href="#aktualisieren"><kbd> <br> Aktualisieren <br> </kbd></a>&ensp;&ensp;
+  <a href="#hintergrundbilder"><kbd> <br> Hintergrundbilder <br> </kbd></a>&ensp;&ensp;
+  <a href="#tastenkombinationen"><kbd> <br> Tastenkombinationen <br> </kbd></a>&ensp;&ensp;
+  <a href="#mitwirken"><kbd> <br> Mitwirken <br> </kbd></a>&ensp;&ensp;
 </div><br>
 
-<div align="center">
+---
 
+## Enthalten
 
-<br/>
-</div>
+- Hyprland-Konfiguration in Lua, aufgeteilt in Systemdateien und Benutzer-Overrides
+- Waybar, Rofi, Quickshell-Übersicht, swaync, wlogout, Hyprlock, Hypridle
+- Kitty als Terminal. Es ist das einzige transparente Fenster, über `background_opacity`.
+  Alle anderen Fenster sind vollständig undurchsichtig.
+- Dolphin als Dateimanager
+- Fastfetch mit dem SUN-Logo und einem eigenen Modul für "Tracked Dates". Es startet, wenn eine interaktive Shell startet.
+- Tastaturlayout-Wechsel pro Fenster, läuft als systemd-Benutzerdienst
+- Wallust-Farbgebung, gesteuert vom Desktop-Hintergrundbild
 
-<h3 align="center">
-	<img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-	KooL's Hyprland Dotfiles Showcase
-	<img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-</h3>
+### Pakete, die der Installer hinzufügt
 
-<div align="center">
+Diese Dotfiles installieren Hyprland nicht selbst. Das übernehmen die Install-Skripte pro Distribution.
+Der Installer fügt diese Pakete zusätzlich hinzu:
 
-https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
+- `dolphin`: Dateimanager
+- Den gewählten Editor: `vim`, `neovim`, `nano` oder `kate`. `nano` wird immer als Ausweichlösung installiert.
+- `jq` und `socat`: werden vom Listener für das Tastaturlayout pro Fenster benötigt
 
-</div>
-
-### 📹 Ein Video Guide
-
-- folgt nach der Textanleitung
-
-### 🎞️ AGS Übersicht DEMO
-
-- Hier ist eine kurze Demo der AGS [Youtube LINK](https://youtu.be/zY5SLNPBJTs)
-
-</details>
+Unterstützte Paketmanager: `pacman` (Arch), `apt` (Debian/Ubuntu), `dnf` (Fedora),
+`zypper` (openSUSE) und `xbps` (Void).
 
 ---
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=22&pause=1000&color=F7077E&vCenter=true&width=435&height=30&lines=INSTALLATION)](https://git.io/typing-svg)
+## Installation
 
-### 🚩 🏁 Distro Hyprland Installationsskripte herunterladen und ausführen
+### Installation mit einer Zeile (empfohlen)
 
-> [!VORSICHT]
-> Wenn du die FISH-SHELL benutzt, VERWENDE diese Funktion NICHT. Klone stattdessen das Distro-Hyprland-Repository und führe install.sh aus.
-
-- HINWEIS: Das Paket `curl` muss installiert sein, um die Skripte herunterzuladen
+Dafür brauchst du `curl`.
 
 ```bash
-sh <(curl -L https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/Distro-Hyprland.sh)
+sh <(curl -L https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/Distro-Hyprland.sh)
 ```
 
-- Mit dem obigen Befehl kannst du jetzt automatisch die Hyprland Installationsskripte herunterladen und ausführen.
-- Das Skript wird weitere Installationsskripte klonen und die `install.sh` starten. 😎
+`Distro-Hyprland.sh` klont dieses Repo nach `~/Sunshine_Hyprland_Dots`, liest `/etc/os-release`
+und startet das Install-Skript für deine Distribution aus [`distro/`](../../distro/). Jedes Skript installiert
+die Pakete dieser Distribution, prüft, ob Hyprland vorhanden ist, und führt dann `copy.sh` aus.
 
-### 👁️‍🗨️ Meine Hyprland-Installationsskripte 👁️‍🗨️
+| Distribution | Install-Skript |
+| --- | --- |
+| Arch Linux (und CachyOS, EndeavourOS, Garuda, Manjaro) | [`distro/arch.sh`](../../distro/arch.sh) |
+| Debian (trixie, testing, sid) | [`distro/debian.sh`](../../distro/debian.sh) |
+| Ubuntu 24.04 LTS | [`distro/ubuntu-24.04.sh`](../../distro/ubuntu-24.04.sh) |
+| Ubuntu 26.04 LTS | [`distro/ubuntu-26.04.sh`](../../distro/ubuntu-26.04.sh) |
+| Fedora | [`distro/fedora.sh`](../../distro/fedora.sh) |
+| openSUSE Tumbleweed | [`distro/opensuse.sh`](../../distro/opensuse.sh) |
+| Void Linux | [`distro/void.sh`](../../distro/void.sh) |
+| NixOS | [`distro/nixos.sh`](../../distro/nixos.sh) |
 
-- Automatisierte Hyprland-Skripte für ein Distro deiner Wahl. Diese Skripte laden, wenn ben;tigt, meine vorkonfigurierten Dotfiles
-- [Arch-Linux](https://github.com/LinuxBeginnings/Arch-Hyprland)
+> [!WARNING]
+> Bisher wurde nur Arch auf diesem Fork getestet. Die anderen Skripte verwenden Paketnamen, die ich auf
+> diesen Distributionen nicht prüfen konnte. Ein Name, der nicht aufgelöst werden kann, wird am Ende der
+> Installation gemeldet. Du kannst ihn dann von Hand installieren und das Skript erneut ausführen.
 
-- [OpenSUSE(Tumbleweed)](https://github.com/LinuxBeginnings/OpenSuse-Hyprland)
+> [!CAUTION]
+> Wenn du **fish** als Shell verwendest, führe den Einzeiler nicht aus. Klone stattdessen das Repo
+> deiner Distribution und führe dessen `install.sh` direkt aus.
 
-- [Fedora-Linux](https://github.com/LinuxBeginnings/Fedora-Hyprland)
+### Manuelle Installation
 
-- [Debian-Linux (Trixie & SID)](https://github.com/LinuxBeginnings/Debian-Hyprland)
-
-- [NixOS](https://github.com/LinuxBeginnings/NixOS-Hyprland)
-
-- [Ubuntu 24.04 LTS](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.04)
-- [Ubuntu 24.10](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.10)
-- [Ubuntu 25.04 - (ALPHA STAGE)](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/25.04)
-
----
-
-### 🪧 Achtung 🪧
-
-- Dieses Repository enthält keine Pakete und wird keine Pakete installieren. Es enthält nur vorkonfigurierte Hyprland-Configs/Dotfiles.
-- In den Installationsskripten kann man die benötigten Pakete finden. Zumindest müssen aber die Hyprland-Pakete installiert sein 😏😏😏 logisch!!
-- Dieses Repository wird von den oben beschriebenen Distro Hyprland-Installationsskripten heruntergeladen, wenn du dich entscheidest, die vorkonfigurierten Dotfiles verwenden zu wollen.
-
-### 👀 Screenshots 👀
-
-- Beispiel Screenshots findest du hier [Screenshots](https://github.com/LinuxBeginnings/screenshots/tree/main/Hyprland-ScreenShots)
-
-### 📦 Whats new?
-
-- Um Änderungen leicht nachzuvollziehen, werde ich die [CHANGELOGS](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Changelogs) regelmäßig aktualisieren. Es werden neue Screenshots hinzugefügt, wenn die Änderungen erwähnenswert sind!
-
-> [!NOTE]
-> Bitte beachte, dass Kools Dots standardmäßig für einen 2K (1440p) Monitor ohne Skalierung angepasst und konfiguriert sind.
-
-### 💥 Kopieren / Installation / Update-Anleitung 💥
-
-- [`Weiter Infos hier`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update)
-  > [!Note]
-  > Das Kopierskript "copy.sh" erstellt Backups der zu kopierenden Konfigurationsverzeichnisse. Sollte das Skript fehlschlagen, empfiehlt es sich, manuell ein Backup zu erstellen.
-- Klone das Repository mit Git, wechsle in das Verzeichnis, mache die Datei ausführbar und führe das Skript aus:
-
-> Um den Master-Branch herunterzuladen
+Wenn Hyprland schon installiert ist oder du den Ablauf selbst steuern willst:
 
 ```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git
-cd Hyprland-Dots
-```
-
-> Um den Entwicklungs-Branch (Development & Testing) herunterzuladen:
-
-```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git -b development
-cd Hyprland-Dots
-```
-
-- Automatisiertes Kopieren und Installieren der vorkonfigurierten Dotfiles (empfohlen für Updates):
-
-```bash
+git clone --depth=1 https://github.com/tak0dan/Sunshine_Hyprland_Dots.git && cd Sunshine_Hyprland_Dots
 chmod +x copy.sh
 ./copy.sh
 ```
 
-- Kopieren und Installieren aus den Releases (stable) (beachte, dass dies eine Version älter als "main" ist):
+`copy.sh` stellt während der Installation Fragen: Tastaturlayout, Monitorauflösung, Standard-Editor
+und ob zusätzliche Hintergrundbilder geladen werden sollen. Der Ablauf ist bei einer Neuinstallation und einem Update gleich.
+
+> [!NOTE]
+> `copy.sh` erstellt Sicherungen aller Konfigurationsordner, die es ersetzen wird.
+> Prüfe deinen `~/.config` auf diese Sicherungen, bevor du sie löschst, und behalte eine eigene
+> Sicherung, wenn du ein funktionierendes Setup hast. Wenn du bereits eine Hyprland-Konfiguration hast,
+> deinstalliere sie zuerst oder installiere in einem neuen Benutzerkonto.
+
+---
+
+## Aktualisieren
+
+Führe `copy.sh` im geklonten Repo erneut aus. Es erkennt die bestehende Installation und aktualisiert sie
+und behält deine eigenen Änderungen (Tastenkombinationen, Autostart-Apps und eigene Skripte). Editor- und
+Hintergrundbild-Auswahl aus der Installation bleiben erhalten.
+
+Um das Repo selbst zu aktualisieren:
 
 ```bash
-chmod +x release.sh
-./release.sh
+cd Sunshine_Hyprland_Dots && git pull && ./copy.sh
 ```
 
-- UPGRADE.sh für ein Versionsupgrade
-  > [!IMPORTANT]
-  > rsync wird benötigt, damit es funktioniert.
-  > KooL's Hyprland sollte bereits laufen, bevor du dieses Skript verwendest.
+---
 
-```bash
-chmod +x upgrade.sh
-./upgrade.sh
-```
+## Standards bei der Installation
 
-## ❗❗❗ DEBIAN AND UBUNTU INFORMATION!
+- **Desktop-Hintergrundbild:** die Flower-Bloom-Grafik
+- **SDDM-Anmeldehintergrund:** die Sonne
+- **Standard-Editor:** der, den du im Installer-Menü wählst. Kate wird als `VISUAL` gesetzt, nano bleibt `EDITOR`.
+- **Fastfetch:** startet beim Start der Shell. Sein Eintrag für "Tracked Dates" wird mit dem Installationsdatum gefüllt. Du kannst ihn in `~/.config/fastfetch/custom-info.json` ändern.
 
-- Ich bekomme eine große Menge an Nachrichten über das Updaten eurer KooL Hyprland dotfiles. Es gibt dazu eine Info im [`WIKI`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update)
+---
 
-#### ⚠️⚠️⚠️ ACHTUNG - SKRIPT-ERSTELLTE BACKUPS
+## Hintergrundbilder
 
-> [!CAUTION]
-> copy.sh, release.sh und auch upgrade.sh erstellen Backups!
-> Schaue dir bitte manuell den Inhalt deines $HOME/.config Ordners an
-> Entferne alle nicht mehr benötigten Backups bitte selbst
+Der Installer kopiert die Hintergrundbilder aus diesem Repo und bietet an, die Hintergrundbilder-Sammlung von
+[Sunshine_Hyprland_Wallpapers](https://github.com/tak0dan/Sunshine_Hyprland_Wallpapers) herunterzuladen.
+Die Sammlung ist groß, deshalb ist der Download optional. Die beiden Standardbilder werden immer kopiert.
 
-#### 🛎️ kleiner Hinweis zu Hintergrundbildern
+---
 
-- ständardmäßig werden nur einige Hintergründe kopiert (jeweils 1 dunkeles und helles plus 3 weitere). Dir wird angeboten werden, weitere Hintergrundbilder herunterzuladen. Du kannst dir die verfügbaren Hintergründe [`HIER`](https://github.com/LinuxBeginnings/Wallpaper-Bank/tree/main/wallpapers) anschauen.
+## Tastenkombinationen
 
-#### ⚠️⚠️⚠️ WICHTIG! Nach dem Kopieren / Der Installation der Dotfiles
+Tastenkombinationen sind in der Lua-Konfiguration definiert. `SUPER + SHIFT + K` öffnet eine durchsuchbare Liste der aktiven Tastenkombinationen.
+Zum Ändern siehe [HOWTO: Tastenkombinationen ändern](../../docs/HOWTO-Change-Keybindgs.md).
 
-- Drücke SUPER W und wähle ein Hintergrundbild. Desweiteren wird hierdurch wallust für waybar, kitty (tty) und die rofi Themes aktiviert. Wenn du copy.sh oder release.sh benutzt hast, wird ein Standard Hintergrund gesetzt sein und die Initialisierung ist bereits gesehen
+---
 
-- Für Nvidia Benutzer. Stelle sicher, dass du deine `~/.config/hypr/UserConfigs/ENVariables.conf` anpasst (unbedingt empfohlen).
+## Anpassen
 
-* Für NVIDIA Benutzer, schaue dir diese Informationen [`HIER`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users) an.
+Lege eigene Änderungen in `~/.config/hypr/UserConfigs/` ab. Dateien dort überschreiben die Standardwerte
+und bleiben bei Updates erhalten:
 
-- Wenn die bereits deine Keybinds, Monitoren, usw. eingestellt hast... Kopiere die Einstellungen von dem Backup vor dem Logout / Reboot. (empfohlen)
+- `user_keybinds.lua`, `user_startup.lua`, `user_window_rules.lua`, `user_decorations.lua`, `user_settings.lua`
+- `user_defaults.lua`: Standard-Apps (Dateimanager, Editor, Terminal)
+- `kitty.conf`: Terminal-Einstellungen
 
-#### 📖 Bekannte Probleme und mögliche Lösungen
+Anleitungen findest du im Ordner [`docs/`](../../docs/).
 
-- Schau dir diese Seite an [FAQ](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/FAQ) und checke die [UNSOLVED ISSUES](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Known_Issues)
+---
 
-#### 🙋 FRAGEN ?!?! ⁉️
+## Mitwirken
 
-- FAQ! Die Dotfiles funktionieren auch auf anderen Distros! Stelle nur sicher, die richtigen Pakete vorher zu installieren! Falls du dich dann besser fühlst, ich benutze die selbe Konfiguration für mein Gentoo:)
-- KLEINER HINWEIS! Klicke auf das HINT! Waybar Modul (Notiz, nur in Waybar default und Simple-L [TOP] Layout verfügbar). Kann auch mit der Tastenkombination `SUPER H` gestartet werden
-- Weitere Fragen? Klicke hier um das [WIKI](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/) zu durchstöbern.
-- Falls du eine ältere Version der Konfiguration haben möchtest, sind diese in meinem "Archive" Repository verfügbar. Siehe [HIER](https://github.com/LinuxBeginnings/Hyprland-Dots-releases-Archive)
+Pull Requests sind willkommen und gehen an `main`. Halte Änderungen fokussiert und teste auf der Distribution, die du änderst.
+Siehe [CONTRIBUTING.md](../../CONTRIBUTING.md) und [COMMIT_MESSAGE_GUIDELINES.md](../../COMMIT_MESSAGE_GUIDELINES.md).
 
-#### ⌨ Keybinds
+---
 
-- Keybinds [`KLICKE`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds)
+## Lizenz
 
-#### 🙏 Hilfe gebraucht
-
-- Wenn du Verbesserungen der Dotfiles oder Konfigurationen hast, mache gerne einen PR für die Verbesserung. Ich heiße Verbesserungen immer Willkommen, da ich genau wie ihr Alle immer viel Neues lerne.
-
-#### ✍️ Contributing
-
-- Möchtest du contributen? Klicke [`HIER`](https://github.com/LinuxBeginnings/Hyprland-Dots/blob/main/CONTRIBUTING.md) für eine Anleitung.
-
-#### 🤷‍♂️ TO DO!
-
-- [ ] Dotfiles verbesser - 🚧 in ständiger Entwicklung
-- ~~[ ] Vielleicht zu starship wechseln. Jedoch limitiere Themes im Vergleich zu oh-my-zsh.~~ momentan nicht geplant
-
-#### 🔮 Discord Server
-
-- Bitte joine meinem [Discord](https://discord.com/invite/kool-tech-world)
-
-#### 💖 Unterstützung
-
-- ein Star auf meinen Github repos wäre nett 🌟
-
-- Abbonieren meinen Youtube Kanal [YouTube](https://www.youtube.com/@Ja.KooLit)
-
-- du kannst mich auch mit Kaffees oder BTC unterstützen 😊
-
-
-oder
-
-
-Oder du kannst auch Krypto an meine btc wallet spenden :)
-
-
-
-## 🫰 Vielen Dank für die stars 🩷
-
+GNU GPLv3. Siehe [LICENSE.md](../../LICENSE.md).

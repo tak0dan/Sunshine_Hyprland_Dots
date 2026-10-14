@@ -1,225 +1,172 @@
 [![en](https://img.shields.io/badge/lang-en-yellow.svg)](../../README.md)
-[![ro](https://img.shields.io/badge/lang-ro-green.svg)](./README.ro.md)
-[![ru](https://img.shields.io/badge/lang-ru-red.svg)](./README.ru.md)
-[![ua](https://img.shields.io/badge/lang-ua-white.svg)](./README.ua.md)
 [![de](https://img.shields.io/badge/lang-de-magenta.svg)](./README.de.md)
 [![fr](https://img.shields.io/badge/lang-fr-cyan.svg)](./README.fr.md)
-
-<h3 align="center">
-<img align="center" width="80%" src=https://github.com/user-attachments/assets/bc18bd4d-944b-4d5f-a119-7578fa38f9b4 />
-</h3>
+[![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./README.jp.md)
+[![ro](https://img.shields.io/badge/lang-ro-green.svg)](./README.ro.md)
+[![ua](https://img.shields.io/badge/lang-ua-white.svg)](./README.ua.md)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/assets/latte.png" width="400" />
+  <img src="../../assets/sunshine-icon.png" width="200" alt="Sunshine" />
+</p>
+
+<h1 align="center">Sunshine Hyprland Dotfiles</h1>
+
+<p align="center">
+  温かみのある太陽テーマの、設定済み Hyprland デスクトップ。
+</p>
+<p align="center">
+  元は LinuxBeginnings/Hyprland-Dots (https://github.com/LinuxBeginnings/Hyprland-Dots.git) からフォークしました。
 </p>
 
 <div align="center">
 <br>
-  <a href="#-コピー--インストール--アップデート手順-"><kbd> <br> Installation <br> </kbd></a>&ensp;&ensp;
-  <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/discussions"><kbd> <br> Discussions <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds"><kbd> <br> Keybinds <br> </kbd></a>&ensp;&ensp;
-  <a href="https://discord.gg/kool-tech-world"><kbd> <br> Discord <br> </kbd></a>
+  <a href="#インストール"><kbd> <br> インストール <br> </kbd></a>&ensp;&ensp;
+  <a href="#更新"><kbd> <br> 更新 <br> </kbd></a>&ensp;&ensp;
+  <a href="#壁紙"><kbd> <br> 壁紙 <br> </kbd></a>&ensp;&ensp;
+  <a href="#キーバインド"><kbd> <br> キーバインド <br> </kbd></a>&ensp;&ensp;
+  <a href="#コントリビュート"><kbd> <br> コントリビュート <br> </kbd></a>&ensp;&ensp;
 </div><br>
 
-<div align="center">
+---
 
+## 含まれるもの
 
-<br/>
-</div>
+- Lua で書かれた Hyprland 設定。システム用ファイルとユーザー用の上書き設定に分かれています
+- Waybar、Rofi、Quickshell のオーバービュー、swaync、wlogout、Hyprlock、Hypridle
+- ターミナルは Kitty。`background_opacity` によって、透明になるのは Kitty のウィンドウだけです。
+  他のウィンドウは完全に不透明です。
+- ファイルマネージャーは Dolphin
+- SUN ロゴと独自の「tracked dates」モジュールを含む Fastfetch。対話型シェルの起動時に実行されます。
+- ウィンドウごとのキーボードレイアウト切り替え。systemd のユーザーサービスとして動作します
+- デスクトップの壁紙に基づく Wallust のテーマ設定
 
-<h3 align="center">
-	<img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-	KooL's Hyprland Dotfiles Showcase
-	<img src="https://github.com/LinuxBeginnings/Telegram-Animated-Emojis/blob/main/Activity/Sparkles.webp" alt="Sparkles" width="38" height="38" />
-</h3>
+### インストーラーが追加するパッケージ
 
-<div align="center">
+これらのドットファイルは Hyprland 自体をインストールしません。それは各ディストリビューション用のインストールスクリプトが行います。
+インストーラーは以下のパッケージを追加します。
 
-https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
+- `dolphin`：ファイルマネージャー
+- 選択したエディター：`vim`、`neovim`、`nano`、`kate` のいずれか。`nano` は予備として常にインストールされます。
+- `jq` と `socat`：ウィンドウごとのキーボードレイアウト監視で使用します
 
-</div>
-
-### 📹 動画による説明
-
-- ページの下部へ
-
-### 🎞️ AGS概要デモ
-
-- 概要が気になる場合は、こちらにAGS概要の短いデモがあります [Youtube リンク](https://youtu.be/zY5SLNPBJTs)
-
-</details>
+対応パッケージマネージャー：`pacman`（Arch）、`apt`（Debian/Ubuntu）、`dnf`（Fedora）、
+`zypper`（openSUSE）、`xbps`（Void）。
 
 ---
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=22&pause=1000&color=F7077E&vCenter=true&width=435&height=30&lines=INSTALLATION)](https://git.io/typing-svg)
+## インストール
 
-### 🚩 🏁 自動化された Distro-Hyprland のインストールスクリプトのクローンと起動 🇵🇭
+### ワンラインインストール（推奨）
 
-> [注意！]
-> FISH SHELLを使用している場合、この関数を使わないでください。代わりにDistro-Hyprlandをクローンしinstall.shを実行してください。
-
-- 重要：これを動作させるには、`curl` パッケージが必要です。
+`curl` が必要です。
 
 ```bash
-sh <(curl -L https://raw.githubusercontent.com/LinuxBeginnings/Hyprland-Dots/main/Distro-Hyprland.sh)
+sh <(curl -L https://raw.githubusercontent.com/tak0dan/Sunshine_Hyprland_Dots/main/Distro-Hyprland.sh)
 ```
 
-- 上記のコマンドを使用して、Distro-Hyprland のインストールスクリプトを自動的にクローンできます。
-- インストールスクリプトをクローンし、`install.sh` を実行します😎
+`Distro-Hyprland.sh` はこのリポジトリを `~/Sunshine_Hyprland_Dots` にクローンし、`/etc/os-release` を読み取って、
+お使いのディストリビューション用のインストールスクリプトを [`distro/`](../../distro/) から実行します。各スクリプトは
+そのディストリビューションのパッケージをインストールし、Hyprland があることを確認してから `copy.sh` を実行します。
 
-### 👁️‍🗨️ 私の Hyprland のインストールスクリプト 👁️‍🗨️
+| ディストリビューション | インストールスクリプト |
+| --- | --- |
+| Arch Linux（CachyOS、EndeavourOS、Garuda、Manjaro を含む） | [`distro/arch.sh`](../../distro/arch.sh) |
+| Debian（trixie、testing、sid） | [`distro/debian.sh`](../../distro/debian.sh) |
+| Ubuntu 24.04 LTS | [`distro/ubuntu-24.04.sh`](../../distro/ubuntu-24.04.sh) |
+| Ubuntu 26.04 LTS | [`distro/ubuntu-26.04.sh`](../../distro/ubuntu-26.04.sh) |
+| Fedora | [`distro/fedora.sh`](../../distro/fedora.sh) |
+| openSUSE Tumbleweed | [`distro/opensuse.sh`](../../distro/opensuse.sh) |
+| Void Linux | [`distro/void.sh`](../../distro/void.sh) |
+| NixOS | [`distro/nixos.sh`](../../distro/nixos.sh) |
 
-- 選択したディストロ向けの自動化された Hyprland スクリプトです。これらの設定をインストールするオプションを選択した場合、対応する dotfiles を取得します。
+> [!WARNING]
+> このフォークで動作確認が済んでいるのは Arch のみです。それ以外のスクリプトは、私が各ディストリビューションで
+> 確認できなかったパッケージ名を使っています。解決できない名前はインストールの最後に報告されます。
+> その場合は手動でインストールしてから、スクリプトを再実行してください。
 
-- [Arch-Linux](https://github.com/LinuxBeginnings/Arch-Hyprland)
+> [!CAUTION]
+> シェルに **fish** を使っている場合は、ワンラインコマンドを実行しないでください。代わりに、
+> ディストリビューション用のリポジトリをクローンして、その `install.sh` を直接実行してください。
 
-- [OpenSUSE(Tumbleweed)](https://github.com/LinuxBeginnings/OpenSuse-Hyprland)
+### 手動インストール
 
-- [Fedora-Linux](https://github.com/LinuxBeginnings/Fedora-Hyprland)
-
-- [Debian-Linux (Trixie & SID)](https://github.com/LinuxBeginnings/Debian-Hyprland)
-
-- [NixOS](https://github.com/LinuxBeginnings/NixOS-Hyprland)
-
-- [Ubuntu 24.04 LTS](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.04)
-- [Ubuntu 24.10](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/24.10)
-- [Ubuntu 25.04 - (ALPHA STAGE)](https://github.com/LinuxBeginnings/Ubuntu-Hyprland/tree/25.04)
-
----
-
-### 🪧 注意 🪧
-
-- このリポジトリにはパッケージは含まれておらず、インストールもされません。含まれているのは、あらかじめ設定された Hyprland の設定ファイルや dotfiles のみです。
-- 必要なパッケージについてはインストールスクリプトを参照してください。ただし、少なくとも Hyprland のパッケージは必須です 😏😏😏
-- このリポジトリは、上記の Distro-Hyprland インストールスクリプトによって、プリセットの dotfiles をダウンロードするオプションを選択した場合に取得されます。
-
-### 👀 スクリーンショット 👀
-
-- すべてのスクリーンショットはここにまとめられています。 [スクリーンショット](https://github.com/LinuxBeginnings/screenshots/tree/main/Hyprland-ScreenShots)
-
-### 📦 変更点
-
-- 変更を簡単に追跡できるよう、[変更ログ](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Changelogs) 変更が注目に値する場合はスクリーンショットも含めます！
-
-> [注意!]
-> デフォルトでは、Kools Dots はスケーリングなしの 2K (1440p) ディスプレイ向けに調整・設定されています。
-
-### 💥 コピー / インストール / アップデート手順 💥
-
-- [`ここに詳細を記載しています`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update)
-  > [注意!]
-  > 自動コピーのスクリプトである "copy.sh" は、コピー対象のディレクトリをバックアップします。しかし、スクリプトがバックアップに失敗する可能性もあるため、手動でバックアップを取るのも良い考えです！
-- このリポジトリを git でクローンし、ディレクトリを移動して、実行可能にした後、スクリプトを実行してください。
-
-> Master ブランチからダウンロードする場合
+Hyprland がすでにインストールされている場合や、手順を自分で選びたい場合：
 
 ```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git
-cd Hyprland-Dots
-```
-
-> 開発ブランチ（Development）からダウンロードする場合（開発およびテスト用）
-
-```bash
-git clone --depth=1 https://github.com/LinuxBeginnings/Hyprland-Dots.git -b development
-cd Hyprland-Dots
-```
-
-- プリセット dotfiles の自動コピー/インストール（更新推奨）
-
-```bash
+git clone --depth=1 https://github.com/tak0dan/Sunshine_Hyprland_Dots.git && cd Sunshine_Hyprland_Dots
 chmod +x copy.sh
 ./copy.sh
 ```
 
-- リリース版（Stable）からコピー/インストール（メインより 1 バージョン古い点に注意）
+`copy.sh` は途中でいくつか質問します：キーボードレイアウト、モニターの解像度、既定のエディター、
+追加の壁紙をダウンロードするかどうか。新規インストールでも更新でも、流れは同じです。
+
+> [!NOTE]
+> `copy.sh` は置き換える予定の設定ディレクトリをバックアップします。
+> 削除する前に `~/.config` のバックアップを確認してください。動作している環境がある場合は、
+> 自分でもバックアップを取っておいてください。すでに Hyprland の設定がある場合は、先にアンインストールするか、
+> 新しいユーザーアカウントにインストールしてください。
+
+---
+
+## 更新
+
+クローンしたリポジトリで `copy.sh` をもう一度実行します。既存のインストールを検出して更新し、
+キーバインド、スタートアップアプリ、独自スクリプトなど、あなたの変更は保持されます。インストール時に選んだエディターと
+壁紙も保持されます。
+
+リポジトリ自体を更新するには：
 
 ```bash
-chmod +x release.sh
-./release.sh
+cd Sunshine_Hyprland_Dots && git pull && ./copy.sh
 ```
 
-- UPGRADE.sh の関数について
-  > [重要!]
-  > これを動作させるには rsync が必要です。
-  > この機能を使用する前に、KooL's Hyprland が既に動作している必要があります。
+---
 
-```bash
-chmod +x upgrade.sh
-./upgrade.sh
-```
+## インストール時の既定値
 
-## ❗❗❗ DEBIAN および UBUNTU ユーザーへの注意！
+- **デスクトップの壁紙：** flower bloom
+- **SDDM のログイン背景：** 太陽
+- **既定のエディター：** インストーラーのメニューで選んだもの。Kate は `VISUAL` に設定され、nano は `EDITOR` のままです。
+- **Fastfetch：** シェル起動時に実行されます。その「tracked dates」の項目にはインストール日が入ります。内容は `~/.config/fastfetch/custom-info.json` で編集できます。
 
-- KooL Hyprland の dotfiles 更新に関するメッセージが大量に届いています。 [`WIKI`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Install_&_Update)に大きく注意書きを記載しました。
+---
 
-#### ⚠️⚠️⚠️ スクリプトによって作成されたバックアップについての注意
+## 壁紙
 
-> [超重要!]
-> copy.sh、release.sh、そして upgrade.sh もバックアップを作成します！
-> $HOME/.config の内容を手動で確認してください。
-> 不要なバックアップは手動で削除してください。
+インストーラーはこのリポジトリの壁紙をコピーし、
+[Sunshine_Hyprland_Wallpapers](https://github.com/tak0dan/Sunshine_Hyprland_Wallpapers) から壁紙コレクションをダウンロードするかを尋ねます。
+コレクションは大きいため、ダウンロードは任意です。既定の 2 枚の画像は常にコピーされます。
 
-#### 🛎️ 壁紙に関するちょっとした注意
+---
 
-- デフォルトでは、ダークとライト各 1 枚＋3 枚の壁紙のみがコピーされます。追加の壁紙をダウンロードするオプションが提供されます。追加の壁紙は[`THIS`](https://github.com/LinuxBeginnings/Wallpaper-Bank/tree/main/wallpapers) リンクからプレビュー/確認できます。
+## キーバインド
 
-#### ⚠️⚠️⚠️これらの dotfiles をコピー / インストールした後の必須事項
+キーバインドは Lua 設定で定義されています。`SUPER + SHIFT + K` で、有効なキーバインドを検索できる一覧が開きます。
+変更方法は [HOWTO：キーバインドの変更](../../docs/HOWTO-Change-Keybindgs.md) を参照してください。
 
-- SUPER + W を押して壁紙を設定してください。これにより、Waybar、Kitty（TTY）、Rofi のテーマ用に Wallust を初期化できます。ただし、copy.sh または release.sh を使用した場合は、初期壁紙がプリセットされているため、この手順は不要です。
+---
 
-- NVIDIA の所有者へ。`~/.config/hypr/UserConfigs/ENVariables.conf`を編集してください（強く推奨）。
+## カスタマイズ
 
-* NVIDIA の所有者とユーザーへ。 インsトール後に [`THIS`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)を確認してください。
+独自の変更は `~/.config/hypr/UserConfigs/` に置いてください。そこにあるファイルはシステムの既定値を上書きし、
+更新後も保持されます：
 
-- 既に独自のキー設定やモニター設定を行っている場合は、ログアウトや再起動前に作成されたバックアップからコピーしてください。（推奨）
+- `user_keybinds.lua`、`user_startup.lua`、`user_window_rules.lua`、`user_decorations.lua`、`user_settings.lua`
+- `user_defaults.lua`：既定のアプリ（ファイルマネージャー、エディター、ターミナル）
+- `kitty.conf`：ターミナルの設定
 
-#### 📖 既知の問題と可能な解決策
+ガイドは [`docs/`](../../docs/) にあります。
 
-- こちらのページを確認してください: [FAQ](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/FAQ) & [UNSOLVED ISSUES](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Known_Issues)
+---
 
-#### 🙋 質問対応 ⁉️
+## コントリビュート
 
-- FAQ! はい、これらの dotfiles は他のディストロでも使用できます！ただし、適切なパッケージを事前にインストールしてください！安心できるなら、私も Gentoo で同じ設定を使っています :)
-- クイックヒント！ Waybar モジュールの HINT! をクリックしてください。 (Waybar のデフォルトレイアウトおよび Simple-L [TOP] レイアウトでのみ利用可能)。キーバインドの `SUPER H`でも起動できます。
-- さらに質問がありますか？ こちらをクリックして [WIKI](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/)を参照してください。
-- 旧設定が欲しい場合, すべて "Archive" リポジトリにまとめています。詳しくは[HERE](https://github.com/LinuxBeginnings/Hyprland-Dots-releases-Archive)をご覧ください。
+プルリクエストは `main` 向けに歓迎します。変更は絞り込み、変更したディストリビューションで動作確認をしてください。
+[CONTRIBUTING.md](../../CONTRIBUTING.md) と [COMMIT_MESSAGE_GUIDELINES.md](../../COMMIT_MESSAGE_GUIDELINES.md) を参照してください。
 
-#### ⌨ キーバインド
+---
 
-- キーバインドの説明はこちら： [`CLICK`](https://github.com/LinuxBeginnings/Hyprland-Dots/wiki/Keybinds)
+## ライセンス
 
-#### 🙏 スペシャルリクエスト
-
-- dotfilesや設定の改善がある場合改善のためのPRをぜひ送ってください！私も皆さんと同じように学んでいるので、改善は大歓迎です！
-- Waybar のスタイル（新しいパネルスタイルは微調整が必要）→ ご協力をお願いできますか？🙏
-
-#### 🤷‍♂️ TO DO!
-
-- [ ] dotfiles の微調整 - 🚧 常に改善中
-- ~~[ ] Starship に切り替えるかも？（ただし、oh-my-zsh に比べてテーマが少ない）~~ → 今のところ予定なし
-
-#### 🔮 Discord サーバー
-
-- ぜひ [Discord](https://discord.com/invite/kool-tech-world)に参加してください！
-
-### 💖 サポート
-
-- GitHub のリポジトリにスターを付けてもらえると嬉しいです 🌟
-
-- YouTube チャンネル登録もよろしく！→ [YouTube](https://www.youtube.com/@Ja.KooLit)
-
-- コーヒーや BTC でサポートも歓迎 😊
-
-
-または
-
-
-また、BTC での寄付も可能です
-
-
-
-## 🫰 スターありがとう 🩷
-
+GNU GPLv3。[LICENSE.md](../../LICENSE.md) を参照してください。

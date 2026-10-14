@@ -1,4 +1,6 @@
-# Contributor Covenant Code of Conduct
+# Sunshine Hyprland Dots Code of Conduct
+
+This community follows the Contributor Covenant, adapted for the Sunshine Hyprland Dots project.
 
 ## Our Pledge
 
@@ -59,8 +61,8 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-.
+reported to the project maintainer, [@tak0dan](https://github.com/tak0dan), by GitHub
+direct message. Do not post private details in a public issue or pull request.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
