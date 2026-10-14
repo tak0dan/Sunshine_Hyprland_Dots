@@ -62,7 +62,10 @@ copy_phase1() {
 
   # Handle ~/.config/rofi: backup existing and ensure an empty directory exists
   local rofi_dir="${XDG_CONFIG_HOME:-$HOME/.config}/rofi"
-  if [ -d "$rofi_dir" ]; then
+  if [ -d "$rofi_dir" ] && [ "$run_mode" != "install" ]; then
+    # Upgrades keep the user's rofi config as it is.
+    echo -e "${NOTE:-[NOTE]} - Keeping your existing rofi config." 2>&1 | tee -a "$log"
+  elif [ -d "$rofi_dir" ]; then
     if [ -n "$(ls -A "$rofi_dir" 2>/dev/null)" ]; then
       BACKUP_DIR=$(get_backup_dirname)
       mv "$rofi_dir" "$rofi_dir-backup-$BACKUP_DIR" 2>&1 | tee -a "$log"
@@ -329,6 +332,13 @@ copy_phase2() {
 
   for DIR_NAME in $DIR; do
     local DIRPATH="${XDG_CONFIG_HOME:-$HOME/.config}/$DIR_NAME"
+    # Upgrades never replace an existing directory: only files that are missing
+    # are added, so the user's own configs and scripts stay untouched.
+    if [ "${RUN_MODE:-}" != "install" ] && [ -d "$DIRPATH" ]; then
+      echo -e "${NOTE:-[NOTE]} - Keeping your existing ${YELLOW:-}$DIR_NAME${RESET:-} config; adding only missing files." 2>&1 | tee -a "$log"
+      cp -rn "$base/config/$DIR_NAME/." "$DIRPATH/" 2>&1 | tee -a "$log" || true
+      continue
+    fi
     if [ -d "$DIRPATH" ]; then
       echo -e "\n${NOTE:-[NOTE]} - Config for ${YELLOW:-}$DIR_NAME${RESET:-} found, attempting to back up."
       BACKUP_DIR=$(get_backup_dirname)
