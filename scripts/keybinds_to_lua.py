@@ -68,6 +68,8 @@ def convert_line(line):
         mods = mod
     mods = " ".join(mods.split())
     if dispatcher == "exec":
+        # Rofi runs through the layout wrapper so it opens in its own layout.
+        args = re.sub(r"(?<![\w/])rofi -show", "$scriptsDir/RofiKeyboardLayout.sh -show", args)
         action = f"exec_cmd({lua_string(expand(args))})"
     else:
         action = f"dispatch({lua_string(dispatcher)}, {lua_string(expand(args))})"
