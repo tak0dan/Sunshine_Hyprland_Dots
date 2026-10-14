@@ -804,7 +804,7 @@ ensure_keybinds_init "$LOG"
 if is_nixos; then
   report_waybar_weather_missing
 else
-  install_waybar_weather "$LOG"
+  if [ "$RUN_MODE" = "install" ]; then install_waybar_weather "$LOG"; fi
 fi
 ensure_oh_my_zsh "$LOG"
 printf "\n%.0s" {1..1}
@@ -906,6 +906,7 @@ if [ "$RUN_MODE" = "install" ]; then
   unset _hl_install_ver
 fi
 printf "\\n%.0s" {1..1}
+if [ "$RUN_MODE" = "install" ]; then
 # waybar-weather config handling:
 # - install (fresh copy): always overwrite and prompt for units
 # - upgrade (non-express): copy only if missing; prompt only if copied
@@ -1014,6 +1015,7 @@ if [ "$EXPRESS_MODE" -eq 0 ] && [ "$WAYBAR_WEATHER_COPIED" -eq 1 ]; then
   done
 fi
 
+fi
 # ags config
 # Check if ags is installed
 if command -v ags >/dev/null 2>&1; then
