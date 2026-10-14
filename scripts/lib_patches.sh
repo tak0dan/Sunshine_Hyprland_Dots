@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -11,13 +11,13 @@
 
 # Capture the repo root relative to this helper at source time, so the runner
 # does not depend on DOTFILES_DIR being set by the caller.
-KOOLDOTS_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SUNSHINEDOTS_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-export KOOLDOTS_REPO_ROOT
+export SUNSHINEDOTS_REPO_ROOT
 
 apply_user_patches() {
   local log="${1:-/dev/null}"
-  local base="${DOTFILES_DIR:-$KOOLDOTS_REPO_ROOT}"
+  local base="${DOTFILES_DIR:-$SUNSHINEDOTS_REPO_ROOT}"
   local patches_dir="$base/patches"
 
   if [ ! -d "$patches_dir" ]; then
@@ -25,8 +25,8 @@ apply_user_patches() {
     return 0
   fi
 
-  export KOOLDOTS_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-  export KOOLDOTS_LOG="$log"
+  export SUNSHINEDOTS_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+  export SUNSHINEDOTS_LOG="$log"
 
   local patch_file patch_name applied=0
   shopt -s nullglob

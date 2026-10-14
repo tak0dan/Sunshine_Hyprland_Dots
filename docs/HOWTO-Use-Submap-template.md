@@ -7,7 +7,7 @@ submaps as you like, which makes keybinding customisation very flexible.
 The official Hyprland documentation is
 [here](https://wiki.hypr.land/configuring/core/binds/submaps/).
 
-## **KoolDots Submap**
+## **Sunshine Hyprland Dots Submap**
 
 `submap_helper.lua` (in `hypr/lua/`) wraps Hyprland's native
 [`hl.dsp.submap`](https://wiki.hypr.land/configuring/core/binds/submaps/) and

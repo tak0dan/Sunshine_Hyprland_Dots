@@ -1,6 +1,6 @@
-# Cómo configurar reglas de capas en KoolDots (`user_layer_rules.lua`)
+# Cómo configurar reglas de capas en Sunshine Hyprland Dots (`user_layer_rules.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las reglas personales aplicadas a superficies de capas (*layer surfaces* como Waybar, menús de inicio Rofi/Wofi, paneles de notificaciones y diálogos OSD) se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las reglas personales aplicadas a superficies de capas (*layer surfaces* como Waybar, menús de inicio Rofi/Wofi, paneles de notificaciones y diálogos OSD) se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_layer_rules.lua

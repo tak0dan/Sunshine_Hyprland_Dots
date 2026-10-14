@@ -1,6 +1,6 @@
-# How to Add Autostart Applications in KoolDots (`user_startup.lua`)
+# How to Add Autostart Applications in Sunshine Hyprland Dots (`user_startup.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal autostart applications, system tray applets, background services, and custom startup scripts are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal autostart applications, system tray applets, background services, and custom startup scripts are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_startup.lua

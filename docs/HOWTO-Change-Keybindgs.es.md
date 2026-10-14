@@ -1,6 +1,6 @@
-# Cómo cambiar y personalizar atajos de teclado en KoolDots (`user_keybinds.lua`)
+# Cómo cambiar y personalizar atajos de teclado en Sunshine Hyprland Dots (`user_keybinds.lua`)
 
-En **KoolDots (2026)** con la arquitectura de configuración en Lua, todas las adiciones, modificaciones, desvinculaciones y reasignaciones de atajos de teclado se configuran en:
+En **Sunshine Hyprland Dots (2026)** con la arquitectura de configuración en Lua, todas las adiciones, modificaciones, desvinculaciones y reasignaciones de atajos de teclado se configuran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_keybinds.lua
@@ -15,7 +15,7 @@ Esta guía explica cómo funcionan los atajos de teclado en la arquitectura Lua,
 ### Atajos predeterminados del sistema vs. Atajos del usuario
 
 - **Predeterminados del sistema (`~/.config/hypr/configs/system_keybinds.lua`)**  
-  Define los atajos listos para usar en la gestión de ventanas, scripts centrales de KoolDots (menús de Waybar, selectores de Rofi, efectos de fondos de pantalla, control de audio, disposiciones de ventanas) y navegación estándar de espacios de trabajo. Este archivo es administrado por el instalador de dotfiles y **no** debe editarse directamente, ya que futuras actualizaciones pueden sobrescribir los cambios.
+  Define los atajos listos para usar en la gestión de ventanas, scripts centrales de Sunshine Hyprland Dots (menús de Waybar, selectores de Rofi, efectos de fondos de pantalla, control de audio, disposiciones de ventanas) y navegación estándar de espacios de trabajo. Este archivo es administrado por el instalador de dotfiles y **no** debe editarse directamente, ya que futuras actualizaciones pueden sobrescribir los cambios.
 
 - **Atajos personalizados del usuario (`~/.config/hypr/UserConfigs/user_keybinds.lua`)**  
   Reservado exclusivamente para sus atajos de teclado personales y modificaciones. Los atajos declarados aquí tienen prioridad y se **conservan intactos entre actualizaciones de dotfiles**.
@@ -152,7 +152,7 @@ bind("SUPER CTRL", "T", exec_cmd("missioncenter"), { description = "Administrado
 ---
 
 ### Categoría B: Reemplazar aplicaciones predeterminadas
-Reemplace las aplicaciones estándar de KoolDots con sus alternativas preferidas:
+Reemplace las aplicaciones estándar de Sunshine Hyprland Dots con sus alternativas preferidas:
 
 ```lua
 -- 1. Reemplazar la terminal predeterminada (Kitty) por Ghostty o WezTerm

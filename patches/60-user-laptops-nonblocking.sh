@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -51,7 +51,7 @@ if ! grep -q '^local function read_command(command)[[:space:]]*$' "$TARGET" 2>/d
   exit 0
 fi
 
-workdir="$(mktemp -d "${TMPDIR:-/tmp}/kooldots-patch-60.XXXXXX")" || exit 1
+workdir="$(mktemp -d "${TMPDIR:-/tmp}/sunshinedots-patch-60.XXXXXX")" || exit 1
 block_lid_paths="$workdir/lid-paths.lua"
 block_lid_closed="$workdir/lid-closed.lua"
 block_drm="$workdir/drm.lua"

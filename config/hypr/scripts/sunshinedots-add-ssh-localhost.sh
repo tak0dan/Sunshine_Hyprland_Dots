@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
-# 💫 https://github.com/LinuxBeginnings 💫 #
+# 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 #
 # Setup & Verify SSH Agent on Localhost for Shells and Hyprland #
 
 set -uo pipefail
 
 SCRIPT_NAME="$(basename "$0")"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-AGENT_SCRIPT="$SCRIPT_DIR/kooldots-add-ssh-agent.sh"
+AGENT_SCRIPT="$SCRIPT_DIR/sunshinedots-add-ssh-agent.sh"
 
 CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 HYPR_DIR="$CONFIG_HOME/hypr"
@@ -255,7 +255,7 @@ remove_configurations() {
 
 show_status_report() {
   echo -e "\n${BOLD}${BLUE}╔══════════════════════════════════════════════════════════════╗${RESET}"
-  echo -e "${BOLD}${BLUE}║        KoolDots SSH Agent Status & Verification              ║${RESET}"
+  echo -e "${BOLD}${BLUE}║        Sunshine Hyprland Dots SSH Agent Status & Verification              ║${RESET}"
   echo -e "${BOLD}${BLUE}╚══════════════════════════════════════════════════════════════╝${RESET}\n"
 
   # Service status

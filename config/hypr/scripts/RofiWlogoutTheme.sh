@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 #  Rofi Wlogout Theme Switcher
-#  Switch between presets: Default (KoolDots), Sekiro, Silvia, Kurenai, Fuji, Hadi493, BlueBerries
+#  Switch between presets: Default (Sunshine Hyprland Dots), Sekiro, Silvia, Kurenai, Fuji, Hadi493, BlueBerries
 #  Includes backup and restore for current wlogout configurations
 # ==============================================================================
 
@@ -41,7 +41,7 @@ if [[ -f "${WLOGOUT_DIR}/.current_theme" ]]; then
     CURRENT_PRESET="$(head -n1 "${WLOGOUT_DIR}/.current_theme" 2>/dev/null | tr -d '[:space:]')"
 fi
 
-# Locate Rofi config with KoolDots fallback
+# Locate Rofi config with Sunshine Hyprland Dots fallback
 ROFI_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/config.rasi"
 if [[ ! -f "$ROFI_CONFIG" && -f "${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi" ]]; then
     ROFI_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
@@ -188,7 +188,7 @@ apply_theme() {
 
     # Background handling
     if [[ "$theme" == "default" ]]; then
-        # Default KoolDots wlogout uses dynamic Wallust color styling without a static wallpaper background
+        # Default Sunshine Hyprland Dots wlogout uses dynamic Wallust color styling without a static wallpaper background
         rm -f "${WLOGOUT_DIR}/bg.png" "${WLOGOUT_DIR}/sekiro_blurred.png"
     else
         # Read active blur radius
@@ -210,7 +210,7 @@ apply_theme() {
 
     if [[ "$silent" -ne 1 ]] && command -v notify-send >/dev/null 2>&1; then
         if [[ "$theme" == "default" ]]; then
-            notify-send -u normal -i "preferences-desktop-theme" "Wlogout Theme" "Restored: Default (KoolDots)"
+            notify-send -u normal -i "preferences-desktop-theme" "Wlogout Theme" "Restored: Default (Sunshine Hyprland Dots)"
         elif [[ "$theme" == "user_backup" ]]; then
             notify-send -u normal -i "document-revert" "Wlogout Theme" "Restored: User Backup Config"
         elif [[ "$theme" == "hadi493" ]]; then
@@ -236,7 +236,7 @@ if pidof rofi >/dev/null; then
 fi
 
 declare -A PRESET_MAP=(
-    ["💫  Default (KoolDots)"]="default"
+    ["💫  Default (Sunshine Hyprland Dots)"]="default"
     ["⚔️  Sekiro (Sumi-e Crimson)"]="sekiro"
     ["🌸  Silvia (Sakura Pink)"]="silvia"
     ["🍁  Kurenai (Crimson Sakura)"]="kurenai"
@@ -246,7 +246,7 @@ declare -A PRESET_MAP=(
 )
 
 MENU_ITEMS=(
-    "💫  Default (KoolDots)"
+    "💫  Default (Sunshine Hyprland Dots)"
     "⚔️  Sekiro (Sumi-e Crimson)"
     "🌸  Silvia (Sakura Pink)"
     "🍁  Kurenai (Crimson Sakura)"

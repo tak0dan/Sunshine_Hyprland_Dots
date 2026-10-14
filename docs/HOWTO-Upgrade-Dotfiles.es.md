@@ -1,4 +1,4 @@
-# Cómo actualizar los instaladores y dotfiles de KoolDots
+# Cómo actualizar los instaladores y dotfiles de Sunshine Hyprland Dots
 
 - Al actualizar los dotfiles, actualice primero el instalador
   - Esto garantiza que se instalen las dependencias nuevas o actualizadas
@@ -17,8 +17,8 @@
   - Clone la versión más reciente de Hyprland-Dots
 
 ```sh
-   git clone https://github.com/Linuxbeginnings/Hyprland-Dots  --depth 1
-   cd ~/Hyprland-Dots
+   git clone https://github.com/tak0dan/Sunshine_Hyprland_Dots  --depth 1
+   cd ~/Sunshine_Hyprland_Dots
    ./copy.sh
    seleccione `Express update`
 ```
@@ -42,7 +42,7 @@
       cd ~/Arch-Hyprland
       git stash && git pull
       install-scripts/update-deps.sh
-      cd ~/Hyprland-Dots
+      cd ~/Sunshine_Hyprland_Dots
       git stash && git pull
       ./copy.sh
       seleccione Express Upgrade

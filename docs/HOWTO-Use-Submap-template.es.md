@@ -8,7 +8,7 @@ sea muy flexible.
 La documentación oficial de Hyprland está
 [aquí](https://wiki.hypr.land/configuring/core/binds/submaps/).
 
-## **Submap de KoolDots**
+## **Submap de Sunshine Hyprland Dots**
 
 `submap_helper.lua` (en `hypr/lua/`) envuelve el
 [`hl.dsp.submap`](https://wiki.hypr.land/configuring/core/binds/submaps/) nativo de Hyprland y

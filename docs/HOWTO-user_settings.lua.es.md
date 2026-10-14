@@ -1,6 +1,6 @@
-# Cómo configurar ajustes de usuario en KoolDots (`user_settings.lua`)
+# Cómo configurar ajustes de usuario en Sunshine Hyprland Dots (`user_settings.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las preferencias de dispositivos de entrada, distribución de teclado, comportamiento del touchpad, sensibilidad del cursor y opciones generales del compositor se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las preferencias de dispositivos de entrada, distribución de teclado, comportamiento del touchpad, sensibilidad del cursor y opciones generales del compositor se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_settings.lua
@@ -17,7 +17,7 @@ Esta guía explica cómo interactúa `user_settings.lua` con la configuración d
 - **Ajustes del sistema (`~/.config/hypr/configs/system_settings.lua` y `lua/settings.lua`)**:
   Define el comportamiento base del entorno, reglas de arrastrar y soltar (*drag and drop*), tipos de distribución de ventanas (*dwindle* / *master*) y configuración inicial de entrada.
 - **Ajustes del usuario (`~/.config/hypr/UserConfigs/user_settings.lua`)**:
-  Se carga para aplicar las personalizaciones de entrada del usuario (como idiomas del teclado, desplazamiento del touchpad, aceleración del ratón y control del cursor). Las opciones aquí definidas se conservan tras las actualizaciones de KoolDots.
+  Se carga para aplicar las personalizaciones de entrada del usuario (como idiomas del teclado, desplazamiento del touchpad, aceleración del ratón y control del cursor). Las opciones aquí definidas se conservan tras las actualizaciones de Sunshine Hyprland Dots.
 
 ### Estructura de `hl.config()`
 

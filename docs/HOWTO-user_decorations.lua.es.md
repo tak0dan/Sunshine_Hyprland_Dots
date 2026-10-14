@@ -1,6 +1,6 @@
-# Cómo configurar decoraciones de ventana en KoolDots (`user_decorations.lua`)
+# Cómo configurar decoraciones de ventana en Sunshine Hyprland Dots (`user_decorations.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todo el estilo estético de las ventanas (bordes, espaciado/gaps, redondeo de esquinas, opacidad, desenfoque/blur, sombras y diseño de pestañas agrupadas) se administra en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todo el estilo estético de las ventanas (bordes, espaciado/gaps, redondeo de esquinas, opacidad, desenfoque/blur, sombras y diseño de pestañas agrupadas) se administra en:
 
 ```
 ~/.config/hypr/UserConfigs/user_decorations.lua

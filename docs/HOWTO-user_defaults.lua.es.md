@@ -1,6 +1,6 @@
-# Cómo configurar aplicaciones predeterminadas en KoolDots (`user_defaults.lua`)
+# Cómo configurar aplicaciones predeterminadas en Sunshine Hyprland Dots (`user_defaults.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las aplicaciones predeterminadas personales (emulador de terminal, gestor de archivos, editores de texto y motor de búsqueda web) se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las aplicaciones predeterminadas personales (emulador de terminal, gestor de archivos, editores de texto y motor de búsqueda web) se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_defaults.lua
@@ -15,13 +15,13 @@ Esta guía explica cómo funciona `user_defaults.lua`, cómo interactúan los va
 ### Valores del sistema vs. Valores del usuario
 
 - **Valores del sistema (`~/.config/hypr/lua/user_defaults.lua`)**:
-  Inicializa la tabla global `KOOLDOTS_DEFAULTS` con valores predeterminados de reserva. Si variables de entorno como `$EDITOR` o `$VISUAL` están definidas, se leen automáticamente; de lo contrario, se usan opciones estándar como `nano`, `kitty` y `thunar`.
+  Inicializa la tabla global `SUNSHINEDOTS_DEFAULTS` con valores predeterminados de reserva. Si variables de entorno como `$EDITOR` o `$VISUAL` están definidas, se leen automáticamente; de lo contrario, se usan opciones estándar como `nano`, `kitty` y `thunar`.
 - **Valores del usuario (`~/.config/hypr/UserConfigs/user_defaults.lua`)**:
-  Se carga inmediatamente después de los valores del sistema para sobrescribir cualquier clave en `KOOLDOTS_DEFAULTS`. Los cambios realizados aquí se conservan durante las actualizaciones de KoolDots.
+  Se carga inmediatamente después de los valores del sistema para sobrescribir cualquier clave en `SUNSHINEDOTS_DEFAULTS`. Los cambios realizados aquí se conservan durante las actualizaciones de Sunshine Hyprland Dots.
 
 ### Claves admitidas
 
-La tabla `KOOLDOTS_DEFAULTS` admite las siguientes claves de configuración:
+La tabla `SUNSHINEDOTS_DEFAULTS` admite las siguientes claves de configuración:
 
 | Clave | Tipo | Descripción | Valor de reserva |
 |---|---|---|---|
@@ -44,26 +44,26 @@ nano ~/.config/hypr/UserConfigs/user_defaults.lua
 nvim ~/.config/hypr/UserConfigs/user_defaults.lua
 ```
 
-*(También puede presionar `SUPER + SHIFT + E` para abrir el menú de edición rápida de KoolDots).*
+*(También puede presionar `SUPER + SHIFT + E` para abrir el menú de edición rápida de Sunshine Hyprland Dots).*
 
 ### Paso 2: Asegurar la inicialización de la tabla
 Verifique que la tabla base esté presente:
 
 ```lua
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 ```
 
 ### Paso 3: Agregar sus aplicaciones personalizadas
-Asigne los nombres de ejecutables o patrones de URL deseados a las claves de `KOOLDOTS_DEFAULTS`:
+Asigne los nombres de ejecutables o patrones de URL deseados a las claves de `SUNSHINEDOTS_DEFAULTS`:
 
 ```lua
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 
-KOOLDOTS_DEFAULTS.term = "kitty"
-KOOLDOTS_DEFAULTS.edit = "nvim"
-KOOLDOTS_DEFAULTS.visual = "code"
-KOOLDOTS_DEFAULTS.files = "thunar"
-KOOLDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
+SUNSHINEDOTS_DEFAULTS.term = "kitty"
+SUNSHINEDOTS_DEFAULTS.edit = "nvim"
+SUNSHINEDOTS_DEFAULTS.visual = "code"
+SUNSHINEDOTS_DEFAULTS.files = "thunar"
+SUNSHINEDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
 ```
 
 ### Paso 4: Guardar y recargar
@@ -81,37 +81,37 @@ KOOLDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
 ### Ejemplo A: Configuración TUI moderna (Neovim + Ghostty + Yazi)
 
 ```lua
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 
-KOOLDOTS_DEFAULTS.term = "ghostty"
-KOOLDOTS_DEFAULTS.edit = "nvim"
-KOOLDOTS_DEFAULTS.visual = "nvim"
-KOOLDOTS_DEFAULTS.files = "kitty -e yazi"
-KOOLDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
+SUNSHINEDOTS_DEFAULTS.term = "ghostty"
+SUNSHINEDOTS_DEFAULTS.edit = "nvim"
+SUNSHINEDOTS_DEFAULTS.visual = "nvim"
+SUNSHINEDOTS_DEFAULTS.files = "kitty -e yazi"
+SUNSHINEDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
 ```
 
 ### Ejemplo B: Ecosistema GNOME / GTK (Nautilus + Editor de texto)
 
 ```lua
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 
-KOOLDOTS_DEFAULTS.term = "alacritty"
-KOOLDOTS_DEFAULTS.edit = "micro"
-KOOLDOTS_DEFAULTS.visual = "gnome-text-editor"
-KOOLDOTS_DEFAULTS.files = "nautilus"
-KOOLDOTS_DEFAULTS.search_engine = "https://www.google.com/search?q={}"
+SUNSHINEDOTS_DEFAULTS.term = "alacritty"
+SUNSHINEDOTS_DEFAULTS.edit = "micro"
+SUNSHINEDOTS_DEFAULTS.visual = "gnome-text-editor"
+SUNSHINEDOTS_DEFAULTS.files = "nautilus"
+SUNSHINEDOTS_DEFAULTS.search_engine = "https://www.google.com/search?q={}"
 ```
 
 ### Ejemplo C: Ecosistema KDE / Qt (Dolphin + Kate)
 
 ```lua
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 
-KOOLDOTS_DEFAULTS.term = "foot"
-KOOLDOTS_DEFAULTS.edit = "nano"
-KOOLDOTS_DEFAULTS.visual = "kate"
-KOOLDOTS_DEFAULTS.files = "dolphin"
-KOOLDOTS_DEFAULTS.search_engine = "https://search.brave.com/search?q={}"
+SUNSHINEDOTS_DEFAULTS.term = "foot"
+SUNSHINEDOTS_DEFAULTS.edit = "nano"
+SUNSHINEDOTS_DEFAULTS.visual = "kate"
+SUNSHINEDOTS_DEFAULTS.files = "dolphin"
+SUNSHINEDOTS_DEFAULTS.search_engine = "https://search.brave.com/search?q={}"
 ```
 
 ---

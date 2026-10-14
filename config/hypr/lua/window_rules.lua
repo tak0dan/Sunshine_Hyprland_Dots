@@ -1,6 +1,6 @@
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -88,27 +88,27 @@ apply_window_rule({
 })
 
 apply_window_rule({
-  name = "tag-kool-cheat-sheet",
+  name = "tag-sunshine-cheat-sheet",
   match = {
-    title = "^(KooL Quick Cheat Sheet)$",
+    title = "^(Sunshine Quick Cheat Sheet)$",
   },
-  tag = "+KooL_Cheat",
+  tag = "+Sunshine_Cheat",
 })
 
 apply_window_rule({
-  name = "tag-kool-hyprland-settings",
+  name = "tag-sunshine-hyprland-settings",
   match = {
-    title = "^(KooL Hyprland Settings)$",
+    title = "^(Sunshine Hyprland Settings)$",
   },
-  tag = "+KooL_Settings",
+  tag = "+Sunshine_Settings",
 })
 
 apply_window_rule({
-  name = "tag-kool-settings-nwg-tools",
+  name = "tag-sunshine-settings-nwg-tools",
   match = {
     class = "^(nwg-displays|nwg-look)$",
   },
-  tag = "+KooL-Settings",
+  tag = "+Sunshine-Settings",
 })
 
 apply_window_rule({
@@ -841,9 +841,9 @@ apply_window_rule({
 })
 
 apply_window_rule({
-  name = "KooL Cheat (tag)",
+  name = "Sunshine Cheat (tag)",
   match = {
-    tag = "KooL_Cheat",
+    tag = "Sunshine_Cheat",
   },
   float = true,
   center = true,
@@ -880,9 +880,9 @@ apply_window_rule({
 })
 
 apply_window_rule({
-  name = "KooL Settings (tag)",
+  name = "Sunshine Settings (tag)",
   match = {
-    tag = "KooL-Settings",
+    tag = "Sunshine-Settings",
   },
   float = true,
   center = true,

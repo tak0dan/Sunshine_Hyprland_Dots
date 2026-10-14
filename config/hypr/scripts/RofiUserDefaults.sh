@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -65,9 +65,9 @@ get_user_override() {
   local key="$1"
   [[ -f "$USER_DEFAULTS_LUA" ]] || return 0
   if [[ "$key" == "search_engine" ]]; then
-    sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$USER_DEFAULTS_LUA" | tail -n1
+    sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\2/p' "$USER_DEFAULTS_LUA" | tail -n1
   else
-    sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.'"$key"'[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\1/p' "$USER_DEFAULTS_LUA" | tail -n1
+    sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.'"$key"'[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\1/p' "$USER_DEFAULTS_LUA" | tail -n1
   fi
 }
 
@@ -76,7 +76,7 @@ get_system_default() {
   local key="$1"
   local val=""
   if [[ -f "$SYSTEM_DEFAULTS_LUA" ]]; then
-    val=$(sed -nE 's/^[[:space:]]*KOOLDOTS_DEFAULTS\.'"$key"'[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\1/p' "$SYSTEM_DEFAULTS_LUA" | tail -n1)
+    val=$(sed -nE 's/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.'"$key"'[[:space:]]*=[[:space:]]*["'\'']([^"'\'']*)["'\''][[:space:]]*(;?([[:space:]]*--.*)?)?$/\1/p' "$SYSTEM_DEFAULTS_LUA" | tail -n1)
   fi
 
   if [[ -z "$val" ]]; then
@@ -121,29 +121,29 @@ set_user_override() {
   if [[ ! -f "$USER_DEFAULTS_LUA" ]]; then
     cat << 'EOF' > "$USER_DEFAULTS_LUA"
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
 -- User defaults overrides template.
 -- This file is sourced by lua/user_defaults.lua.
 
-KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
+SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}
 EOF
   fi
 
   if [[ "$key" == "search_engine" ]]; then
-    if grep -qE "^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=" "$USER_DEFAULTS_LUA"; then
-      sed -i -E "s|^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=.*$|KOOLDOTS_DEFAULTS.search_engine = \"${val}\"|" "$USER_DEFAULTS_LUA"
+    if grep -qE "^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=" "$USER_DEFAULTS_LUA"; then
+      sed -i -E "s|^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=.*$|SUNSHINEDOTS_DEFAULTS.search_engine = \"${val}\"|" "$USER_DEFAULTS_LUA"
     else
-      printf 'KOOLDOTS_DEFAULTS.search_engine = "%s"\n' "$val" >> "$USER_DEFAULTS_LUA"
+      printf 'SUNSHINEDOTS_DEFAULTS.search_engine = "%s"\n' "$val" >> "$USER_DEFAULTS_LUA"
     fi
   else
-    if grep -qE "^[[:space:]]*KOOLDOTS_DEFAULTS\.${key}[[:space:]]*=" "$USER_DEFAULTS_LUA"; then
-      sed -i -E "s|^[[:space:]]*KOOLDOTS_DEFAULTS\.${key}[[:space:]]*=.*$|KOOLDOTS_DEFAULTS.${key} = \"${val}\"|" "$USER_DEFAULTS_LUA"
+    if grep -qE "^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.${key}[[:space:]]*=" "$USER_DEFAULTS_LUA"; then
+      sed -i -E "s|^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.${key}[[:space:]]*=.*$|SUNSHINEDOTS_DEFAULTS.${key} = \"${val}\"|" "$USER_DEFAULTS_LUA"
     else
-      printf 'KOOLDOTS_DEFAULTS.%s = "%s"\n' "$key" "$val" >> "$USER_DEFAULTS_LUA"
+      printf 'SUNSHINEDOTS_DEFAULTS.%s = "%s"\n' "$key" "$val" >> "$USER_DEFAULTS_LUA"
     fi
   fi
 
@@ -156,9 +156,9 @@ restore_single_default() {
   local friendly_name="$2"
   if [[ -f "$USER_DEFAULTS_LUA" ]]; then
     if [[ "$key" == "search_engine" ]]; then
-      sed -i -E "/^[[:space:]]*KOOLDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
+      sed -i -E "/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(search_engine|Search_Engine)[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
     else
-      sed -i -E "/^[[:space:]]*KOOLDOTS_DEFAULTS\.${key}[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
+      sed -i -E "/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.${key}[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
     fi
   fi
 
@@ -171,7 +171,7 @@ restore_single_default() {
 # Global restore defaults: removes SPECIFIC custom entries only
 restore_all_defaults() {
   if [[ -f "$USER_DEFAULTS_LUA" ]]; then
-    sed -i -E "/^[[:space:]]*KOOLDOTS_DEFAULTS\.(edit|visual|term|files|search_engine|Search_Engine)[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
+    sed -i -E "/^[[:space:]]*SUNSHINEDOTS_DEFAULTS\.(edit|visual|term|files|search_engine|Search_Engine)[[:space:]]*=/d" "$USER_DEFAULTS_LUA"
   fi
   notify_success "All user defaults restored to system defaults."
 }

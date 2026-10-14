@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -130,7 +130,7 @@ layout)
   # A workspace carries its own layout, so a workspace or monitor switch can
   # change the label too. A layout change produces no event of its own, so
   # ChangeLayout.sh and the layout menu push one in with hypr_emit_event, which
-  # arrives as `custom>>kool:layout`.
+  # arrives as `custom>>sunshine:layout`.
   event_re='^(custom|workspace|workspacev2|focusedmon|monitoradded|monitorremoved|configreloaded)>>'
   ;;
 keyboard)

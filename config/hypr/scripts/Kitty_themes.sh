@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -14,7 +14,7 @@ kitty_config="$user_kitty_config"
 iDIR="${XDG_CONFIG_HOME:-$HOME/.config}/swaync/images" # For notifications
 rofi_theme_for_this_script="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/config-kitty-theme.rasi"
 wallust_refresh_script="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/WallustSwww.sh"
-debug_log="${XDG_CACHE_HOME:-$HOME/.cache}/kooldots-kitty-themes.log"
+debug_log="${XDG_CACHE_HOME:-$HOME/.cache}/sunshinedots-kitty-themes.log"
 
 ensure_managed_kitty_config() {
   if [ -f "$user_kitty_config" ] && [ -r "$user_kitty_config" ]; then

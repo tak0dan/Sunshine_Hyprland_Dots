@@ -1,6 +1,6 @@
-# Cómo configurar reglas de ventana en KoolDots (`user_window_rules.lua`)
+# Cómo configurar reglas de ventana en Sunshine Hyprland Dots (`user_window_rules.lua`)
 
-En **KoolDots (2026)** con el flujo de configuración en Lua, todas las reglas de ventana personales (comportamiento flotante, tamaños personalizados, posiciones, opacidades, etiquetas y asignaciones a espacios de trabajo) se administran en:
+En **Sunshine Hyprland Dots (2026)** con el flujo de configuración en Lua, todas las reglas de ventana personales (comportamiento flotante, tamaños personalizados, posiciones, opacidades, etiquetas y asignaciones a espacios de trabajo) se administran en:
 
 ```
 ~/.config/hypr/UserConfigs/user_window_rules.lua
@@ -15,7 +15,7 @@ Esta guía explica cómo funcionan las reglas de ventana en la arquitectura Lua,
 ### Reglas de ventana del sistema vs. Reglas del usuario
 
 - **Reglas del sistema (`~/.config/hypr/configs/system_window_rules.lua` y `lua/window_rules.lua`)**:  
-  Proporciona el estilo predeterminado, definiciones de cuadros de diálogo flotantes, etiquetas y reglas para aplicaciones esenciales en toda la configuración de KoolDots.
+  Proporciona el estilo predeterminado, definiciones de cuadros de diálogo flotantes, etiquetas y reglas para aplicaciones esenciales en toda la configuración de Sunshine Hyprland Dots.
 - **Reglas del usuario (`~/.config/hypr/UserConfigs/user_window_rules.lua`)**:  
   Reservado exclusivamente para sus reglas de aplicación personalizadas y modificaciones. Los cambios aquí se conservan durante las actualizaciones estándar de dotfiles.
 

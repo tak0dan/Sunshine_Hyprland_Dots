@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -389,7 +389,7 @@ if [ -x "$rainbow_startup" ]; then
   "$rainbow_startup" >/dev/null 2>&1 || true
 fi
 
-if [ "${HYPR_FULL_RELOAD_ON_WALLPAPER:-0}" = "1" ] || [ "${KOOLDOTS_FULL_RELOAD_ON_WALLPAPER:-0}" = "1" ]; then
+if [ "${HYPR_FULL_RELOAD_ON_WALLPAPER:-0}" = "1" ] || [ "${SUNSHINEDOTS_FULL_RELOAD_ON_WALLPAPER:-0}" = "1" ]; then
   reload_hypr_preserve_layout
 fi
 

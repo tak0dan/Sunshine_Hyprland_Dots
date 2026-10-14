@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
-# Shared helpers for KoolDots user-config patches.
+# Shared helpers for Sunshine Hyprland Dots user-config patches.
 #
 # Contract for a patch script (patches/NN-name.sh):
 #   * Executed by scripts/lib_patches.sh (apply_user_patches), in sorted order.
 #   * Must be content-idempotent: detect whether its fix is already present
 #     and leave the file unchanged if so.
-#   * Targets live under $KOOLDOTS_CONFIG_HOME (mainly hypr/UserConfigs and
+#   * Targets live under $SUNSHINEDOTS_CONFIG_HOME (mainly hypr/UserConfigs and
 #     hypr/UserScripts, but any user-owned config file is fair game - e.g.
 #     swaync/style.css). Skip cleanly (exit 0) when a target file is absent.
 #   * Never rewrite a whole file: only add/adjust the specific setting, so a
@@ -19,16 +19,16 @@
 #   * Exit 0 for both "applied" and "already present/skipped".
 #   * Log through patch_log(); the runner also captures stdout/stderr.
 
-KOOLDOTS_CONFIG_HOME="${KOOLDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
-KOOLDOTS_LOG="${KOOLDOTS_LOG:-/dev/null}"
+SUNSHINEDOTS_CONFIG_HOME="${SUNSHINEDOTS_CONFIG_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}}"
+SUNSHINEDOTS_LOG="${SUNSHINEDOTS_LOG:-/dev/null}"
 
 patch_log() {
-  echo "${NOTE:-[NOTE]} - [patch] $*" 2>&1 | tee -a "$KOOLDOTS_LOG"
+  echo "${NOTE:-[NOTE]} - [patch] $*" 2>&1 | tee -a "$SUNSHINEDOTS_LOG"
 }
 
 # patch_hypr_dir: absolute path to the installed hypr config directory.
 patch_hypr_dir() {
-  printf '%s' "$KOOLDOTS_CONFIG_HOME/hypr"
+  printf '%s' "$SUNSHINEDOTS_CONFIG_HOME/hypr"
 }
 
 # patch_ensure_line <file> <present-extended-regex> <line>
@@ -61,7 +61,7 @@ patch_ensure_line_after() {
   fi
 
   local tmp
-  tmp="$(mktemp "${TMPDIR:-/tmp}/kooldots-patch.XXXXXX")" || return 1
+  tmp="$(mktemp "${TMPDIR:-/tmp}/sunshinedots-patch.XXXXXX")" || return 1
   if awk -v anchor="$anchor_re" -v ins="$line" '
       { print }
       !done && $0 ~ anchor { print ins; done = 1 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -15,7 +15,7 @@ iDIR="${XDG_CONFIG_HOME:-$HOME/.config}/swaync/images"
 rofi_theme="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/config-zsh-theme.rasi"
 
 if [ -n "$(grep -i nixos < /etc/os-release)" ]; then
-  notify-send -i "$iDIR/note.png" "NOT Supported" "Sorry NixOS does not support this KooL feature"
+  notify-send -i "$iDIR/note.png" "NOT Supported" "Sorry NixOS does not support this Sunshine feature"
   exit 1
 fi
 

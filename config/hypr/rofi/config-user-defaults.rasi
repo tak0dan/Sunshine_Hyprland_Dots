@@ -1,5 +1,5 @@
-/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
-/* KooL Hyprland User Defaults Rofi Config */
+/* ---- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 ---- */
+/* Sunshine Hyprland User Defaults Rofi Config */
 
 @import "~/.config/hypr/rofi/config.rasi"
 

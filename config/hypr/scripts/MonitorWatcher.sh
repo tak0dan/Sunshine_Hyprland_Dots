@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -28,12 +28,12 @@ MW_RECONNECT_DELAY="${MW_RECONNECT_DELAY:-2}"
 # Empty means "forever"; the tests bound it so they terminate.
 MW_MAX_RECONNECTS="${MW_MAX_RECONNECTS-}"
 MW_RUNTIME_DIR="${MW_RUNTIME_DIR:-${XDG_RUNTIME_DIR:-/tmp}}"
-MW_LOG_FILE="${MW_LOG_FILE:-$MW_RUNTIME_DIR/kooldots-display-profiles/monitor-watcher.log}"
-MW_LOCK_FILE="${MW_LOCK_FILE:-$MW_RUNTIME_DIR/kooldots-monitor-watcher.lock}"
+MW_LOG_FILE="${MW_LOG_FILE:-$MW_RUNTIME_DIR/sunshinedots-display-profiles/monitor-watcher.log}"
+MW_LOCK_FILE="${MW_LOCK_FILE:-$MW_RUNTIME_DIR/sunshinedots-monitor-watcher.lock}"
 MW_LOCK_WAIT="${MW_LOCK_WAIT:-0}"
 MW_APPLY_RETRIES="${MW_APPLY_RETRIES:-3}"
 MW_RETRY_DELAY="${MW_RETRY_DELAY:-2}"
-MW_STATE_DIR="${MW_STATE_DIR:-$MW_RUNTIME_DIR/kooldots-display-profiles}"
+MW_STATE_DIR="${MW_STATE_DIR:-$MW_RUNTIME_DIR/sunshinedots-display-profiles}"
 # Written by DisplayProfile.sh: line 1 the fingerprint, line 2 the layout name.
 MW_STATE_FILE="${MW_STATE_FILE:-$MW_STATE_DIR/current}"
 # Written by the menu (and Quick Settings) around nwg-displays: holds its PID.

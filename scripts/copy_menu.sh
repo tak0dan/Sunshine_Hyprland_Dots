@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -34,7 +34,7 @@ fi
 # Sets global COPY_MENU_CHOICE to one of: install, upgrade, express, quit
 show_copy_menu() {
   local express_supported="${1:-0}"
-  local menu_title="      KooL's Hyprland Dotfiles      "
+  local menu_title="      Sunshine Hyprland Dotfiles      "
   local prompt="Select what you would like to do:"
 
   local install_tag="Install"

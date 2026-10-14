@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -21,7 +21,7 @@ fi
 # Launch yad with calculated width and height
 GDK_BACKEND=$BACKEND yad \
   --center \
-  --title="KooL Quick Cheat Sheet" \
+  --title="Sunshine Quick Cheat Sheet" \
   --no-buttons \
   --list \
   --column=Key: \
@@ -30,7 +30,7 @@ GDK_BACKEND=$BACKEND yad \
   --timeout-indicator=bottom \
   "ESC" "close this app" "" " = " "SUPER KEY (Windows Key Button)" "(SUPER KEY)" \
   " SHIFT K" "Searchable Keybinds" "(Search all Keybinds via rofi)" \
-  " SHIFT E" "KooL Hyprland Settings Menu" "WindowRules,themes,defaults, etc" \
+  " SHIFT E" "Sunshine Hyprland Settings Menu" "WindowRules,themes,defaults, etc" \
   " enter" "Terminal" "(Default:kitty)" \
   " SHIFT enter" "DropDown Terminal" " Q to close" \
   " B" "Launch Browser" "(Default browser)" \
@@ -78,4 +78,4 @@ GDK_BACKEND=$BACKEND yad \
   " ALT E" "Rofi Emoticons" "Emoticon" \
   " H" "Launch this Quick Cheat Sheet" "" \
   "" "" "" \
-  "More tips:" "https://github.com/LinuxBeginnings/Hyprland-Dots/wiki" ""
+  "More tips:" "https://github.com/tak0dan/Sunshine_Hyprland_Dots/wiki" ""

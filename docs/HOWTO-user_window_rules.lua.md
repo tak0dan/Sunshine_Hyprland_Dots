@@ -1,6 +1,6 @@
-# How to Configure Window Rules in KoolDots (`user_window_rules.lua`)
+# How to Configure Window Rules in Sunshine Hyprland Dots (`user_window_rules.lua`)
 
-In **KoolDots (2026)** with the Lua configuration workflow, all personal window rules (floating behaviors, custom sizes, positions, opacities, tags, and workspace assignments) are managed in:
+In **Sunshine Hyprland Dots (2026)** with the Lua configuration workflow, all personal window rules (floating behaviors, custom sizes, positions, opacities, tags, and workspace assignments) are managed in:
 
 ```
 ~/.config/hypr/UserConfigs/user_window_rules.lua
@@ -15,7 +15,7 @@ This guide explains how window rules work in the Lua architecture, how to find w
 ### System vs. User Window Rules
 
 - **System Window Rules (`~/.config/hypr/configs/system_window_rules.lua` & `lua/window_rules.lua`)**:
-  Provides default styling, floating dialog definitions, tags, and rules for core applications across the entire KoolDots setup.
+  Provides default styling, floating dialog definitions, tags, and rules for core applications across the entire Sunshine Hyprland Dots setup.
 - **User Window Rules (`~/.config/hypr/UserConfigs/user_window_rules.lua`)**:
   Reserved exclusively for your custom application rules and overrides. Changes here are preserved during standard dotfiles updates.
 

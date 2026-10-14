@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
+#  Sunshine Hyprland Dots (2026)
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -10,7 +10,7 @@
 # Ctrl+Shift+L inside rofi: cycle rofi's layout and reopen rofi with the same arguments.
 # On close: restore the window's layout.
 
-STATE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/kooldots"
+STATE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sunshinedots"
 ROFI_INDEX_FILE="$STATE_DIR/rofi-layout-index"
 CYCLE_KEY="Control+Shift+l"
 CYCLE_RC=10            # rofi exit code for -kb-custom-1

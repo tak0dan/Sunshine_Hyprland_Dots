@@ -1,35 +1,36 @@
-/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
-/* KooL Hyprland Rofi Style 11 - Windows 11 List Light */
+/* ---- 💫 https://github.com/tak0dan/Sunshine_Hyprland_Dots 💫 ---- */
+/* Sunshine Hyprland Rofi Style 11 - Windows 11 List Dark */
 /* source: https://github.com/newmanls */
 
 /* Integrating Wallust and More tweaks */
 
 /* ---- Configuration ---- */
 configuration {
-  show-icons:        true;
-  hover-select:      true;
-  me-select-entry:   "MouseSecondary";
-  me-accept-entry:   "MousePrimary";
+    show-icons:      true;
+    hover-select:    true;
+    me-select-entry: "MouseSecondary";
+    me-accept-entry: "MousePrimary";
 }
 
 /*****----- Global Properties -----*****/
 * {
-  bg0    : #ffffff80;
-  bg1    : #f9f9f9bf;
-  bg2    : #f7f7f7;
-  bg3    : #fefefebf;
-  fg0    : #1a1a1a;
-  fg1    : #5f5f5f;
-  accent : #005fb8;
+  bg0    : black/50%;
+  bg1    : black/40%;
+  bg2    : black/10%;
+  bg3    : black;
+  fg0    : #ffffff;
+  fg1    : #cecece;
+  accent : #60cdff;
   urgent : @accent;
-  
-  background-color: transparent;
-  text-color : @fg0;
+
+  background-color : transparent;
+  text-color       : @fg0;
 
   margin  : 0;
   padding : 0;
   spacing : 0;
 }
+
 
 element-icon, element-text, scrollbar {
   cursor: pointer;
@@ -62,7 +63,6 @@ inputbar {
 
 icon-search, entry, element-icon, element-text {
   vertical-align: 0.5;
-  background-color : transparent;
 }
 
 icon-search {
@@ -75,7 +75,6 @@ entry {
   placeholder       : "Search  👀 NOTE: CTRL TAB to change MODE";
   text-color		: @fg1;
   horizontal-align  : 0.5;
-  background-color : transparent;
 }
 
 listview {
@@ -87,7 +86,7 @@ listview {
 
 element {
   spacing       : 1em;
-  padding       : 8px;
+  padding       : 20px;
   border-radius : 2px;
 }
 
@@ -108,9 +107,8 @@ element selected active {
 }
 
 element-text selected,
-element selected normal {
-  background-color: @bg0;
-  text-color: @accent;
+element selected {
+  background-color: @bg3;
   padding: 20px;
   border-radius: 12px;
 }
@@ -133,7 +131,7 @@ scrollbar {
   border-radius:	10px;
   background-color:	inherit;
   handle-color: 	@accent;
-  handle-width: 	1px ;
+  handle-width: 	2px ;
   padding:      	0;
 }
 
@@ -143,8 +141,9 @@ error-message {
 }
 
 textbox {
-  padding           : 10px;
-  text-color        : @fg0;
+  padding			: 10px;
+  background-color	: @bg0;
+  text-color		: @fg0;
   vertical-align	: 0.5;
   horizontal-align	: 0.5;
 }

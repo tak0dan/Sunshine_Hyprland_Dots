@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -62,9 +62,9 @@ set_keyboard_layout_configs() {
   local base="${DOTFILES_DIR:-.}"
   local cfg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-  export KOOLDOTS_SELECTED_KB_LAYOUT="$new_kb"
-  export KOOLDOTS_SELECTED_KB_VARIANT="$new_var"
-  export KOOLDOTS_SELECTED_KB_MODEL="$new_mod"
+  export SUNSHINEDOTS_SELECTED_KB_LAYOUT="$new_kb"
+  export SUNSHINEDOTS_SELECTED_KB_VARIANT="$new_var"
+  export SUNSHINEDOTS_SELECTED_KB_MODEL="$new_mod"
 
   # 1. Update repo UserConfigs/user_settings.lua & active target user_settings.lua
   local user_lua_files=("$base/config/hypr/UserConfigs/user_settings.lua")
@@ -247,7 +247,7 @@ prompt_clock_12h() {
     return 0
   fi
   while true; do
-    echo -e "${NOTE} ${SKY_BLUE} By default, KooL's Dots are configured in 24H clock format."
+    echo -e "${NOTE} ${SKY_BLUE} By default, Sunshine Dots are configured in 24H clock format."
     echo -n "$CAT Do you want to change to 12H (AM/PM) clock format? (y/n): "
     read answer
     answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')

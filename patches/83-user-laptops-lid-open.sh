@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -48,7 +48,7 @@ if grep -q 'the internal panel has to come back ON' "$TARGET" 2>/dev/null; then
   exit 0
 fi
 
-workdir="$(mktemp -d "${TMPDIR:-/tmp}/kooldots-patch-83.XXXXXX")" || exit 1
+workdir="$(mktemp -d "${TMPDIR:-/tmp}/sunshinedots-patch-83.XXXXXX")" || exit 1
 block="$workdir/lid-open.lua"
 out="$workdir/patched.lua"
 

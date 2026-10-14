@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ==================================================
-#  KoolDots (2026)
+#  Sunshine Hyprland Dots (2026)
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================

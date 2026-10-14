@@ -1,6 +1,6 @@
 # Patching UserConfigs / UserScripts
 
-KoolDots preserves `~/.config/hypr/UserConfigs` and `~/.config/hypr/UserScripts`
+Sunshine Hyprland Dots preserves `~/.config/hypr/UserConfigs` and `~/.config/hypr/UserScripts`
 on install, upgrade, and express upgrade - your edits are never overwritten.
 That also means a fix shipped in the repo copy of a UserConfigs file will not
 reach an existing install on its own.
@@ -22,7 +22,7 @@ the `NN-` prefix to control sequencing). It must:
 
 - be **content-idempotent**: check whether its fix is already present and leave
   the file unchanged if so;
-- target files under `$KOOLDOTS_CONFIG_HOME` (default
+- target files under `$SUNSHINEDOTS_CONFIG_HOME` (default
   `${XDG_CONFIG_HOME:-$HOME/.config}`) - mainly `hypr/UserConfigs/` and
   `hypr/UserScripts/`, but any user-owned config file is fair game (for example
   `swaync/style.css` and the Waybar styles under `hypr/waybar/style/`);
@@ -31,8 +31,8 @@ the `NN-` prefix to control sequencing). It must:
   own edits are preserved; and
 - exit `0` for both "applied" and "already present/skipped".
 
-The runner (`scripts/lib_patches.sh`) exports `KOOLDOTS_CONFIG_HOME` and
-`KOOLDOTS_LOG` and executes each patch with `bash`. A non-zero exit is logged
+The runner (`scripts/lib_patches.sh`) exports `SUNSHINEDOTS_CONFIG_HOME` and
+`SUNSHINEDOTS_LOG` and executes each patch with `bash`. A non-zero exit is logged
 and does not abort the overall upgrade.
 
 ## Shared helpers
@@ -45,7 +45,7 @@ Source `patches/lib.sh` for the common primitives:
 ```
 
 - `patch_hypr_dir` - absolute path to the installed `hypr` config directory.
-- `patch_log <msg>` - log a line (also appended to `$KOOLDOTS_LOG`).
+- `patch_log <msg>` - log a line (also appended to `$SUNSHINEDOTS_LOG`).
 - `patch_ensure_line <file> <present-regex> <line>` - append `<line>` when no
   line matches `<present-regex>`.
 - `patch_ensure_line_after <file> <anchor-regex> <present-regex> <line>` -

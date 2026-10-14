@@ -2,7 +2,7 @@
 
 [Leer en español](./HOWTO-Add-New-Application-Icons-ModulesWorkspaces.es.md)
 
-In **KoolDots (2026)**, Waybar layouts that use the dynamic workspace module can display unique, per-application icons for every open window within each workspace.
+In **Sunshine Hyprland Dots (2026)**, Waybar layouts that use the dynamic workspace module can display unique, per-application icons for every open window within each workspace.
 
 These workspace rules and icon mappings are defined in:
 
@@ -34,11 +34,11 @@ Waybar's `hyprland/workspaces` module supports dynamic window rewriting via rege
 ```
 
 - **`format`**: `{icon} {windows}` displays the workspace number/icon followed by icons for every window open in that workspace.
-- **`window-rewrite-default`**: The fallback icon shown when an application does not match any rule (in KoolDots, this displays a terminal glyph with a red cross ` ✘`).
+- **`window-rewrite-default`**: The fallback icon shown when an application does not match any rule (in Sunshine Hyprland Dots, this displays a terminal glyph with a red cross ` ✘`).
 - **`window-rewrite`**: A JSON map of regex selectors pointing to icon strings.
 
 ### Which Waybar Layouts Support This?
-Most standard and modern Waybar layouts in KoolDots include `"hyprland/workspaces#rw"`:
+Most standard and modern Waybar layouts in Sunshine Hyprland Dots include `"hyprland/workspaces#rw"`:
 - `TOP-Default`, `BOT-Default`
 - `TOP-Default-Laptop`, `TOP-Default-Laptop-glass`
 - `TOP-Simple`, `BOT-Simple`
@@ -189,7 +189,7 @@ Some containerized or wrapped applications have unique class prefixes:
 
 3. **Icon renders as a missing rectangle or empty box:**
    - The font installed on your system does not contain that specific glyph.
-   - Choose an alternative glyph from the standard Nerd Font range supported by KoolDots.
+   - Choose an alternative glyph from the standard Nerd Font range supported by Sunshine Hyprland Dots.
 
 4. **Icons do not show on your active bar:**
    - Your active Waybar theme might be using a different workspace module (such as `#roman`, `#pacman`, `#kanji`, or `#numbers`).

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -41,7 +41,7 @@ if ! grep -q '^local function post_layout_refresh()[[:space:]]*$' "$TARGET" 2>/d
   exit 0
 fi
 
-workdir="$(mktemp -d "${TMPDIR:-/tmp}/kooldots-patch-70.XXXXXX")" || exit 1
+workdir="$(mktemp -d "${TMPDIR:-/tmp}/sunshinedots-patch-70.XXXXXX")" || exit 1
 block="$workdir/throttle.lua"
 out="$workdir/patched.lua"
 

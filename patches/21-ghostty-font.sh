@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -62,7 +62,7 @@ else
   patch_log "ghostty.conf not found; skipping font fix."
 fi
 
-RUNTIME_GHOSTTY="$KOOLDOTS_CONFIG_HOME/ghostty/config"
+RUNTIME_GHOSTTY="$SUNSHINEDOTS_CONFIG_HOME/ghostty/config"
 if [ -f "$RUNTIME_GHOSTTY" ]; then
   migrate_font_config "$RUNTIME_GHOSTTY" || changed=1
 fi

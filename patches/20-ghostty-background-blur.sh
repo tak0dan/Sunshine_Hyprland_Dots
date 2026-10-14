@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -70,7 +70,7 @@ fi
 # The runtime config Ghostty actually reads is refreshed from the repo template
 # by copy.sh, but migrate it too so a previously generated file is not left
 # with the deprecated key.
-RUNTIME_GHOSTTY="$KOOLDOTS_CONFIG_HOME/ghostty/config"
+RUNTIME_GHOSTTY="$SUNSHINEDOTS_CONFIG_HOME/ghostty/config"
 if [ -f "$RUNTIME_GHOSTTY" ]; then
   before="$(deprecated_key_count "$RUNTIME_GHOSTTY")"
   migrate_blur_key "$RUNTIME_GHOSTTY"

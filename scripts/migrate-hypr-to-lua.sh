@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -389,8 +389,8 @@ import re
 import sys
 from pathlib import Path
 HEADER = """-- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================
@@ -1530,15 +1530,15 @@ user_defaults_lines = [
     "-- User defaults overrides (auto-generated).",
     "-- Edit this file for terminal/editor/file-manager/search defaults in Lua mode.",
     "-- Example:",
-    "-- KOOLDOTS_DEFAULTS.term = \"ghostty\"",
+    "-- SUNSHINEDOTS_DEFAULTS.term = \"ghostty\"",
     "",
-    "KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}",
-    f"KOOLDOTS_DEFAULTS.edit = {lua_string(resolved_edit)}",
-    f"KOOLDOTS_DEFAULTS.visual = {lua_string(resolved_visual)}",
-    f"KOOLDOTS_DEFAULTS.term = {lua_string(resolved_term)}",
-    f"KOOLDOTS_DEFAULTS.files = {lua_string(resolved_files)}",
-    f"KOOLDOTS_DEFAULTS.search_engine = {lua_string(resolved_search_engine)}",
-    f"KOOLDOTS_DEFAULTS.Search_Engine = {lua_string(resolved_search_engine)}",
+    "SUNSHINEDOTS_DEFAULTS = SUNSHINEDOTS_DEFAULTS or {}",
+    f"SUNSHINEDOTS_DEFAULTS.edit = {lua_string(resolved_edit)}",
+    f"SUNSHINEDOTS_DEFAULTS.visual = {lua_string(resolved_visual)}",
+    f"SUNSHINEDOTS_DEFAULTS.term = {lua_string(resolved_term)}",
+    f"SUNSHINEDOTS_DEFAULTS.files = {lua_string(resolved_files)}",
+    f"SUNSHINEDOTS_DEFAULTS.search_engine = {lua_string(resolved_search_engine)}",
+    f"SUNSHINEDOTS_DEFAULTS.Search_Engine = {lua_string(resolved_search_engine)}",
 ]
 if files_out["user_defaults"].exists():
     print(f"[INFO] Preserving existing custom Lua user defaults file: {files_out['user_defaults']}")
@@ -1776,7 +1776,7 @@ system_keybind_lines = [
     "",
     "local dsp = hl.dsp or hl",
     "local function resolve_cmd(cmd)",
-    "  local defaults = rawget(_G, \"KOOLDOTS_DEFAULTS\") or {}",
+    "  local defaults = rawget(_G, \"SUNSHINEDOTS_DEFAULTS\") or {}",
     "  local resolved_term = defaults.term or os.getenv(\"TERMINAL\") or \"kitty\"",
     "  local resolved_files = defaults.files or \"thunar\"",
     "  local resolved_edit = defaults.edit or os.getenv(\"EDITOR\") or \"nano\"",
@@ -2576,8 +2576,8 @@ if [ -f "$SRC_HYPR_DIR/lua/user_overrides.lua" ]; then
 else
   cat > "$USER_OVERRIDES_SHIM" <<'LUA'
 -- ==================================================
---  KoolDots (2026)
---  Project URL: https://github.com/LinuxBeginnings
+--  Sunshine Hyprland Dots (2026)
+--  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 --  License: GNU GPLv3
 --  SPDX-License-Identifier: GPL-3.0-or-later
 -- ==================================================

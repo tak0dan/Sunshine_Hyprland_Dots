@@ -3,7 +3,7 @@
   "runtime.version": "LuaJIT",
   "diagnostics.globals": [
     "hl",
-    "KOOLDOTS_DEFAULTS"
+    "SUNSHINEDOTS_DEFAULTS"
   ],
   "workspace.checkThirdParty": false,
   "workspace.library": [

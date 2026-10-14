@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -30,7 +30,7 @@ DPM_JQ="${DPM_JQ:-jq}"
 DPM_NOTIFY="${DPM_NOTIFY:-notify-send}"
 DPM_STORE_FILE="${DPM_STORE_FILE:-$config_home/hypr/UserConfigs/display-layouts.json}"
 DPM_RUNTIME_DIR="${DPM_RUNTIME_DIR:-${XDG_RUNTIME_DIR:-/tmp}}"
-STATE_DIR="$DPM_RUNTIME_DIR/kooldots-display-profiles"
+STATE_DIR="$DPM_RUNTIME_DIR/sunshinedots-display-profiles"
 DPM_LOG_FILE="${DPM_LOG_FILE:-$STATE_DIR/menu.log}"
 
 DRY_RUN=0

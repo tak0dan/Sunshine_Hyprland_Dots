@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -60,7 +60,7 @@ fix_before_sleep_cmd() {
 
 install_startup_helper() {
   local helper_src helper_dst
-  helper_src="${DOTFILES_DIR:-$KOOLDOTS_REPO_ROOT}/config/hypr/scripts/HypridleStartup.sh"
+  helper_src="${DOTFILES_DIR:-$SUNSHINEDOTS_REPO_ROOT}/config/hypr/scripts/HypridleStartup.sh"
   helper_dst="$(patch_hypr_dir)/scripts/HypridleStartup.sh"
 
   if [ ! -f "$helper_src" ]; then

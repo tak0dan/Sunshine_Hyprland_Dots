@@ -268,7 +268,7 @@ apply_wlogout_background() {
         wallust run -s "$img_path" || true
     fi
 
-    # 4. Read Wallust accent color from waybar template (prefer KoolDots location)
+    # 4. Read Wallust accent color from waybar template (prefer Sunshine Hyprland Dots location)
     local waybar_wallust="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/wallust/colors-waybar.css"
     if [[ ! -f "$waybar_wallust" && -f "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/wallust/colors-waybar.css" ]]; then
         waybar_wallust="${XDG_CONFIG_HOME:-$HOME/.config}/waybar/wallust/colors-waybar.css"
@@ -616,7 +616,7 @@ EOF
         echo "sekiro" > "${WLOGOUT_DIR}/.current_theme"
 
     elif [[ "$CURRENT_THEME" == "default" ]]; then
-        # Default KoolDots theme: restore clean layout and remove custom theme flags
+        # Default Sunshine Hyprland Dots theme: restore clean layout and remove custom theme flags
         if [[ -f "${THEMES_DIR}/default/style.css" ]]; then
             cp -f "${THEMES_DIR}/default/style.css" "${WLOGOUT_DIR}/style.css"
         fi

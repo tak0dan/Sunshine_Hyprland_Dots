@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================
-#  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Sunshine Hyprland Dots (2026)
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
@@ -23,7 +23,7 @@ SCRIPT="$HERE/../DisplayProfileMenu.sh"
 F="$HERE/fixtures"
 WORK="$(mktemp -d)"; trap 'rm -rf -- "$WORK"' EXIT
 BIN="$WORK/bin"; mkdir -p "$BIN" "$WORK/run"
-STATE="$WORK/run/kooldots-display-profiles"
+STATE="$WORK/run/sunshinedots-display-profiles"
 PROFILE_LOG="$WORK/profile-calls.log"
 ROFI_LOG="$WORK/rofi-calls.log"
 ROWS_FILE="$WORK/rows.txt"
