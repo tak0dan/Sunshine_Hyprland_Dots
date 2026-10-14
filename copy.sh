@@ -726,7 +726,7 @@ printf "\n%.0s" {1..1}
 
 ####### Announcement
 echo "${WARNING}A T T E N T I O N !${RESET}"
-echo "${MAGENTA}Kindly visit KooL Hyprland Own Wiki for changelogs${RESET}"
+echo "${MAGENTA}Kindly visit Page of the project for the details${RESET}"
 printf "\n%.0s" {1..1}
 
 # Create Directory for Copy Logs (use script dir to avoid CWD issues)
