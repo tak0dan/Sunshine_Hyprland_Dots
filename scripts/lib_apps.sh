@@ -153,8 +153,12 @@ apply_editor_selection_to_userconfigs() {
 
   local lf
   for lf in "${lua_defaults_files[@]}"; do
-    [ -n "$editor" ] && set_kooldots_default "$lf" edit "$editor"
-    [ -n "$visual" ] && set_kooldots_default "$lf" visual "$visual"
+    if [ -n "$editor" ]; then
+      set_kooldots_default "$lf" edit "$editor"
+    fi
+    if [ -n "$visual" ]; then
+      set_kooldots_default "$lf" visual "$visual"
+    fi
   done
 }
 
