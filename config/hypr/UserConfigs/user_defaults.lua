@@ -15,3 +15,5 @@ KOOLDOTS_DEFAULTS = KOOLDOTS_DEFAULTS or {}
 -- KOOLDOTS_DEFAULTS.term = "kitty"
 -- KOOLDOTS_DEFAULTS.files = "dolphin"
 -- KOOLDOTS_DEFAULTS.search_engine = "https://duckduckgo.com/?q={}"
+KOOLDOTS_DEFAULTS.edit = "nano"
+KOOLDOTS_DEFAULTS.visual = "kate"
