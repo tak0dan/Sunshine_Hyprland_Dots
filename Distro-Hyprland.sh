@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # ==================================================
 #  KoolDots (2026)
-#  Project URL: https://github.com/LinuxBeginnings
+#  Project URL: https://github.com/tak0dan/Sunshine_Hyprland_Dots
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
 
-# Script design to clone the Distro-Hyprland install scripts
+# Script design to clone the Sunshine per-distro install scripts
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -39,8 +39,8 @@ if [ "$distro_name" = "Debian GNU/Linux" ]; then
     PACKAGE_MANAGER="apt"
     INSTALL_CMD="sudo apt install -y"
     GIT_INSTALL_CMD="sudo apt install -y git"
-    Distro="Debian-Hyprland"
-    Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+    Distro="Sunshine_Debian_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
     Distro_DIR="$HOME/$Distro"
 elif [ "$distro_name" = "Ubuntu" ]; then
     PACKAGE_MANAGER="apt"
@@ -49,42 +49,42 @@ elif [ "$distro_name" = "Ubuntu" ]; then
 
     case "$distro_version" in
         "24.04")
-            Distro="Ubuntu-Hyprland"
-            Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+            Distro="Sunshine_Ubuntu_Hyprland"
+            Github_URL="https://github.com/tak0dan/$Distro.git"
             Github_URL_branch="24.04"
             Distro_DIR="$HOME/$Distro-$Github_URL_branch"
             echo "${INFO} Ubuntu 24.04 detected. Customizing setup for Ubuntu 24.04."
             ;;
         "24.10")
-            Distro="Ubuntu-Hyprland"
-            Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+            Distro="Sunshine_Ubuntu_Hyprland"
+            Github_URL="https://github.com/tak0dan/$Distro.git"
             Github_URL_branch="24.10"
             Distro_DIR="$HOME/$Distro-$Github_URL_branch"
             echo "${INFO} Ubuntu 24.10 detected. Customizing setup for Ubuntu 24.10."
             ;;
         "25.04")
-            Distro="Ubuntu-Hyprland"
-            Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+            Distro="Sunshine_Ubuntu_Hyprland"
+            Github_URL="https://github.com/tak0dan/$Distro.git"
             Github_URL_branch="25.04"
             Distro_DIR="$HOME/$Distro-$Github_URL_branch"
             echo "${INFO} Ubuntu 25.04 detected. Customizing setup for Ubuntu 25.04."
             ;;
         "25.10")
-            Distro="Ubuntu-Hyprland"
-            Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+            Distro="Sunshine_Ubuntu_Hyprland"
+            Github_URL="https://github.com/tak0dan/$Distro.git"
             Github_URL_branch="25.10"
             Distro_DIR="$HOME/$Distro-$Github_URL_branch"
             echo "${INFO} Ubuntu 25.10 detected. Customizing setup for Ubuntu 25.10."
             ;;
         "26.04-development")
-            Distro="Ubuntu-Hyprland"
-            Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+            Distro="Sunshine_Ubuntu_Hyprland"
+            Github_URL="https://github.com/tak0dan/$Distro.git"
             Github_URL_branch="26.04-development"
             Distro_DIR="$HOME/$Distro-$Github_URL_branch"
             echo "${INFO} Ubuntu 26.04 (development) detected. Customizing setup for Ubuntu 26.04 development branch."
             ;;
         *)
-            Distro="Ubuntu-Hyprland"
+            Distro="Sunshine_Ubuntu_Hyprland"
             echo "${ERROR} Unsupported distribution: $distro_version. Exiting."
             exit 1
             ;;
@@ -94,29 +94,36 @@ elif command -v pacman &> /dev/null; then
     PACKAGE_MANAGER="pacman"
     INSTALL_CMD="sudo pacman -S --noconfirm"
     GIT_INSTALL_CMD="sudo pacman -S git --noconfirm"
-    Distro="Arch-Hyprland"
-    Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+    Distro="Sunshine_Arch_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
     Distro_DIR="$HOME/$Distro"
 elif command -v dnf &> /dev/null; then
     PACKAGE_MANAGER="dnf"
     INSTALL_CMD="sudo dnf install -y"
     GIT_INSTALL_CMD="sudo dnf install -y git"
-    Distro="Fedora-Hyprland"
-    Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+    Distro="Sunshine_Fedora_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
     Distro_DIR="$HOME/$Distro"
 elif command -v zypper &> /dev/null; then
     PACKAGE_MANAGER="zypper"
     INSTALL_CMD="sudo zypper install -y"
     GIT_INSTALL_CMD="sudo zypper install -y git"
-    Distro="OpenSUSE-Hyprland"
-    Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+    Distro="Sunshine_OpenSUSE_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
+    Distro_DIR="$HOME/$Distro"
+elif command -v xbps-install &> /dev/null; then
+    PACKAGE_MANAGER="xbps"
+    INSTALL_CMD="sudo xbps-install -Sy"
+    GIT_INSTALL_CMD="sudo xbps-install -Sy git"
+    Distro="Sunshine_Void_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
     Distro_DIR="$HOME/$Distro"
 elif [ "$distro_name" = "NixOS" ]; then
     PACKAGE_MANAGER="nix"
     INSTALL_CMD="nix-shell"
     GIT_INSTALL_CMD="nix-shell -p git curl pciutils"
-    Distro="NixOS-Hyprland"
-    Github_URL="https://github.com/LinuxBeginnings/$Distro.git"
+    Distro="Sunshine_NixOS_Hyprland"
+    Github_URL="https://github.com/tak0dan/$Distro.git"
     Distro_DIR="$HOME/$Distro"
 else
     echo "${ERROR} Unsupported distribution: $distro_name. Exiting."
