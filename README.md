@@ -135,9 +135,10 @@ cd Sunshine_Hyprland_Dots && git pull && ./copy.sh
 
 ## Wallpapers
 
-The installer copies the wallpapers in this repo and offers to download the wallpaper bank from
+The dotfiles ship only two wallpapers: the flower bloom for the desktop and the sun for SDDM.
+Every other wallpaper comes from the wallpaper bank,
 [Sunshine_Hyprland_Wallpapers](https://github.com/tak0dan/Sunshine_Hyprland_Wallpapers).
-The bank is large, so the download is optional. The two default images are always copied.
+A fresh install fetches it. Upgrades ask before downloading it again.
 
 ---
 
