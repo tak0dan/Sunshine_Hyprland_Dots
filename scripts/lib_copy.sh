@@ -240,7 +240,7 @@ copy_waybar() {
   local DIRPATHw="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/$DIRW"
 
   # Upgrades keep an existing waybar, wallust, GTK and terminal config exactly as it is.
-  if [ "$run_mode" != "install" ] && [ -d "$DIRPATHw" ]; then
+  if [ "$run_mode" != "install" ]; then
     echo -e "${NOTE:-[NOTE]} - Keeping your existing waybar, wallust, GTK and terminal configs unchanged." 2>&1 | tee -a "$log"
     return 0
   fi
