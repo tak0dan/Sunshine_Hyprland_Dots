@@ -4,6 +4,7 @@
 [![jp](https://img.shields.io/badge/lang-jp-blue.svg)](./i18n/README/README.jp.md)
 [![ro](https://img.shields.io/badge/lang-ro-green.svg)](./i18n/README/README.ro.md)
 [![ua](https://img.shields.io/badge/lang-ua-white.svg)](./i18n/README/README.ua.md)
+[![ru](https://img.shields.io/badge/lang-ru-red.svg)](./i18n/README/README.ru.md)
 
 <p align="center">
   <img src="assets/sunshine-icon.png" width="200" alt="Sunshine" />
