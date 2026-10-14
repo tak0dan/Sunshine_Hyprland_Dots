@@ -1107,6 +1107,7 @@ fi
 
 printf "\n%.0s" {1..1}
 
+if [ "$RUN_MODE" = "install" ]; then
 restore_hypr_assets "$LOG" "$EXPRESS_MODE"
 restore_wlogout_selection "$LOG"
 printf "\\n%.0s" {1..1}
@@ -1124,6 +1125,7 @@ else
   echo "${NOTE} - Keeping your config files unchanged (user-config patches run on fresh installs only)." 2>&1 | tee -a "$LOG"
 fi
 restore_runtime_personal_state "$LOG"
+fi
 # After restores, migrate restored Hyprlang customizations to Lua when approved.
 if [ "$RUN_MODE" = "upgrade" ] || [ "$RUN_MODE" = "express" ]; then
   migrate_hypr_to_lua_if_needed "$LOG" "${MIGRATE_HYPR_TO_LUA:-0}" || true
@@ -1138,6 +1140,7 @@ fi
 printf "\n%.0s" {1..1}
 printf "\n%.0s" {1..1}
 
+if [ "$RUN_MODE" = "install" ]; then
 # Define the target directory for rofi themes
 rofi_DIR="$HOME/.local/share/rofi/themes"
 
@@ -1201,7 +1204,7 @@ if [ "$RUN_MODE" = "install" ] && command -v systemctl >/dev/null 2>&1; then
 fi
 
 # Per-window keyboard layout listener: install its dependencies and enable the user service
-if [ "$RUN_MODE" = "install" ] || [ "$RUN_MODE" = "upgrade" ]; then
+if [ "$RUN_MODE" = "install" ]; then
   install_fork_per_window_deps "$LOG"
   enable_fork_per_window_layout "$LOG" || true
 fi
@@ -1442,11 +1445,14 @@ fi
 
 printf "\n%.0s" {1..1}
 
+fi
+
 # Fork defaults: sun image for SDDM, flower bloom for the desktop (fresh install only)
 if [ "$RUN_MODE" = "install" ]; then
   apply_fork_wallpapers "$LOG" "$PICTURES_DIR/wallpapers" || true
 fi
 
+if [ "$RUN_MODE" = "install" ]; then
 # initialize wallust to avoid config error on hyprland
 wallust_args=()
 # shellcheck source=/dev/null
@@ -1467,6 +1473,8 @@ fi
 
 # Ensure shell profile sources /etc/profile (fixes flatpak not showing in rofi on Debian)
 ensure_shell_profile_sources_etc_profile "$LOG"
+
+fi
 
 # Fork: fastfetch defaults (SUN logo + custom-info module)
 seed_custom_info_json "$LOG"
