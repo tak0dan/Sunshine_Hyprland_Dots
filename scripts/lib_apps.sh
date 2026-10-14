@@ -385,6 +385,37 @@ install_waybar_weather() {
   fi
 }
 
+# Install assets/waybar-launcher.sh as /usr/local/bin/waybar, ahead of /usr/bin
+# in the session PATH. A bare `waybar` (rofi run mode, a terminal) then starts
+# the dots' bar through WaybarStartup.sh instead of the stock one. A file there
+# without our marker belongs to someone else and is left alone.
+install_waybar_launcher() {
+  local log="${1:-/dev/null}"
+  local asset="${SCRIPT_DIR:-.}/assets/waybar-launcher.sh"
+  local dest="/usr/local/bin/waybar"
+  local marker="sunshinedots-waybar-launcher"
+  local sudo_cmd=""
+
+  if grep -qi '^ID=nixos' /etc/os-release 2>/dev/null; then
+    return 0
+  fi
+  [ -f "$asset" ] || { echo "${WARN:-[WARN]} $asset not found; skipping the waybar launcher." 2>&1 | tee -a "$log"; return 1; }
+  if [ -e "$dest" ] && ! grep -q "$marker" "$dest" 2>/dev/null; then
+    echo "${NOTE:-[NOTE]} $dest exists and is not ours; leaving it alone." 2>&1 | tee -a "$log"
+    return 0
+  fi
+  if [ "$EUID" -ne 0 ]; then
+    command -v sudo >/dev/null 2>&1 || { echo "${WARN:-[WARN]} sudo not found; skipping the waybar launcher." 2>&1 | tee -a "$log"; return 1; }
+    sudo_cmd="sudo"
+  fi
+  if $sudo_cmd install -D -m 0755 "$asset" "$dest" 2>&1 | tee -a "$log"; then
+    echo "${OK:-[OK]} Installed the waybar launcher at $dest." 2>&1 | tee -a "$log"
+  else
+    echo "${WARN:-[WARN]} Could not install the waybar launcher at $dest." 2>&1 | tee -a "$log"
+    return 1
+  fi
+}
+
 # Install Oh My Zsh (and bundled theme templates) when zsh is used and OMZ is missing.
 # Uses --unattended --keep-zshrc so it never blocks the script, doesn't hijack the user's
 # shell immediately, and preserves the existing .zshrc.

@@ -50,9 +50,9 @@ fi
 clear
 wallpaper=${XDG_CONFIG_HOME:-$HOME/.config}/hypr/wallpaper_effects/.wallpaper_current
 # Defaults updated to normalized names
-waybar_style="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/style/Extra-Prismatic-Glow.css"
-waybar_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/configs/TOP-Default"
-waybar_config_laptop="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/configs/TOP-Default-Laptop"
+waybar_style="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/style/Wallust-Chroma-Edge.css"
+waybar_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/configs/TOP-&-BOT-SummitSplit-v3"
+waybar_config_laptop="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/waybar/configs/TOP-&-BOT-SummitSplit-v3"
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -113,6 +113,11 @@ fi
 if [ -f "$BACKUP_HELPER" ]; then
   # shellcheck source=./scripts/lib_backup.sh
   . "$BACKUP_HELPER"
+  # Fix the backup suffix once, in this shell. Callers use $(get_backup_dirname),
+  # a subshell whose export never reaches us, so each call built a new
+  # timestamp: a run crossing a minute boundary split its backups across two
+  # names and the restore step looked in the wrong one.
+  get_backup_dirname >/dev/null
 else
   echo "${ERROR} Backup helper not found at $BACKUP_HELPER. Exiting."
   exit 1
@@ -805,6 +810,7 @@ if is_nixos; then
   report_waybar_weather_missing
 else
   if [ "$RUN_MODE" = "install" ]; then install_waybar_weather "$LOG"; fi
+  install_waybar_launcher "$LOG" || true
 fi
 ensure_oh_my_zsh "$LOG"
 printf "\n%.0s" {1..1}
@@ -1111,6 +1117,7 @@ printf "\n%.0s" {1..1}
 
 if [ "$RUN_MODE" = "install" ]; then
 restore_hypr_assets "$LOG" "$EXPRESS_MODE"
+carry_display_layout_from_backup "$LOG"
 restore_wlogout_selection "$LOG"
 printf "\\n%.0s" {1..1}
 
@@ -1481,6 +1488,32 @@ fi
 # Fork: fastfetch defaults (SUN logo + custom-info module)
 seed_custom_info_json "$LOG"
 if [ "$RUN_MODE" = "install" ]; then enable_fastfetch_on_shell "$LOG"; fi
+
+# Reload the live session so it picks up the new files. A bar started before the
+# install keeps the old config in memory and runs scripts that no longer exist.
+# setsid detaches the new bar so closing this terminal does not take it down.
+#
+# Hyprland picks Lua or legacy config once, at startup. A session started on
+# hyprland.conf cannot reload into hyprland.lua: it finds no .conf, writes a
+# stub with six binds and loads that. Only reload a session already on Lua.
+if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ] && command -v hyprctl >/dev/null 2>&1; then
+  hypr_log="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprland.log"
+  hypr_cfg="$(grep -m1 -a -o -E 'Using (lua )?config( found at)?:? .*' "$hypr_log" 2>/dev/null || true)"
+  if [[ "$hypr_cfg" == *.lua ]]; then
+    echo "${INFO} Reloading Hyprland..." 2>&1 | tee -a "$LOG"
+    hyprctl reload >/dev/null 2>&1 || echo "${WARN} hyprctl reload failed." 2>&1 | tee -a "$LOG"
+  else
+    echo "${WARN} This Hyprland session did not start on hyprland.lua; skipping reload." 2>&1 | tee -a "$LOG"
+    echo "${NOTE} ${MAGENTA}Log out and back in${RESET} to load the new config." 2>&1 | tee -a "$LOG"
+  fi
+  echo "${INFO} Restarting Waybar..." 2>&1 | tee -a "$LOG"
+  waybar_startup="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/WaybarStartup.sh"
+  if [ -x "$waybar_startup" ]; then
+    setsid -f "$waybar_startup" --restart >/dev/null 2>&1 </dev/null || true
+  fi
+else
+  echo "${NOTE} No running Hyprland session found; skipping the live reload." 2>&1 | tee -a "$LOG"
+fi
 
 printf "\n%.0s" {1..2}
 printf "${OK} GREAT! Sunshine Hyprland Dots is now Loaded & Ready !!! "

@@ -14,6 +14,9 @@ STATE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/sunshinedots"
 ROFI_INDEX_FILE="$STATE_DIR/rofi-layout-index"
 CYCLE_KEY="Control+Shift+l"
 CYCLE_RC=10            # rofi exit code for -kb-custom-1
+# ~/.config/rofi is left empty by the installer, so rofi needs the config path
+# or it starts unthemed. Callers that pass their own -config keep it.
+ROFI_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/config.rasi"
 mkdir -p "$STATE_DIR"
 
 # Keyboards that take layout changes (the first one is used for reading).
@@ -52,7 +55,11 @@ main() {
   kb_set "$(rofi_index)"
 
   while true; do
-    rofi -kb-custom-1 "$CYCLE_KEY" "$@"
+    if [[ " $* " == *" -config "* ]]; then
+      rofi -kb-custom-1 "$CYCLE_KEY" "$@"
+    else
+      rofi -kb-custom-1 "$CYCLE_KEY" -config "$ROFI_CONFIG" "$@"
+    fi
     rc=$?
     if [ "$rc" -eq "$CYCLE_RC" ]; then
       new_index=$(( ( $(rofi_index) + 1 ) % count ))

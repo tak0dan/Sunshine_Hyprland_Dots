@@ -43,7 +43,7 @@
 --
 -- 4. CUSTOM SCRIPTS & WALLPAPER ENHANCEMENTS:
 --    "$HOME/.config/hypr/UserScripts/RainbowBorders.sh",
---    "$HOME/.config/hypr/UserScripts/WallpaperAutoChange.sh $HOME/Pictures/wallpapers",
+--    "$HOME/.config/hypr/scripts/WallpaperAutoChange.sh $HOME/Pictures/wallpapers",
 --    "sleep 3; notify-send 'Welcome' 'Hyprland session started successfully!'",
 --
 -- 5. IDLE / NIGHT LIGHT / RGB:
@@ -99,10 +99,10 @@ local startup_commands = {
   -- two controllers would apply layouts at the same time.
   "$HOME/.config/hypr/scripts/MonitorWatcher.sh",
   -- Apps pinned to workspaces (from the previous Startup_Apps.conf).
-  [[hyprctl dispatch exec "[workspace 7] Telegram"]],
-  [[hyprctl dispatch exec "[workspace 1] kitty --hold btop"]],
-  [[hyprctl dispatch exec "[workspace 2] zen-browser"]],
-  [[hyprctl dispatch exec "[workspace 1] spotify"]],
+  [[hyprctl eval 'hl.exec_cmd("Telegram", { workspace = 7 })']],
+  [[hyprctl eval 'hl.exec_cmd("kitty --hold btop", { workspace = 1 })']],
+  [[hyprctl eval 'hl.exec_cmd("zen-browser", { workspace = 2 })']],
+  [[hyprctl eval 'hl.exec_cmd("spotify", { workspace = 1 })']],
 }
 
 local function run_startup_commands()

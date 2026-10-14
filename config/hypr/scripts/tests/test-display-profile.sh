@@ -554,6 +554,24 @@ if [[ -f "$STATE/active-layout.json" ]] \
    && [[ "$(jq -r '.monitors[]|select(.identity|startswith("BOE"))|.scale' "$STATE/active-layout.json")" == "1.25" ]]
 then pass_msg; else fail "the imported layout was not staged for saving"; fi
 
+it "import-nwg stores the arrangement as the monitor set's default layout"
+# Otherwise the next login resolves a fresh layout over the drag. The file
+# matches the fake monitors so verification passes, and carries the vrr,0 that
+# nwg-displays 0.4.x writes on every line.
+reset_store
+cat >"$WORK/nwg-live.conf" <<'EOS'
+monitor=desc:BOE 0x0630,1920x1080@60.03,0x0,1.5,vrr,0
+monitor=desc:ASUSTek COMPUTER INC VG249Q3A S7LMBS003105,1920x1080@119.88,1280x0,1,vrr,0
+EOS
+run_dp "$F/monitors-dual.json" "$F/monitors-dual.json" import-nwg "$WORK/nwg-live.conf" >/dev/null 2>&1
+if jq -e '[.fingerprints[] | select(.default == "nwg-displays" and (.layouts | has("nwg-displays")))] | length == 1' \
+     "$WORK/store.json" >/dev/null 2>&1
+then pass_msg; else fail "the import was not saved as the default nwg-displays layout"; fi
+
+it "auto after import-nwg resolves to the imported arrangement"
+run_dp "$F/monitors-dual.json" "$F/monitors-dual.json" auto >"$WORK/auto-after-nwg.out" 2>&1
+assert_contains "$WORK/auto-after-nwg.out" 'auto -> nwg-displays' "login picks the imported layout"
+
 it "import-nwg on a file nwg never wrote (empty) changes nothing"
 printf '# nothing\n' >"$WORK/nwg-empty.conf"
 if run_dp "$F/monitors-dual.json" "$F/monitors-dual.json" import-nwg "$WORK/nwg-empty.conf" >/dev/null 2>&1

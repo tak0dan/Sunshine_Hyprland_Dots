@@ -2,7 +2,8 @@ import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 
 function moveClientToWorkspace(address, workspace) {
-    Utils.execAsync(['bash', '-c', `hyprctl dispatch movetoworkspacesilent ${workspace},address:${address} &`]);
+    // Lua-mode Hyprland only takes Lua dispatchers over IPC.
+    Utils.execAsync(['hyprctl', 'dispatch', `hl.dsp.window.move({ workspace = ${workspace}, follow = false, window = "address:${address}" })`]);
 }
 
 export function dumpToWorkspace(from, to) {

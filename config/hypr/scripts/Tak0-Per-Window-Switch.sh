@@ -84,11 +84,6 @@ get_win() {
   hyprctl activewindow -j 2>/dev/null | jq -r '.address // .id // empty'
 }
 
-# Get available keyboard names
-get_keyboards() {
-  hyprctl devices -j 2>/dev/null | jq -r '.keyboards[].name // empty'
-}
-
 # Save window-specific layout
 save_map() {
   local W=$1 L=$2
@@ -105,12 +100,11 @@ load_map() {
   [[ -n "$E" ]] && echo "${E#*:}" || echo "${kb_layouts[0]}"
 }
 
-# Switch layout for all keyboards to layout index
+# Switch layout for all keyboards to layout index. One `all` request instead of
+# one per device: mice, mics and power buttons register as keyboards too.
 do_switch() {
   local IDX=$1
-  for kb in $(get_keyboards); do
-    hyprctl switchxkblayout "$kb" "$IDX" >/dev/null 2>&1 || true
-  done
+  hyprctl switchxkblayout all "$IDX" >/dev/null 2>&1 || true
 }
 
 # Toggle layout for current window only
@@ -145,10 +139,10 @@ cmd_toggle() {
   fi
 }
 
-# Restore layout on focus
+# Restore layout on focus. Takes the window address, or looks it up.
 cmd_restore() {
-  local W
-  W=$(get_win)
+  local W=${1:-}
+  [[ -n "$W" ]] || W=$(get_win)
   [[ -z "$W" || "$W" == "null" ]] && return
 
   local LAY
@@ -186,10 +180,16 @@ subscribe() {
     exit 1
   fi
 
+  # Only activewindowv2 carries the address. Hyprland re-sends it on every title
+  # change, so a terminal spinner or a browser tab fires it many times a second:
+  # act only when focus really moves to another window.
+  local last="" addr
   socat -u UNIX-CONNECT:"$SOCKET2" - 2>/dev/null | while read -r line; do
-    if [[ "$line" =~ ^activewindow ]]; then
-      cmd_restore
-    fi
+    [[ "$line" == activewindowv2\>\>* ]] || continue
+    addr="${line#activewindowv2>>}"
+    [[ -z "$addr" || "$addr" == "," || "$addr" == "$last" ]] && continue
+    last="$addr"
+    cmd_restore "0x$addr"
   done
 }
 
