@@ -679,15 +679,17 @@ get_weather_units_label() {
   fi
 }
 
-show_category_menu() {
-  local category="$1"
-  local quick_settings_monitor="$2"
-  local options=""
+# One list grouped by type, as in the older Kool menu. Section headers are
+# non-selectable rows, so they only label the entries below them.
+menu_header() {
+  printf '%b\n' "--- $1 ---\x00nonselectable\x1ftrue"
+}
 
-  case "$category" in
-  "[[ User Settings ]]")
-    options=$(
-      cat <<EOF
+show_main_menu() {
+  local weather_label
+  weather_label="$(get_weather_units_label)"
+  menu_header "USER CUSTOMIZATIONS"
+  cat <<EOF
 Manage User Defaults
 Edit User Defaults
 Edit User Keybinds
@@ -702,123 +704,42 @@ Edit User Laptop Settings
 Edit User Monitor config
 Select Hyprview Layout
 EOF
-    )
-    ;;
-  "[[ System Settings ]]")
-    options=$(
-      cat <<EOF
+  menu_header "SYSTEM DEFAULTS"
+  cat <<EOF
 Edit System Default Keybinds
 Edit System Default Startup Apps
 Edit System Default Window Rules
 Edit System Default Layer Rules
 Edit System Default Settings
 EOF
-    )
-    ;;
-  "[[ Toggle Options ]]")
-    local weather_label
-    weather_label="$(get_weather_units_label)"
-    options=$(
-      cat <<EOF
+  menu_header "DISPLAYS"
+  cat <<EOF
+Arrange Monitors (nwg-displays)
+Choose Monitor Profiles
+EOF
+  menu_header "APPEARANCE"
+  cat <<EOF
+Choose Rofi Themes
+Choose Hyprland Animations
+Rainbow Borders Mode
+Choose Kitty Terminal Theme
+Choose Ghostty Terminal Theme
+Change Starship Prompt
+GTK Settings (nwg-look)
+QT Apps Settings (qt6ct)
+QT Apps Settings (qt5ct)
+Set SDDM Wallpaper
+Set Hyprlock Wallpaper
+Choose Wlogout Theme
+Choose Wlogout Wallpaper
+EOF
+  menu_header "UTILITIES"
+  cat <<EOF
+Search for Keybinds
 Toggle Waybar Weather units [Current: $weather_label]
 Toggle Waybar Clock (12H/24H)
 Toggle Game Mode
 EOF
-    )
-    ;;
-  "[[ Misc ]]")
-    options=$(
-      cat <<EOF
-Change Starship Prompt
-Set SDDM Wallpaper
-Choose Kitty Terminal Theme
-Choose Ghostty Terminal Theme
-Choose Wlogout Theme
-Choose Wlogout Wallpaper
-Arrange Monitors (nwg-displays)
-GTK Settings (nwg-look)
-QT Apps Settings (qt6ct)
-QT Apps Settings (qt5ct)
-Set Hyprlock Wallpaper
-Choose Hyprland Animations
-Choose Monitor Profiles
-Choose Rofi Themes
-Search for Keybinds
-Rainbow Borders Mode
-EOF
-    )
-    ;;
-  *)
-    return
-    ;;
-  esac
-
-  local sub_choice=""
-  "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts/RofiFocusedWallpaperLink.sh" >/dev/null 2>&1 || true
-  sub_choice=$(
-    {
-      printf "%s\n" "$options"
-      printf "\n"
-      printf "[ SUPER+SHIFT+E to return to main menu ]\n"
-    } | rofi -i -dmenu -config "$rofi_theme" \
-      -mesg "$category" \
-      -theme-str 'listview { lines: 8; }'
-  )
-  [[ -z "$sub_choice" ]] && return
-  [[ "$sub_choice" == "[ SUPER+SHIFT+E to return to main menu ]" ]] && return
-  handle_choice "$sub_choice" "$quick_settings_monitor"
-}
-
-show_main_menu() {
-  local weather_label
-  weather_label="$(get_weather_units_label)"
-  printf '%s\n' "[ Settings ]"
-  printf '%b\n' "[[ User Settings ]]\x00meta\x1fManage User Defaults Edit User Defaults Edit User Keybinds Edit User ENV variables Edit User Startup Apps overlay Edit User Window Rules overlay Edit User Layer Rules overlay Edit User Settings Edit User Decorations Edit User Animations Edit User Laptop Settings Edit User Monitor config Select Hyprview Layout"
-  printf '%b\n' "[[ System Settings ]]\x00meta\x1fEdit System Default Keybinds Edit System Default Startup Apps Edit System Default Window Rules Edit System Default Layer Rules Edit System Default Settings"
-  printf '%b\n' "[[ Toggle Options ]]\x00meta\x1fToggle Waybar Weather units C F Toggle Waybar Clock 12H 24H Toggle Game Mode"
-  printf '%b\n' "[[ Misc ]]\x00meta\x1fChange Starship Prompt Set SDDM Wallpaper Choose Kitty Terminal Theme Choose Ghostty Terminal Theme Choose Wlogout Theme Choose Wlogout Wallpaper Arrange Monitors nwg-displays GTK Settings nwg-look QT Apps Settings qt6ct QT Apps Settings qt5ct Set Hyprlock Wallpaper Choose Hyprland Animations Choose Monitor Profiles Choose Rofi Themes Search for Keybinds Rainbow Borders Mode"
-  printf '%s\n' "[ Quick Links]"
-  printf '%s\n' "Manage User Defaults"
-  printf '%s\n' "Set User Keybinds"
-  printf '%s\n' "Set User Decorations"
-  printf '%s\n' "Set Hyprlock paper"
-  printf '%s\n' "Set User ENV variables"
-  printf '%s\n' "Edit User Defaults"
-  printf '%s\n' "Edit User Keybinds"
-  printf '%s\n' "Edit User ENV variables"
-  printf '%s\n' "Edit User Startup Apps (overlay)"
-  printf '%s\n' "Edit User Window Rules (overlay)"
-  printf '%s\n' "Edit User Layer Rules (overlay)"
-  printf '%s\n' "Edit User Settings"
-  printf '%s\n' "Edit User Decorations"
-  printf '%s\n' "Edit User Animations"
-  printf '%s\n' "Edit User Laptop Settings"
-  printf '%s\n' "Edit User Monitor config"
-  printf '%s\n' "Select Hyprview Layout"
-  printf '%s\n' "Edit System Default Keybinds"
-  printf '%s\n' "Edit System Default Startup Apps"
-  printf '%s\n' "Edit System Default Window Rules"
-  printf '%s\n' "Edit System Default Layer Rules"
-  printf '%s\n' "Edit System Default Settings"
-  printf '%s\n' "Toggle Waybar Weather units [Current: $weather_label]"
-  printf '%s\n' "Toggle Waybar Clock (12H/24H)"
-  printf '%s\n' "Toggle Game Mode"
-  printf '%s\n' "Change Starship Prompt"
-  printf '%s\n' "Set SDDM Wallpaper"
-  printf '%s\n' "Choose Kitty Terminal Theme"
-  printf '%s\n' "Choose Ghostty Terminal Theme"
-  printf '%s\n' "Choose Wlogout Theme"
-  printf '%s\n' "Choose Wlogout Wallpaper"
-  printf '%s\n' "Arrange Monitors (nwg-displays)"
-  printf '%s\n' "GTK Settings (nwg-look)"
-  printf '%s\n' "QT Apps Settings (qt6ct)"
-  printf '%s\n' "QT Apps Settings (qt5ct)"
-  printf '%s\n' "Set Hyprlock Wallpaper"
-  printf '%s\n' "Choose Hyprland Animations"
-  printf '%s\n' "Choose Monitor Profiles"
-  printf '%s\n' "Choose Rofi Themes"
-  printf '%s\n' "Search for Keybinds"
-  printf '%s\n' "Rainbow Borders Mode"
 }
 
 main() {
@@ -828,24 +749,10 @@ main() {
 
   choice=$(
     show_main_menu | rofi -i -dmenu -config "$rofi_theme" \
-      -mesg "Left: Categories • Right: Quick Links" \
-      -theme-str 'listview { columns: 2; lines: 5; }'
+      -mesg "Sunshine Quick Settings"
   )
-
-  case "$choice" in
-  "[[ User Settings ]]" | "[[ System Settings ]]" | "[[ Toggle Options ]]" | "[[ Misc ]]")
-    show_category_menu "$choice" "$quick_settings_monitor"
-    ;;
-  "[ Settings ]" | "[[ Quick Links]]")
-    return
-    ;;
-  "Set User Keybinds" | "Set User Decorations" | "Set Hyprlock paper" | "Set User ENV variables")
-    handle_choice "$choice" "$quick_settings_monitor"
-    ;;
-  *)
-    handle_choice "$choice" "$quick_settings_monitor"
-    ;;
-  esac
+  [[ -z "$choice" || "$choice" == ---* ]] && return
+  handle_choice "$choice" "$quick_settings_monitor"
 }
 
 # Check if rofi is already running

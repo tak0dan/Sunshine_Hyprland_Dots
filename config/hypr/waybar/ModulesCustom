@@ -64,8 +64,8 @@
 
 "custom/cycle_wall": {
 	"format": " ",
-	"on-click": "$HOME/.config/hypr/UserScripts/WallpaperSelect.sh",
-	"on-click-right": "$HOME/.config/hypr/UserScripts/WallpaperRandom.sh",
+	"on-click": "$HOME/.config/hypr/scripts/WallpaperSelect.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/WallpaperRandom.sh",
 	"on-click-middle": "$HOME/.config/hypr/scripts/WaybarStyles.sh",
 	"tooltip": true,
 	"tooltip-format": "Left Click: Wallpaper Menu\nMiddle Click: Random wallpaper\nRight Click: Waybar Styles Menu",
@@ -137,7 +137,7 @@
 	"format": "󰔎 ",
 	"on-click": "$HOME/.config/hypr/scripts/ThemeChanger.sh",
 	"on-click-right": "$HOME/.config/hypr/scripts/WaybarStyles.sh",
-	"on-click-middle": "$HOME/.config/hypr/UserScripts/WallpaperSelect.sh",
+	"on-click-middle": "$HOME/.config/hypr/scripts/WallpaperSelect.sh",
 	"tooltip": true,
 	"tooltip-format": "Left Click: Wallust Theme Selector\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Styles Menu",
 },
@@ -170,7 +170,7 @@
 "custom/menu": {
 	"format": "  ",
 	"on-click": "rofi_dir=\"$HOME/.config/hypr/rofi\"; [ ! -d \"$rofi_dir\" ] && rofi_dir=\"$HOME/.config/rofi\"; pkill rofi || true; $HOME/.config/hypr/scripts/RofiFocusedWallpaperLink.sh >/dev/null 2>&1 || true; rofi -show drun -modi run,drun,filebrowser,window -config \"$rofi_dir/config.rasi\"",
-	"on-click-middle": "$HOME/.config/hypr/UserScripts/WallpaperSelect.sh",
+	"on-click-middle": "$HOME/.config/hypr/scripts/WallpaperSelect.sh",
 	"on-click-right": "$HOME/.config/hypr/scripts/WaybarLayout.sh",
 	"tooltip": true,
 	"tooltip-format": "Left Click: Rofi Menu\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Layout Menu",

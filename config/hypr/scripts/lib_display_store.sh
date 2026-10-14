@@ -595,7 +595,12 @@ ds_from_nwg_conf() {
       name = join_fields(a, 1, mi - 1); gsub(/##/, "#", name)
       if (name == "") next
       mode[name] = a[mi]; pos[name] = a[mi+1]; scale[name] = a[mi+2]
-      for (i = mi + 3; i <= n; i++) extras[name] = extras[name] (extras[name] == "" ? "" : ",") a[i]
+      for (i = mi + 3; i <= n; i++) {
+        # nwg-displays 0.4.x writes `vrr,0` on every line. VRR off is the
+        # default, so the pair carries nothing a layout would lose.
+        if (a[i] == "vrr" && a[i+1] == "0" && i + 1 <= n) { i++; continue }
+        extras[name] = extras[name] (extras[name] == "" ? "" : ",") a[i]
+      }
       remember(name)
     }
     END {

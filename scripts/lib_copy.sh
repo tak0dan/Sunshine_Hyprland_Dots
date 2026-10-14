@@ -163,14 +163,12 @@ _restore_waybar_customizations() {
 
   # Ensure config and style.css exist and are valid symlinks; if broken or missing, point to defaults
   if [ ! -e "$new_dir/config" ]; then
-    local chassis
-    chassis="$(detect_waybar_config 2>/dev/null || echo "desktop")"
-    local d_cfg="$new_dir/configs/TOP-Default"
-    [ "$chassis" = "laptop" ] && d_cfg="$new_dir/configs/TOP-Default-Laptop"
+    # SummitSplit v3 carries group/laptop and backlight, so it serves both chassis.
+    local d_cfg="$new_dir/configs/TOP-&-BOT-SummitSplit-v3"
     [ -f "$d_cfg" ] && rm -f "$new_dir/config" && ln -sf "$d_cfg" "$new_dir/config"
   fi
   if [ ! -e "$new_dir/style.css" ]; then
-    local d_stl="$new_dir/style/Extra-Prismatic-Glow.css"
+    local d_stl="$new_dir/style/Wallust-Chroma-Edge.css"
     [ -f "$d_stl" ] && rm -f "$new_dir/style.css" && ln -sf "$d_stl" "$new_dir/style.css"
   fi
 }
@@ -805,6 +803,47 @@ restore_hypr_assets() {
       fi
     fi
   fi
+}
+
+# Carry the monitor and workspace layout from the backup into UserConfigs/.
+#
+# These describe the machine, not a preference, so a fresh install keeps them
+# too. nwg-displays writes monitors.lua/workspaces.lua at the hypr root, which
+# no other restore step reads. A target that already holds rules is left alone,
+# so a file the upgrade path restored is never overwritten.
+carry_display_layout_from_backup() {
+  local log="${1:-/dev/null}"
+  local hypr_dir="${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
+  local backup_dir user_dir="$hypr_dir/UserConfigs"
+  local -a backups=()
+  BACKUP_DIR="${BACKUP_DIR:-$(get_backup_dirname)}"
+  for backup_dir in "${hypr_dir}-${BACKUP_DIR}" "${hypr_dir}-backup-${BACKUP_DIR}"; do
+    [ -d "$backup_dir" ] && backups+=("$backup_dir")
+  done
+  [ "${#backups[@]}" -gt 0 ] || return 0
+  mkdir -p "$user_dir"
+
+  local name call target src candidate
+  for name in monitors workspaces; do
+    call="hl.monitor"
+    [ "$name" = "workspaces" ] && call="hl.workspace_rule"
+    target="$user_dir/$name.lua"
+    if [ -f "$target" ] && grep -qE "^[[:space:]]*${call//./\\.}[[:space:]]*[({]" "$target"; then
+      continue
+    fi
+    src=""
+    for backup_dir in "${backups[@]}"; do
+      for candidate in "$backup_dir/UserConfigs/$name.lua" "$backup_dir/$name.lua"; do
+        if [ -f "$candidate" ] && grep -qE "^[[:space:]]*${call//./\\.}[[:space:]]*[({]" "$candidate"; then
+          src="$candidate"
+          break 2
+        fi
+      done
+    done
+    [ -n "$src" ] || continue
+    cp -f "$src" "$target" 2>&1 | tee -a "$log"
+    echo "${OK:-[OK]} - Carried ${MAGENTA:-}UserConfigs/$name.lua${RESET:-} over from $src" 2>&1 | tee -a "$log"
+  done
 }
 
 # Restore the user's wlogout theme selection after copy_phase2 has replaced

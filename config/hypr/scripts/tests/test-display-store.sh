@@ -643,4 +643,25 @@ printf 'monitor=DP-2,1920x1080@119.88,0x0,1.0\n' >"$WORK/nwg-plain.conf"
 ds_from_nwg_conf "$WORK/nwg-plain.conf" "$n_dual" >"$WORK/nwg-plain.layout.json" 2>/dev/null \
   && pass_msg || fail "a plain arrangement must import"
 
+it "the default vrr,0 that nwg-displays 0.4.x writes on every line still imports"
+printf 'monitor=DP-2,1920x1080@119.88,0x0,1.0,vrr,0\n' >"$WORK/nwg-vrr0.conf"
+ds_from_nwg_conf "$WORK/nwg-vrr0.conf" "$n_dual" >"$WORK/nwg-vrr0.layout.json" 2>/dev/null \
+  && pass_msg || fail "vrr,0 is the default and must not block the import"
+
+it "vrr switched on is still refused"
+printf 'monitor=DP-2,1920x1080@119.88,0x0,1.0,vrr,1\n' >"$WORK/nwg-vrr1.conf"
+if ds_from_nwg_conf "$WORK/nwg-vrr1.conf" "$n_dual" >/dev/null 2>"$WORK/nwg-vrr1.err"; then
+  fail "vrr,1 must not be dropped silently"
+else
+  assert_contains "$WORK/nwg-vrr1.err" 'vrr,1' "the reason names the vrr setting"
+fi
+
+it "vrr,0 next to a real extra still refuses, naming only the extra"
+printf 'monitor=DP-2,1920x1080@119.88,0x0,1.0,vrr,0,bitdepth,10\n' >"$WORK/nwg-vrr0-10bit.conf"
+if ds_from_nwg_conf "$WORK/nwg-vrr0-10bit.conf" "$n_dual" >/dev/null 2>"$WORK/nwg-vrr0-10bit.err"; then
+  fail "bitdepth after vrr,0 must still be refused"
+else
+  assert_contains "$WORK/nwg-vrr0-10bit.err" 'bitdepth,10' "the reason names bitdepth"
+fi
+
 summary "test-display-store"

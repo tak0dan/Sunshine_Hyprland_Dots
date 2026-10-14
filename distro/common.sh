@@ -48,6 +48,37 @@ install_list() {
   fi
 }
 
+# Is a package available from the distro's configured repositories?
+pkg_in_repos() {
+  case "$PKG_MANAGER" in
+    pacman) pacman -Si "$1" >/dev/null 2>&1 ;;
+    apt)    [ -n "$(apt-cache policy "$1" 2>/dev/null | awk '/Candidate:/ && $2 != "(none)" {print $2}')" ] ;;
+    dnf)    dnf -q list --available "$1" >/dev/null 2>&1 || dnf -q list --installed "$1" >/dev/null 2>&1 ;;
+    zypper) zypper --non-interactive --quiet search --match-exact "$1" >/dev/null 2>&1 ;;
+    xbps)   xbps-query -R "$1" >/dev/null 2>&1 ;;
+    *)      return 1 ;;
+  esac
+}
+
+# Waybar: prefer waybar-git when the repositories carry it. Releases up to
+# 0.15.0 send hyprlang dispatchers on a workspace click, which Hyprland's Lua
+# config rejects; the git build speaks Lua. Fall back to the release package.
+install_waybar() {
+  if pkg_in_repos waybar-git; then
+    echo "${INFO} Installing waybar-git..."
+    if [ "$PKG_MANAGER" = pacman ]; then
+      # --ask 4 accepts replacing the conflicting waybar package.
+      sudo pacman -S --needed --noconfirm --ask 4 waybar-git && return 0
+    else
+      pkg_install waybar-git && return 0
+    fi
+    echo "${WARN} waybar-git could not be installed; installing waybar instead."
+  else
+    echo "${NOTE} waybar-git is not in this distro's repositories; installing waybar."
+  fi
+  pkg_install waybar || echo "${WARN} Could not install waybar. Install it by hand, then re-run."
+}
+
 # Hyprland itself is not installed by copy.sh. Stop here if it is missing.
 check_hyprland() {
   if ! command -v Hyprland >/dev/null 2>&1 && ! command -v hyprland >/dev/null 2>&1; then

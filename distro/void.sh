@@ -8,12 +8,13 @@ PKG_MANAGER=xbps
 sudo xbps-install -Syu || true
 
 install_list \
-  hyprland hypridle hyprlock kitty waybar rofi swaync wlogout \
+  hyprland hypridle hyprlock kitty rofi swaync wlogout \
   qt5ct qt6ct kvantum \
   grim slurp swappy wl-clipboard cliphist playerctl pamixer pavucontrol \
   NetworkManager curl wget jq socat bc unzip xdg-user-dirs xdg-utils util-linux yad \
   ImageMagick brightnessctl btop cava fastfetch \
   mpv nvtop dolphin nano yazi lua rsync findutils \
   python3-requests yt-dlp mousepad base-devel
+install_waybar
 
 finish_install

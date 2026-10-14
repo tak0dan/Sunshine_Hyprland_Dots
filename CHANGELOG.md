@@ -1,5 +1,104 @@
 # Changelog — Sunshine Hyprland Dots
 
+## v2.3.29
+
+## Fixed:
+
+- Install no longer splits its backups across two folder names
+  - `$(get_backup_dirname)` ran in a subshell, so `BACKUP_DIR` never stuck
+  - Each call built a new timestamp; a run crossing a minute got two names
+  - The restore step then looked for `hypr` in the wrong backup
+  - `copy.sh` now fixes the name once, right after loading `lib_backup.sh`
+- A fresh install keeps the monitor and workspace layout
+  - Install mode moved the old `hypr` aside and restored no layout from it
+  - nwg-displays writes `monitors.lua`/`workspaces.lua` at the `hypr` root
+  - `carry_display_layout_from_backup` copies them into `UserConfigs/`
+  - A target that already holds rules is never overwritten
+- Leftover per-window layout listeners are stopped during install
+  - The old `Tak0-Per-Window-Switch-v2.sh daemon` outlived logout
+  - It kept fighting the new listener over the layout
+- More hyprlang-only commands converted for Lua mode
+  - `SUPER ALT SPACE` floats all windows via `window_actions.same_size_floating`
+  - `CTRL ALT Delete` uses `hl.dsp.exit()`
+  - `SUPER M` uses `hl.dsp.layout("splitratio 0.3")`
+  - `SUPER ALT` scroll zoom sets `cursor.zoom_factor` in-process, not `keyword`
+  - The ags overview focus, close, workspace and move calls use `hl.dsp.*`
+  - The ags raw-input toggle uses `hl.config` instead of `hyprctl keyword`
+  - yazi's nemo opener uses `hl.exec_cmd` with float/size/center rules
+- `migrate-hypr-to-lua.sh` converts bind flags correctly
+  - `r` (release) was turned into repeat; it is now `release = true`
+  - `n` (non-consuming) was dropped; it is now `non_consuming = true`
+  - Modifier keys as the bound key get canonical case, e.g. `Shift_L`
+- A bare `waybar` starts the dots' bar instead of the stock one
+  - Rofi run mode or a terminal ran `waybar` with no config
+  - `copy.sh` installs `assets/waybar-launcher.sh` as `/usr/local/bin/waybar`
+  - With no arguments it hands off to `WaybarStartup.sh --restart`
+  - A foreign `/usr/local/bin/waybar` is left alone
+- Wallpaper and zsh theme keybinds open their menus again
+  - The scripts moved from `UserScripts/` to `scripts/`
+  - `system_keybinds.lua` and Waybar's `ModulesCustom` still used the old path
+  - `SUPER W`, `SUPER SHIFT W`, `CTRL ALT W` and `SUPER SHIFT O` did nothing
+  - All references now point to `~/.config/hypr/scripts/`
+- Keyboard layout switching no longer fires on every `Shift` or `Alt` press
+  - The Lua binds were `SHIFT`+`Shift_L` and `ALT`+`Alt_L`
+  - So any capital letter switched globally, any Alt shortcut per-window
+  - Restored the hyprlang combos with `non_consuming = true`
+  - Global: hold `Alt_L`, press `Shift_L`
+  - Per-window: hold `Shift_L`, press `Alt_L`
+- Per-window layout listener no longer fights the user
+  - Hyprland sends `activewindow` on every title change, not just focus
+  - A terminal spinner re-applied the saved layout many times a second
+  - It now acts only when the focused window address changes
+  - Each switch is one `switchxkblayout all` call, not one per device
+- Arranging monitors in nwg-displays from the settings menu sticks again
+  - nwg-displays 0.4.x writes `vrr,0` on every monitor line
+  - `lib_display_store.sh` refused any extra setting, so every import failed
+  - The default `vrr,0` pair is now skipped; real extras are still refused
+  - The import is also saved as the `nwg-displays` layout, the set's default
+  - So the next login no longer computes a fresh layout over the drag
+- Scrolling over Waybar workspaces switches workspace again
+  - `ModulesWorkspaces` used `hyprctl dispatch workspace e+1`, a hyprlang form
+  - Now `hyprctl dispatch 'hl.dsp.focus({ workspace = "e+1" })'`
+  - Clicking a workspace needs Waybar newer than `0.15.0`, which sends Lua
+- btop follows the wallpaper colors again
+  - `wallust.toml` and `wallust-v4.toml` had lost the btop template entry
+  - The `colors-btop.theme` template was missing from the repo too
+  - Both are back; wallust writes `~/.config/btop/themes/wallust.theme`
+  - `btop.conf` sets `color_theme = "wallust"`
+  - The old `$HOME/...` path was never expanded by btop, so it fell back
+- Startup apps in `user_startup.lua` launch again
+  - Entries used `hyprctl dispatch exec "[workspace N] app"`, the hyprlang form
+  - Lua mode reads it as `hl.dispatch(exec [workspace N] ...)` and errors
+  - They now use `hyprctl eval 'hl.exec_cmd("app", { workspace = N })'`
+- `SUPER D` and `SUPER CTRL S` open rofi with its theme again
+  - `RofiKeyboardLayout.sh` started rofi without `-config`
+  - The installer leaves `~/.config/rofi` empty, so rofi fell back to defaults
+  - The wrapper now passes `hypr/rofi/config.rasi` unless the caller sets one
+- Waybar buttons work right after install
+  - The installer left the pre-install bar running with its old config
+  - Its buttons called scripts the install had renamed or moved
+  - `copy.sh` now restarts Waybar at the end
+  - It runs `hyprctl reload` only if the session started on `hyprland.lua`
+  - Detected from the `Using lua config found at` line in the Hyprland log
+  - A `.conf` session would reload into a six-bind stub, so it asks to re-login
+
+## Updated:
+
+- The distro installers prefer `waybar-git` over `waybar`
+  - Waybar up to `0.15.0` sends hyprlang dispatchers on a workspace click
+  - Hyprland's Lua config rejects them; the git build sends Lua
+  - `install_waybar` uses `waybar-git` when the configured repos carry it
+  - Otherwise, or if that install fails, it installs `waybar`
+  - On Arch it replaces an installed `waybar` (`pacman --ask 4`)
+- Quick Settings is one list grouped by type again, like the old Kool menu
+  - Sections: user, system defaults, displays, appearance, utilities
+  - Section headers are non-selectable rows
+  - Replaces the category screens and the two-column quick links grid
+- New default Waybar layout, Waybar style and rofi theme
+  - Layout: `TOP-&-BOT-SummitSplit-v3`, on desktops and laptops
+  - Style: `Wallust-Chroma-Edge.css`
+  - Rofi: `Sunshine_style-6.rasi`
+
 ## v2.3.28
 
 ## Fixed:

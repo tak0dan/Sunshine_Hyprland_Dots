@@ -132,7 +132,7 @@ Utilice `$HOME` o encadenamiento de comandos en shell (`sleep`, `&&`, `;`):
 
 ```lua
 local startup_commands = {
-  "$HOME/.config/hypr/UserScripts/WallpaperAutoChange.sh $HOME/Pictures/wallpapers",
+  "$HOME/.config/hypr/scripts/WallpaperAutoChange.sh $HOME/Pictures/wallpapers",
   "sleep 3; notify-send 'Bienvenido' '¡Sesión de Hyprland iniciada correctamente!'",
 }
 ```

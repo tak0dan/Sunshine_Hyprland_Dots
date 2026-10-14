@@ -65,7 +65,7 @@ done
 
 install_list \
   hyprland hypridle hyprlock hyprsunset hyprpolkitagent hyprland-guiutils \
-  kitty waybar rofi swaync awww wlogout quickshell uwsm \
+  kitty rofi swaync awww wlogout quickshell uwsm \
   qt5ct qt6ct qt5-declarative qt5-quickcontrols2 qt6-declarative qt6-svg kvantum kvantum-qt5 \
   cliphist grim slurp swappy wl-clipboard playerctl pamixer pavucontrol libpulse \
   network-manager-applet curl wget jq socat bc unzip xdg-user-dirs xdg-utils util-linux yad \
@@ -73,6 +73,7 @@ install_list \
   loupe mpv nvtop gvfs gvfs-mtp ttf-fantasque-nerd dolphin nano yazi lua rsync findutils \
   base-devel inxi libspng python-requests python-pyquery pacman-contrib qalculate-gtk \
   yt-dlp mousepad gnome-system-monitor ddcutil
+install_waybar
 
 # wallust comes from the AUR
 if ! command -v wallust >/dev/null 2>&1; then

@@ -262,6 +262,13 @@ enable_fork_per_window_layout() {
   local log="${1:-/dev/null}"
   local unit="tak0-per-window-switch.service"
   local answer=""
+  # Listeners from an earlier install (Tak0-Per-Window-Switch-v2.sh daemon, or
+  # a listener spawned by the toggle) outlive logout and keep re-applying their
+  # own map, fighting the new one. The service, or the next toggle, starts a
+  # fresh listener.
+  if pkill -f 'Tak0-Per-Window-Switch(-v2)?\.sh' 2>/dev/null; then
+    echo "${NOTE:-[NOTE]} Stopped per-window layout listeners from the previous install." 2>&1 | tee -a "$log"
+  fi
   echo "${CAT:-[ACTION]} Enable the per-window keyboard layout listener as a user service? (y/N): " | tr -d '\n'
   read -r answer </dev/tty || answer=""
   case "$answer" in

@@ -87,9 +87,9 @@ export default () => {
             `,
             onClicked: (self) => {
                 App.closeWindow('overview');
-                Utils.timeout(POPUP_CLOSE_TIME, () => Hyprland.messageAsync(`dispatch focuswindow address:${address}`));
+                Utils.timeout(POPUP_CLOSE_TIME, () => Hyprland.messageAsync(`dispatch hl.dsp.focus({ window = "address:${address}" })`));
             },
-            onMiddleClickRelease: () => Hyprland.messageAsync(`dispatch closewindow address:${address}`),
+            onMiddleClickRelease: () => Hyprland.messageAsync(`dispatch hl.dsp.window.close({ window = "address:${address}" })`),
             onSecondaryClick: (button) => {
                 button.toggleClassName('overview-tasks-window-selected', true);
                 const menu = Widget.Menu({
@@ -100,7 +100,7 @@ export default () => {
                                 xalign: 0,
                                 label: "Close (Middle-click)",
                             }),
-                            onActivate: () => Hyprland.messageAsync(`dispatch closewindow address:${address}`),
+                            onActivate: () => Hyprland.messageAsync(`dispatch hl.dsp.window.close({ window = "address:${address}" })`),
                         }),
                         ContextMenuWorkspaceArray({
                             label: "Dump windows to workspace",
@@ -234,13 +234,13 @@ export default () => {
                 vexpand: true,
                 onPrimaryClick: () => {
                     App.closeWindow('overview');
-                    Utils.timeout(POPUP_CLOSE_TIME, () => Hyprland.messageAsync(`dispatch workspace ${index}`));
+                    Utils.timeout(POPUP_CLOSE_TIME, () => Hyprland.messageAsync(`dispatch hl.dsp.focus({ workspace = ${index} })`));
                 },
                 setup: (eventbox) => {
                     eventbox.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY);
                     eventbox.connect('drag-data-received', (_w, _c, _x, _y, data) => {
                         const offset = Math.floor((Hyprland.active.workspace.id - 1) / NUM_OF_WORKSPACES_SHOWN) * NUM_OF_WORKSPACES_SHOWN;
-                        Hyprland.messageAsync(`dispatch movetoworkspacesilent ${index + offset},address:${data.get_text()}`)
+                        Hyprland.messageAsync(`dispatch hl.dsp.window.move({ workspace = ${index + offset}, follow = false, window = "address:${data.get_text()}" })`)
                         overviewTick.setValue(!overviewTick.value);
                     });
                 },

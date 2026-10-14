@@ -449,30 +449,49 @@ bind("ALT SHIFT", "S", exec_cmd([[$HOME/.config/hypr/scripts/hyprshot.sh -m regi
 bind("SUPER SHIFT", "F", dispatch([[fullscreen]], [[]]), { description = [[fullscreen]] })
 bind("SUPER CTRL", "F", dispatch([[fullscreen]], [[1]]), { description = [[maximize window]] })
 bind("SUPER", "SPACE", dispatch([[togglefloating]], [[]]), { description = [[Float current window]] })
-bind("SUPER ALT", "SPACE", exec_cmd([[hyprctl dispatch workspaceopt allfloat]]), { description = [[Float all windows]] })
+-- `workspaceopt allfloat` has no Lua dispatcher; window_actions floats (or
+-- re-tiles) every window on the workspace instead.
+bind("SUPER ALT", "SPACE", function()
+  local actions = rawget(_G, "SUNSHINEDOTS_WINDOW_ACTIONS")
+  if actions and actions.same_size_floating then
+    actions.same_size_floating()
+  end
+end, { description = [[Float all windows]] })
 bind("SUPER SHIFT", "Q", exec_cmd([[$HOME/.config/hypr/scripts/Dropterminal.sh $term]]), { description = [[DropDown terminal]] })
-bind("SUPER ALT", "mouse_down", exec_cmd([[hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor * 2.0}')"]]), { description = [[zoom in]] })
-bind("SUPER ALT", "mouse_up", exec_cmd([[hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor / 2.0}')"]]), { description = [[zoom out]] })
+-- `hyprctl keyword` is refused in Lua mode, so zoom in-process. Same bounds as
+-- the zoom gestures in lua/settings.lua.
+local function zoom_by(multiplier)
+  return function()
+    local factor = hl.get_config and (hl.get_config("cursor.zoom_factor") or hl.get_config("cursor:zoom_factor"))
+    if type(factor) ~= "number" or factor < 1 then
+      factor = 1
+    end
+    factor = math.min(math.max(factor * multiplier, 1), 16)
+    hl.config({ cursor = { zoom_factor = factor } })
+  end
+end
+bind("SUPER ALT", "mouse_down", zoom_by(2), { description = [[zoom in]] })
+bind("SUPER ALT", "mouse_up", zoom_by(0.5), { description = [[zoom out]] })
 bind("SUPER CTRL ALT", "B", exec_cmd([[pkill -SIGUSR1 waybar]]), { description = [[toggle waybar on/off]] })
 bind("SUPER CTRL", "B", exec_cmd([[$HOME/.config/hypr/scripts/WaybarStyles.sh]]), { description = [[waybar styles menu]] })
 bind("SUPER ALT", "B", exec_cmd([[$HOME/.config/hypr/scripts/WaybarLayout.sh]]), { description = [[waybar layout menu]] })
 bind("SUPER", "N", exec_cmd([[$HOME/.config/hypr/scripts/Hyprsunset.sh toggle]]), { description = [[toggle night light]] })
 bind("SUPER SHIFT", "M", exec_cmd([[$HOME/.config/hypr/UserScripts/RofiBeats.sh]]), { description = [[online music]] })
-bind("SUPER", "W", exec_cmd([[$HOME/.config/hypr/UserScripts/WallpaperSelect.sh]]), { description = [[select wallpaper]] })
-bind("SUPER SHIFT", "W", exec_cmd([[$HOME/.config/hypr/UserScripts/WallpaperEffects.sh]]), { description = [[wallpaper effects]] })
-bind("CTRL ALT", "W", exec_cmd([[$HOME/.config/hypr/UserScripts/WallpaperRandom.sh]]), { description = [[random wallpaper]] })
+bind("SUPER", "W", exec_cmd([[$HOME/.config/hypr/scripts/WallpaperSelect.sh]]), { description = [[select wallpaper]] })
+bind("SUPER SHIFT", "W", exec_cmd([[$HOME/.config/hypr/scripts/WallpaperEffects.sh]]), { description = [[wallpaper effects]] })
+bind("CTRL ALT", "W", exec_cmd([[$HOME/.config/hypr/scripts/WallpaperRandom.sh]]), { description = [[random wallpaper]] })
 bind("SUPER CTRL", "O", dispatch([[setprop]], [[active opaque toggle]]), { description = [[toggle active window opacity]] })
 bind("SUPER SHIFT", "K", exec_cmd([[$HOME/.config/hypr/scripts/KeyBinds.sh]]), { description = [[search keybinds]] })
 bind("SUPER SHIFT", "A", exec_cmd([[$HOME/.config/hypr/scripts/Animations.sh]]), { description = [[animations menu]] })
-bind("SUPER SHIFT", "O", exec_cmd([[$HOME/.config/hypr/UserScripts/ZshChangeTheme.sh]]), { description = [[change oh-my-zsh theme]] })
-bind("SHIFT", "Shift_L", exec_cmd([[$HOME/.config/hypr/scripts/KeyboardLayout.sh switch]]), { description = [[switch keyboard layout globally]], locked = true })
-bind("ALT", "Alt_L", exec_cmd([[$HOME/.config/hypr/scripts/Tak0-Per-Window-Switch.sh]]), { description = [[switch keyboard layout per-window]], locked = true })
+bind("SUPER SHIFT", "O", exec_cmd([[$HOME/.config/hypr/scripts/ZshChangeTheme.sh]]), { description = [[change oh-my-zsh theme]] })
+bind("ALT", "Shift_L", exec_cmd([[$HOME/.config/hypr/scripts/KeyboardLayout.sh switch]]), { description = [[switch keyboard layout globally]], locked = true, non_consuming = true })
+bind("SHIFT", "Alt_L", exec_cmd([[$HOME/.config/hypr/scripts/Tak0-Per-Window-Switch.sh]]), { description = [[switch keyboard layout per-window]], locked = true, non_consuming = true })
 bind("SUPER ALT", "C", exec_cmd([[$HOME/.config/hypr/UserScripts/RofiCalc.sh]]), { description = [[calculator]] })
 bind("SUPER CTRL", "F9", dispatch([[movecurrentworkspacetomonitor]], [[l]]), { description = [[move workspace to left monitor]] })
 bind("SUPER CTRL", "F10", dispatch([[movecurrentworkspacetomonitor]], [[r]]), { description = [[move workspace to right monitor]] })
 bind("SUPER CTRL", "F11", dispatch([[movecurrentworkspacetomonitor]], [[u]]), { description = [[move workspace to up monitor]] })
 bind("SUPER CTRL", "F12", dispatch([[movecurrentworkspacetomonitor]], [[d]]), { description = [[move workspace to down monitor]] })
-bind("CTRL ALT", "Delete", exec_cmd([[hyprctl dispatch exit 0]]), { description = [[exit Hyprland]] })
+bind("CTRL ALT", "Delete", exec_cmd([[hyprctl dispatch 'hl.dsp.exit()']]), { description = [[exit Hyprland]] })
 bind("SUPER", "C", dispatch([[killactive]], [[]]), { description = [[close active window]] })
 bind("SUPER SHIFT", "C", exec_cmd([[$HOME/.config/hypr/scripts/KillActiveProcess.sh]]), { description = [[Terminate active process]] })
 bind("CTRL ALT", "L", exec_cmd([[$HOME/.config/hypr/scripts/LockScreen.sh]]), { description = [[lock screen]] })
@@ -484,7 +503,7 @@ bind("SUPER", "I", dispatch([[layoutmsg]], [[addmaster]]), { description = [[add
 bind("SUPER CTRL", "Return", dispatch([[layoutmsg]], [[swapwithmaster]]), { description = [[swap with master]] })
 bind("SUPER SHIFT", "I", dispatch([[layoutmsg]], [[togglesplit]]), { description = [[toggle split (dwindle)]] })
 bind("SUPER", "P", dispatch([[pseudo]], [[]]), { description = [[toggle pseudo (dwindle)]] })
-bind("SUPER", "M", exec_cmd([[hyprctl dispatch splitratio 0.3]]), { description = [[set split ratio 0.3]] })
+bind("SUPER", "M", exec_cmd([[hyprctl dispatch 'hl.dsp.layout("splitratio 0.3")']]), { description = [[set split ratio 0.3]] })
 bind("ALT", "tab", dispatch([[cyclenext]], [[]]), { description = [[cycle next window]] })
 bind("ALT", "tab", dispatch([[bringactivetotop]], [[]]), { description = [[bring active to top]] })
 bind("", "xf86audioraisevolume", exec_cmd([[$HOME/.config/hypr/scripts/Volume.sh --inc]]), { description = [[volume up]], locked = true, repeating = true })

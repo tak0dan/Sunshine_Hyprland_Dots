@@ -1364,6 +1364,23 @@ def emit_rule(rule_type, rule):
     lines.append("})")
     return "\n".join(lines)
 
+def normalize_bind_key(key):
+    """Canonical keysym case for modifier keys used as the bound key.
+
+    Hyprlang configs write `SHIFT_L`/`ALT_L`; hl.bind records the key verbatim,
+    while the canonical keysyms are `Shift_L`/`Alt_L`.
+    """
+    canonical = {
+        "shift_l": "Shift_L", "shift_r": "Shift_R",
+        "alt_l": "Alt_L", "alt_r": "Alt_R",
+        "control_l": "Control_L", "control_r": "Control_R",
+        "ctrl_l": "Control_L", "ctrl_r": "Control_R",
+        "super_l": "Super_L", "super_r": "Super_R",
+        "meta_l": "Meta_L", "meta_r": "Meta_R",
+    }
+    return canonical.get(key.strip().lower(), key)
+
+
 def normalize_bind_mods(mods):
     """Uppercase known modifiers for Hyprland Lua key chords.
 
@@ -1459,7 +1476,7 @@ def parse_keybinds(path, *, variables=None, visited=None):
             parts = [expand(part.strip()) for part in unbind.group(1).split(",")]
             if len(parts) >= 2:
                 mods = normalize_bind_mods(parts[0])
-                converted.append(f"unbind({lua_string(mods)}, {lua_string(parts[1])})")
+                converted.append(f"unbind({lua_string(mods)}, {lua_string(normalize_bind_key(parts[1]))})")
             continue
 
         bind = re.match(r"^(bind[a-z]*)\s*=\s*(.+)$", line)
@@ -1481,14 +1498,21 @@ def parse_keybinds(path, *, variables=None, visited=None):
                 continue
 
             mods = normalize_bind_mods(mods)
+            key = normalize_bind_key(key)
 
+            # Hyprlang bind flags: l locked, e repeat, r release, n non-consuming.
+            flags = binder[4:]
             opts = []
             if description:
                 opts.append(f"description = {lua_string(description)}")
-            if "l" in binder:
+            if "l" in flags:
                 opts.append("locked = true")
-            if "e" in binder or "r" in binder:
+            if "e" in flags:
                 opts.append("[\"repeat\"] = true")
+            if "r" in flags:
+                opts.append("release = true")
+            if "n" in flags:
+                opts.append("non_consuming = true")
             opts_text = ", { " + ", ".join(opts) + " }" if opts else ""
 
             if dispatcher == "exec":
