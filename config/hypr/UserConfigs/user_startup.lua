@@ -99,10 +99,20 @@ local startup_commands = {
   -- two controllers would apply layouts at the same time.
   "$HOME/.config/hypr/scripts/MonitorWatcher.sh",
   -- Apps pinned to workspaces (from the previous Startup_Apps.conf).
-  [[hyprctl eval 'hl.exec_cmd("Telegram", { workspace = 7 })']],
-  [[hyprctl eval 'hl.exec_cmd("kitty --hold btop", { workspace = 1 })']],
-  [[hyprctl eval 'hl.exec_cmd("zen-browser", { workspace = 2 })']],
-  [[hyprctl eval 'hl.exec_cmd("spotify", { workspace = 1 })']],
+  --#===============================================================#
+  --#                           WAYBAR                              #
+  --#        (Do not remove unles you use different bar)            #
+  --#===============================================================#
+  
+  [[hyprctl eval 'hl.exec_cmd("waybar")']],
+
+  --#===============================================================#
+  --#                         OPTIONALS                             #
+  --#===============================================================#
+  --[[hyprctl eval 'hl.exec_cmd("Telegram", { workspace = 7 })']],
+  --[[hyprctl eval 'hl.exec_cmd("kitty --hold btop", { workspace = 1 })']],
+  --[[hyprctl eval 'hl.exec_cmd("zen-browser", { workspace = 2 })']],
+  --[[hyprctl eval 'hl.exec_cmd("spotify", { workspace = 1 })']],
 }
 
 local function run_startup_commands()
